@@ -2,14 +2,14 @@ import React from 'react';
 import './homePage.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus, faSearch, faUser } from '@fortawesome/free-solid-svg-icons'
-
+import { Outlet } from 'react-router';
 
 export default function HomePage({ children }) {
 
     return (
         <div className='home-page-root'>
             <Header />
-            {children}
+            <Outlet />
             <Footer />
         </div>
     );
@@ -21,10 +21,14 @@ function Header() {
     return (
         <div className='header-root'>
             <span className='app-name'>The Forking Best</span>
-            <span className='header-location'>
+            <span className='icon'>
+                <FontAwesomeIcon icon={faUser} />
+            </span>
+
+            {/* <span className='header-location'>
                 <div>Location</div>
                 <div className='city-name'>{city} ⯆</div>
-            </span>
+            </span> */}
         </div>
     )
 }
@@ -36,7 +40,6 @@ function Footer() {
         <div className='footer-root'>
             <span className='icon'><FontAwesomeIcon icon={faSearch} /></span>
             <span className='icon'><FontAwesomeIcon icon={faPlus} /></span>
-            <span className='icon'><FontAwesomeIcon icon={faUser} /></span>
         </div>
     )
 }

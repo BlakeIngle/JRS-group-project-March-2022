@@ -2,8 +2,7 @@
     background-color: #333;
     height: fit-content;
     color: #fff;
-    padding: 0.5rem;
-    position: absolute;
+    padding: 0.6rem;
     top: 0;
     left: 0;
     right: 0;
@@ -33,7 +32,7 @@
 }
 
 .footer-root {
-    position: absolute;
+    position: fixed;
     bottom: 0;
     left: 0;
     right: 0;
