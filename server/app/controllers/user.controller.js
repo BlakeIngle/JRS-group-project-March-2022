@@ -3,21 +3,16 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 
-
 exports.getUserById = (req, res) => {
 
-    const { id } = req.params;
+    const { userId } = req.params;
 
-    const query = `SELECT users.id, users.email, users.password, 
-                        users.name, books.id as 'bookId', books.title, 
-                        books.author, books.publisher, books.year, 
-                        books.cover  
-                    FROM users
-                        LEFT JOIN books
-                            ON users.favoriteBook = books.id
-                    WHERE users.id = ? ;`;
+    const query = `SELECT user.userId, user.email, user.password, 
+                        user.username 
+                    FROM user
+                    WHERE user.userId = ? ;`;
 
-    const placeholders = [id];
+    const placeholders = [userId];
 
     db.query(query, placeholders, (err, results) => {
         if (err) {
@@ -29,66 +24,7 @@ exports.getUserById = (req, res) => {
                     .send({ message: "No user found." });
             } else {
                 var user = results[0];
-                user = rebuildUser(user);
-
                 res.send({ user });
-            }
-        }
-    });
-}
-
-const rebuildUser = (user) => {
-    user = {
-        ...user,
-        favoriteBook: {
-            id: user.bookId,
-            title: user.title,
-            author: user.author,
-            publisher: user.publisher,
-            year: user.year,
-            cover: user.cover
-        }
-    }
-
-    delete user.bookId;
-    delete user.title;
-    delete user.author;
-    delete user.publisher;
-    delete user.year;
-    delete user.cover;
-
-    return user;
-}
-
-const getUserByEmail = (email, res) => {
-
-    const query = `SELECT users.id, users.email, users.password, 
-                        users.name, books.id as 'bookId', books.title, 
-                        books.author, books.publisher, books.year, 
-                        books.cover  
-                    FROM users
-                        LEFT JOIN books
-                            ON users.favoriteBook = books.id
-                    WHERE users.email = ? ;`;
-
-    const placeholders = [email];
-
-    db.query(query, placeholders, (err, results) => {
-        if (err) {
-            res.status(500)
-                .send({ error: err, message: "Error retrieving user." })
-        } else {
-            if (results.length == 0) {
-                res.status(404)
-                    .send({ message: "No user found." });
-            } else {
-                var user = results[0];
-                user = rebuildUser(user);
-
-                res.send({
-                    user,
-                    message: "User added successfully." // upon creation
-                });
             }
         }
     });
@@ -96,19 +32,19 @@ const getUserByEmail = (email, res) => {
 
 exports.registerUser = async (req, res) => {
 
-    const { id, email, password, name } = req.body;
+    const { id, email, password, username } = req.body;
 
     if (!(email && password)) {
         res.status(404)
             .send({ message: "invalid input" })
     };
 
-    const query = `INSERT INTO users (id, email, password, name)
+    const query = `INSERT INTO dishes.user (id, email, password, username)
                     VALUES (?, ?, ?, ?);`;
 
     const encryptedPassword = await bcrypt.hash(password, saltRounds);
 
-    const placeholders = [id, email, encryptedPassword, name];
+    const placeholders = [id, email, encryptedPassword, username];
 
     db.query(query, placeholders, (err, results) => {
         if (err) {
@@ -125,7 +61,7 @@ exports.login = (req, res) => {
 
     const { email, password } = req.body;
 
-    const query = `SELECT * FROM users 
+    const query = `SELECT * FROM user
                     WHERE email = ?;`;
 
     const placeholders = [email];
@@ -172,7 +108,70 @@ exports.login = (req, res) => {
     });
 }
 
-
 exports.updateUserById = (req, res) => {
-    res.send({ message: "Token is valid" });
+
+    const { userId } = req.params;
+
+    const pairs = Object.entries(req.body);
+
+    var setsString = '';
+    var isStarted = false;
+    const placeholders = [];
+
+    for (let i = 0; i < pairs.length; i++) {
+        let [key, value] = pairs[i];
+        if (key === 'id') {
+            continue;
+        }
+        setsString += `${isStarted ? ',' : ''} ?? = ? `
+        isStarted = true;
+        placeholders.push(key, value);
+    }
+
+    var query = `UPDATE user
+        SET ${setsString}
+        WHERE id = ? ;`;
+    placeholders.push(userId);
+
+    db.query(query, placeholders, (err, results) => {
+        if (err) {
+            res.status(500)
+                .send({ error: err, message: "Error updating user." })
+        } else {
+            res.send({
+                results,
+                message: "User updated successfully."
+            });
+        }
+    });
+}
+
+exports.deleteUserById = (req, res) => {
+
+    const { userId } = req.params;
+
+    const query = `DELETE FROM user
+                    WHERE id = ? ;`;
+
+    const placeholders = [userId];
+
+    db.query(query, placeholders, (err, results) => {
+        if (err) {
+            res.status(500)
+                .send({ error: err, message: "Error deleting user." })
+        } else {
+            if (results.affectedRows == 0) {
+                res.status(404)
+                    .send({
+                        message: "Cannot delete user. No user found.",
+                        results
+                    });
+            } else {
+                res.send({
+                    results,
+                    message: "User deleted successfully."
+                });
+            }
+        }
+    });
 }
