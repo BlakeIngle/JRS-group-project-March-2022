@@ -1,25 +1,15 @@
-:root {
+.signup {
   --inputLabelText: #d2e2e2;
   --headerText: #e7dddd;
-  --backgroundImage: url(https://www.wallpapertip.com/wmimgs/54-549491_background-for-food-website.jpg);
-}
 
-body {
-  /* border: solid rgb(224, 9, 9) 1px; */
-  margin: auto 0;
-  padding: 0;
+  margin: auto;
+  background-color: rgba(0, 0, 0, 0.7);
+  border-radius: 8px;
+  max-width: 600px;
 }
 
 .signup-header {
   color: var(--headerText);
-  /* border: solid rgb(9, 255, 0) 1px; */
-}
-
-.signup {
-  margin: 5rem;
-  background-color: rgba(0, 0, 0, 0.705);
-  border-radius: 8px;
-  /* border: solid rgb(9, 255, 0) 1px; */
 }
 
 .signup label {
@@ -27,7 +17,6 @@ body {
   width: 7rem;
   text-align: right;
   color: var(--inputLabelText);
-  /* border: solid red 1px; */
 }
 
 .signup button {
@@ -44,8 +33,8 @@ body {
 }
 
 .signup button:hover {
-  color: rgba(255, 255, 255, 0.925);
-  background-color: rgba(255, 255, 255, 0.767);
+  color: rgba(255, 255, 255, 0.9);
+  background-color: rgba(255, 255, 255, 0.75);
   cursor: pointer;
 }
 
