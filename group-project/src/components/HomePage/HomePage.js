@@ -38,7 +38,7 @@ function Footer() {
 
     return (
         <div className='footer-root'>
-            <span className='icon'><FontAwesomeIcon icon={faSearch} /></span>
+            {/* <span className='icon'><FontAwesomeIcon icon={faSearch} /></span> */}
             <span className='icon'><FontAwesomeIcon icon={faPlus} /></span>
         </div>
     )
