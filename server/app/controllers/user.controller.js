@@ -7,7 +7,6 @@ const saltRounds = 10;
 exports.getUserById = (req, res) => {
 
     const { id } = req.params;
-    console.log("getting userId: ", id)
 
     const query = `SELECT users.id, users.email, users.password, 
                         users.name, books.id as 'bookId', books.title, 
@@ -85,7 +84,7 @@ const getUserByEmail = (email, res) => {
             } else {
                 var user = results[0];
                 user = rebuildUser(user);
-                console.log("sending new user back")
+
                 res.send({
                     user,
                     message: "User added successfully." // upon creation

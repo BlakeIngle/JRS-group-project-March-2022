@@ -14,7 +14,7 @@ app.use(cors(corsOptions));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// require("./app/index.js/index");
+require("./app/index");
 require('./app/routes/user.routes.js')(app);
 
 const PORT = 8080;
