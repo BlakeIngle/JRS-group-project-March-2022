@@ -1,24 +1,14 @@
-:root {
+.login-root {
   --inputLabelText: #d2e2e2;
   --headerText: #e7dddd;
   --buttonTextColor: rgb(247, 243, 243);
-  --buttonBackgroundColor: rgba(255, 255, 255, 0.473);
-  --backgroundImage: url(https://www.wallpapertip.com/wmimgs/54-549491_background-for-food-website.jpg);
-}
+  --buttonBackgroundColor: rgba(255, 255, 255, 0.45);
 
-body {
-  background-image: var(--backgroundImage);
-  margin: auto 0;
-  padding: 0;
-}
-
-.login-root {  
-  margin: 7rem;
-  background-color: rgba(0, 0, 0, 0.616);
+  margin: auto;
+  background-color: rgba(0, 0, 0, 0.6);
   height: 100%;
-  font-size: larger;
-  font-family: monospace;
   border-radius: 8px;
+  max-width: 600px;
 }
 
 .login-root label {
@@ -31,8 +21,6 @@ body {
 .login-root input {
   position: relative;
   margin: 0.25rem;
-  /* display: flex;
-  justify-content: center; */
 }
 
 .login-root button {
@@ -52,8 +40,8 @@ body {
 }
 
 .login-root button:hover {
-  color: rgba(255, 255, 255, 0.925);
-  background-color: rgba(255, 255, 255, 0.767);
+  color: rgba(255, 255, 255, 0.9);
+  background-color: rgba(255, 255, 255, 0.75);
   cursor: pointer;
 }
 
