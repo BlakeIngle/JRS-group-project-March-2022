@@ -1,0 +1,64 @@
+:root {
+  --buttonTextColor: rgb(247, 243, 243);
+  --buttonBackgroundColor: rgba(0, 0, 0, 0.473);
+  --backgroundImage: url(https://pngimage.net/wp-content/uploads/2018/06/login-background-images-png.png);
+}
+
+body {
+  background-image: var(--backgroundImage);
+}
+
+.login-root {
+  height: 100%;
+  font-size: larger;
+  font-family: monospace;
+  margin-top: 2rem;
+}
+
+.login-root label {
+    display: inline-block;
+    width: 6rem;
+    text-align: right;
+}
+
+.login-root input {
+  position: relative;
+  margin: 0.25rem;
+  /* display: flex;
+  justify-content: center; */
+}
+
+.login-root button {
+  
+  font: inherit;
+  font-weight: 900;
+
+  border: none;
+
+  width: 8rem;
+  margin: 0.5rem;
+  padding: 0.25rem;
+
+  border-radius: 4px;
+  background-color: var(--buttonBackgroundColor);
+  color: var(--buttonTextColor);
+}
+
+.login-root button[type='submit']{
+    
+}
+.login-root button[type='button']{
+
+}
+
+.login-root button:hover {
+  color: rgba(0, 0, 0, 0.61);
+  background-color: rgba(165, 164, 164, 0.295);
+  cursor: pointer;
+}
+
+.forgotPassword {
+  position: absolute;
+  margin-top: 4rem;
+  color: rgba(255, 255, 255, 0.541);
+}
