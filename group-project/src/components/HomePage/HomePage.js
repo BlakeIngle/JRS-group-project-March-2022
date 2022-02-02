@@ -1,13 +1,13 @@
-import React from 'react';
-import './homePage.css'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPlus, faSearch, faUser } from '@fortawesome/free-solid-svg-icons'
-import { Outlet } from 'react-router';
+import React, { useState } from "react";
+import "../HomePage/HomePage.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlus, faUser } from "@fortawesome/free-solid-svg-icons";
+import { Outlet } from "react-router";
+import { Link } from "react-router-dom";
 
 export default function HomePage({ children }) {
-
     return (
-        <div className='home-page-root'>
+        <div className="home-page-root">
             <Header />
             <Outlet />
             <Footer />
@@ -18,28 +18,36 @@ export default function HomePage({ children }) {
 function Header() {
     const city = "Charleston, SC";
 
-    return (
-        <div className='header-root'>
-            <span className='app-name'>The Forking Best</span>
-            <span className='icon'>
-                <FontAwesomeIcon icon={faUser} />
-            </span>
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-            {/* <span className='header-location'>
-                <div>Location</div>
-                <div className='city-name'>{city} ⯆</div>
-            </span> */}
+    return (
+        <div className="header-root">
+            <Link to="/">
+                <span className="app-name">The Forking Best</span>
+            </Link>
+            <Link to="/login">
+                <span className="icon">
+                    {isLoggedIn && <FontAwesomeIcon icon={faUser} />}
+                    {!isLoggedIn && (
+                        <button type="button" className="login-homepage-button">
+                            Login
+                        </button>
+                    )}
+                </span>
+            </Link>
+
+            
         </div>
-    )
+    );
 }
 
-
 function Footer() {
-
     return (
-        <div className='footer-root'>
+        <div className="footer-root">
             {/* <span className='icon'><FontAwesomeIcon icon={faSearch} /></span> */}
-            <span className='icon'><FontAwesomeIcon icon={faPlus} /></span>
+            <span className="icon">
+                <FontAwesomeIcon icon={faPlus} />
+            </span>
         </div>
     )
 }
