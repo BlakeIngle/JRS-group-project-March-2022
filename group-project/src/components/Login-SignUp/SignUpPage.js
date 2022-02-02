@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
 // import { Context } from "../App";
-import "./SignUpPage.css";
+import '../Login-SignUp/SignUpPage.css'
 
 export default function SignUpPage() {
   //   const { http, localStorageService } = useContext(Context);
@@ -28,7 +28,6 @@ export default function SignUpPage() {
     <div>
       <div className="signup">
         <h2 className="signup-header">Sign Up</h2>
-        {/* <hr /> */}
         <br />
         <SignUpForm onSubmit={attemptSignUp} />
         <Link to="/login">

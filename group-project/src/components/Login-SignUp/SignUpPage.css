@@ -1,0 +1,62 @@
+:root {
+  --inputLabelText: #d2e2e2;
+  --headerText: #e7dddd;
+  --buttonTextColor: rgb(247, 243, 243);
+  --buttonBackgroundColor: rgba(255, 255, 255, 0.45);
+  --cardBackgroundColor: rgba(0, 0, 0, 0.7);
+  --buttonTextHoverColor: rgba(255, 255, 255, 0.9);
+  --buttonHoverBackgroundColor: rgba(255, 255, 255, 0.75);
+}
+
+.signup {
+  margin: auto;
+  background-color: var(--cardBackgroundColor);
+  border-radius: 8px;
+  max-width: 600px;
+}
+
+.signup-header {
+  color: var(--headerText);
+}
+
+.signup label {
+  display: inline-block;
+  width: 7rem;
+  text-align: right;
+  color: var(--inputLabelText);
+}
+
+.signup button {
+  font: inherit;
+  font-weight: 900;
+
+  border: none;
+
+  width: 8rem;
+  margin: 0.4rem;
+  padding: 0.25rem;
+  background-color: var(--buttonBackgroundColor);
+  color: var(--buttonTextColor);
+
+  border-radius: 4px;
+}
+
+.signup button:hover {
+  color: var(--buttonTextHoverColor);
+  background-color: var(--buttonHoverBackgroundColor);
+  cursor: pointer;
+}
+
+.signup button:active{
+  transform: scale(.9);
+}
+
+/* .signup button:hover::after{
+  width: 30px;
+  height: 30px;
+  border-color: #222222;
+} */
+
+.signup input {
+  margin: 0.25rem;
+}

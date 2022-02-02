@@ -1,50 +1,71 @@
 .header-root {
-    background-color: #333;
-    height: fit-content;
-    color: #fff;
-    padding: 0.6rem 0.8rem;
-    top: 0;
-    left: 0;
-    right: 0;
+  background-color: #333;
+  height: fit-content;
+  color: #fff;
+  padding: 0.6rem 0.8rem;
+  top: 0;
+  left: 0;
+  right: 0;
 
-    display: flex;
-    flex-direction: row;
-    align-items:center;
-    justify-content: space-between;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .header-root .app-name {
-    text-align: left;
-    font-size: 1.5rem;
-    font-weight: bold;
+  text-align: left;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: white;
+  text-decoration: underline;
 }
 
 .header-root .header-location {
-    text-align: right;
-    color: #bbb;
-    font-size: 0.9rem;
+  text-align: right;
+  color: #bbb;
+  font-size: 0.9rem;
 }
 
 .header-root .city-name {
-    font-size: 1rem;
-    color: #eee;
-    cursor: pointer;
+  font-size: 1rem;
+  color: #eee;
+  cursor: pointer;
 }
 
 .footer-root {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
 
-    background-color: #333;
-    color: #fff;
-    height: fit-content;
-    padding: 0.5rem 1rem;
-    font-size: 1.5rem;
+  background-color: #333;
+  color: #fff;
+  height: fit-content;
+  padding: 0.5rem 1rem;
+  font-size: 1.5rem;
 
-    display: flex;
-    flex-direction: row;
-    align-items:center;
-    justify-content: space-around;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.login-homepage-button {
+  cursor: pointer;
+  border-radius: 3px;
+  border: none;
+  font-weight: 900;
+}
+
+.login-homepage-button:hover {
+  transform: scale(1.1);
+}
+
+.login-homepage-button:active {
+  transform: scale(1);
+}
+
+.header-root .icon {
+  color: white;
 }

@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router";
 // import { Context } from "../App";
-import "./LoginPage.css";
+import "../Login-SignUp/LoginPage.css";
 
 export default function LoginPage() {
   return (

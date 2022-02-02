@@ -1,7 +1,7 @@
 import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import LoginPage from './components/LoginPage';
-import SignUpPage from './components/SignUpPage';
+import LoginPage from './components/Login-SignUp/LoginPage';
+import SignUpPage from './components/Login-SignUp/SignUpPage';
 import HomePage from './components/HomePage/HomePage';
 import ReviewCard from './components/ReviewCard/ReviewCard';
 
