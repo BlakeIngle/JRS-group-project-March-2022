@@ -1,4 +1,3 @@
-import React from "react";
 const axios = require("axios");
 const URL = `http://localhost:8080/api`;
 
