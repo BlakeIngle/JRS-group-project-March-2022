@@ -1,5 +1,5 @@
 import React from 'react';
-import './homePage.css'
+import './HomePage.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus, faSearch, faUser } from '@fortawesome/free-solid-svg-icons'
 import { Outlet } from 'react-router';
