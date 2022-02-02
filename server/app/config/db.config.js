@@ -1,4 +1,4 @@
-exports.host = "";
-exports.user = "";
-exports.password = "";
-exports.database = "";
+exports.host = "localhost";
+exports.user = "root";
+exports.password = "Password123!";
+exports.database = "books";
