@@ -19,7 +19,7 @@ CREATE TABLE `dishes`.`dish` (
   PRIMARY KEY (`id`)
 );
 
-INSERT INTO `dish` (`id`,`name`,`meal`,`cuisine`) 
+INSERT INTO `dishes`.`dish` (`id`,`name`,`meal`,`cuisine`) 
 VALUES 
     (1,'burger','entrees','american'),
     (2,'sushi','entrees','asian'),
@@ -65,4 +65,4 @@ VALUES
     (42,'french fries','appetizers','american'),
     (43,'onion rings','appetizers','american'),
     (44,'poke','entrees','american'),
-    (45,'falafel','entrees','mediterranean';
+    (45,'falafel','entrees','mediterranean');
