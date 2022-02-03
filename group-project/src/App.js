@@ -4,6 +4,7 @@ import LoginPage from './components/Login-SignUp/LoginPage';
 import SignUpPage from './components/Login-SignUp/SignUpPage';
 import HomePage from './components/HomePage/HomePage';
 import RestaurantCard from './components/RestaurantCard/RestaurantCard';
+import FoodMap from './components/Map/FoodMap';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
             <Route path="login" element={<LoginPage />}></Route>
             <Route path="review" element={<RestaurantCard />}></Route>
             <Route path="signup" element={<SignUpPage />}></Route>
+            <Route path="map" element={<FoodMap />}></Route>
           </Route>
           <Route path="*" element={<div>404 - page does not exist</div>}></Route>
         </Routes>
