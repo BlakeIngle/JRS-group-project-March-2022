@@ -1,12 +1,9 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router";
-// import { Context } from "../App";
 import "./LoginPage.css";
 
 export default function LoginPage() {
-
-
   return (
     <div className="login-root">
       <h2 className="login-header">Login</h2>
@@ -14,13 +11,14 @@ export default function LoginPage() {
       <Link to="/signup">
         <button type="button">Signup</button>
       </Link>
-      <a href="#" className="forgotPassword">Forgot My Username/Password</a>
+      <a href="#" className="forgotPassword">
+        Forgot My Username/Password
+      </a>
     </div>
   );
 }
 
 function LoginForm() {
-  // let { http, state, setState, localStorageService } = useContext(Context);
   const navigate = useNavigate();
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
@@ -58,7 +56,6 @@ function LoginForm() {
       //       //maybe status code 404 misspelled email
       //       //maybe 4xx -> good email, bad password
       //       // console.error(err);
-
       //       setUser({ email: "", password: "" });
       //     });
       // }
