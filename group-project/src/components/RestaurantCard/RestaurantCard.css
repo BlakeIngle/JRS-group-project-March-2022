@@ -1,0 +1,31 @@
+.restaurant-card-root {
+    margin: 0.8rem auto;
+    background-color: lightgray;
+    width: 700px;
+    max-width: 90vw;
+    padding: 0.8rem;
+    border-radius: 8px;
+}
+
+.restaurant-card-root h2 {
+    margin: 0 0 0.5rem;
+}
+
+.restaurant-card-root .top-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.restaurant-card-root .dish-icon {
+    font-size: 1.3rem;
+}
+
+.restaurant-card-root .links > * {
+    font-size: 1.3rem;
+    margin-left: 0.8rem;
+}
+
+.restaurant-card-root .agree-icon {
+    text-align: right;
+}

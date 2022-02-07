@@ -11,6 +11,10 @@ const api = {
   },
   updateUser: (user) => {
     return axios.put(`${URL}/users/${user.id}`, user);
+  },
+
+  getAllDishes: () => {
+    return axios.get(`${URL}/dishes`);
   }
 }
 
