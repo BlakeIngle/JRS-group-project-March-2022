@@ -1,10 +1,11 @@
 import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import LoginPage from './components/Login-SignUp/LoginPage';
-import SignUpPage from './components/Login-SignUp/SignUpPage';
+import LoginPage from './components/LoginPage/LoginPage';
+import SignUpPage from './components/SignUpPage/SignUpPage';
 import HomePage from './components/HomePage/HomePage';
 import RestaurantCard from './components/RestaurantCard/RestaurantCard';
 import FoodMap from './components/Map/FoodMap';
+import DishPage from './components/DishPage/DishPage';
 
 function App() {
   return (
@@ -12,8 +13,8 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="" element={<HomePage />}>
-            <Route path="/" element={<p>main page</p>}></Route>
-            <Route path="login" element={<LoginPage />}></Route>
+            <Route path="/" element={<DishPage />}></Route>
+          <Route path="login" element={<LoginPage />}></Route>
             <Route path="review" element={<RestaurantCard />}></Route>
             <Route path="signup" element={<SignUpPage />}></Route>
             <Route path="map" element={<FoodMap />}></Route>

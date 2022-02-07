@@ -1,13 +1,16 @@
 :root {
   --inputLabelText: #d2e2e2;
+  --inputLabelText: #000000;
   --headerText: #e7dddd;
+  --headerText: #000000;
   --buttonTextColor: rgb(247, 243, 243);
+  --buttonTextColor: rgb(0, 0, 0);
   --buttonBackgroundColor: rgba(255, 255, 255, 0.473);
   --backgroundImage: url(https://www.wallpapertip.com/wmimgs/54-549491_background-for-food-website.jpg);
 }
 
 body {
-  background-image: var(--backgroundImage);
+  /* background-image: var(--backgroundImage); */
   margin: auto 0;
   padding: 0;
 }

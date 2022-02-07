@@ -1,17 +1,34 @@
-import React from 'react';
-import dishIcons from '../../assets/dishEmoji.json'
+import React, { useEffect } from 'react';
+import { Emojis } from '../../assets/DishIcon';
+import { useApi } from '../../services/axios.services';
 
 
 export default function DishPage({ dishId, name, meal, cuisine }) {
 
-    dishId = 1;
+    
+    const api = useApi();
 
-    const dishIcon = dishIcons[(dishId - 1)].emoji;
+    function getDishes() {
+        api.getAllDishes()
+        .then(res => {
+           console.log(res);
+        })
+        .catch(err => {
+            console.error(err)
+        })
+    };
+
+    useEffect(() => {
+        getDishes();
+    }, []);
+    
+        // const dishId = 1;
+    // const dishIcon = dishIcons[(dishId - 1)].emoji;
 
 
     return (
         <div className='dish-page-root'>
-            <h1>The Forking Best {name}</h1>
+            <h2>Restaurant</h2>
             {/* RestaurantCards go here */}
         </div>
     );

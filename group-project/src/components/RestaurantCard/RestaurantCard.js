@@ -1,6 +1,6 @@
 import React from 'react';
 import './RestaurantCard.css'
-import dishIcons from '../../assets/dishEmoji.json'
+import dishIcons from '../../assets/DishEmoji.json'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faExternalLinkAlt, faMapMarkerAlt, faThumbsUp } from '@fortawesome/free-solid-svg-icons';
 
