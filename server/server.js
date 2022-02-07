@@ -15,8 +15,9 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 require("./app/index");
-require("./app/routes/user.routes.js")(app);
-require("./app/routes/dish.routes.js")(app);
+require("./app/routes/user.routes")(app);
+require("./app/routes/dish.routes")(app);
+require("./app/routes/restaurants.routes")(app);
 
 const PORT = 8080;
 app.listen(PORT, () => {

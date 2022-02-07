@@ -13,8 +13,22 @@ exports.getRestaurantsNearZipCode = (zipcode) => {
   );
 };
 
-exports.searchRestaurantsByName = (name, location) => {
-  return yelp.get(
-    `/search?term=${name}&categories=restaurants&location=${location}`
-  );
+exports.searchRestaurantsByName = (name) => {
+  return yelp.get(`/search?term=${name}&categories=restaurants`);
+};
+
+exports.getRestaurantsByQuery = (req, res) => {
+  const { name } = req.query;
+
+  yelp
+    .get(`/search?term=${name}&categories=restaurants&sort_by=distance`)
+    .then((results) => {
+      if (results.data.length === 0) {
+        res.status(404).send({ message: "No matches" });
+      }
+      res.send({ restaurants: results.data.businesses });
+    })
+    .catch((error) => {
+      res.status(500).send(error);
+    });
 };
