@@ -3,12 +3,11 @@ CREATE SCHEMA `dishes` ;
 
 CREATE TABLE `dishes`.`user` (
   `id` VARCHAR(45) NOT NULL,
+  `firstName` VARCHAR(16) NOT NULL,
   `email` VARCHAR(255) NOT NULL UNIQUE,
-  `password` VARCHAR(255) NOT NULL,
-  `firstName` VARCHAR(45) NOT NULL,
+  `password` VARCHAR(32) NOT NULL,
   
-  PRIMARY KEY (`id`)
-);
+  PRIMARY KEY (`id`));
 
 CREATE TABLE `dishes`.`dish` (
   `id` INT NOT NULL,

@@ -1,0 +1,68 @@
+:root {
+  --inputLabelText: #d2e2e2;
+  --headerText: #e7dddd;
+  --buttonTextColor: rgb(247, 243, 243);
+  --buttonBackgroundColor: rgba(255, 255, 255, 0.473);
+  --backgroundImage: url(https://www.wallpapertip.com/wmimgs/54-549491_background-for-food-website.jpg);
+}
+
+body {
+  background-image: var(--backgroundImage);
+  margin: auto 0;
+  padding: 0;
+}
+
+.login-root {  
+  margin: 7rem;
+  background-color: rgba(0, 0, 0, 0.616);
+  height: 100%;
+  font-size: larger;
+  font-family: monospace;
+  border-radius: 8px;
+}
+
+.login-root label {
+    display: inline-block;
+    width: 6rem;
+    text-align: right;
+    color: var(--inputLabelText);
+}
+
+.login-root input {
+  position: relative;
+  margin: 0.25rem;
+  /* display: flex;
+  justify-content: center; */
+}
+
+.login-root button {
+  
+  font: inherit;
+  font-weight: 900;
+
+  border: none;
+
+  width: 8rem;
+  margin: 0.5rem;
+  padding: 0.25rem;
+
+  border-radius: 4px;
+  background-color: var(--buttonBackgroundColor);
+  color: var(--buttonTextColor);
+}
+
+.login-root button:hover {
+  color: rgba(255, 255, 255, 0.925);
+  background-color: rgba(255, 255, 255, 0.767);
+  cursor: pointer;
+}
+
+.forgotPassword {
+  position: absolute;
+  margin-top: 4rem;
+  color: rgb(247, 244, 244);
+}
+
+.login-header{
+  color: var(--headerText);
+}
