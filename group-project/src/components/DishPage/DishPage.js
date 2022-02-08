@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Emojis } from '../../assets/DishIcon';
-import { useApi } from '../../services/axios.services';
+import { useApi } from '../../services/api.service';
 import '../DishPage/DishPage.css'
 
 

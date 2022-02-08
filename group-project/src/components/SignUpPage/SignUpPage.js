@@ -1,11 +1,9 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
-// import { Context } from "../App";
 import "./SignUpPage.css";
 
 export default function SignUpPage() {
-  //   const { http, localStorageService } = useContext(Context);
   const navigate = useNavigate();
 
   function attemptSignUp(user) {
@@ -40,8 +38,6 @@ export default function SignUpPage() {
 }
 
 function SignUpForm({ onSubmit }) {
-  //   const { http } = useContext(Context);
-
   const [user, setUser] = useState({
     firstName: "",
     lastName: "",
