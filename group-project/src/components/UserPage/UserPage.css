@@ -5,14 +5,19 @@
 }
 .userPage-root .userPage{
     position: relative;
-    font-weight: bolder;
+    height: 4rem;
+    width: 100vw;
+
+    border-bottom: solid rgba(0, 0, 0, 0.404) 1px;
+
     display: flex;
-    justify-content: center;
+    justify-content: left;
+
+    background-color: rgba(162, 163, 163, 0.418);
 }
 
 
 .userPage-root .favorites{
-    margin-top: 5rem;
     padding: 1rem;
     display: flex;
     flex-direction: row;
@@ -29,4 +34,10 @@
     right: .5rem;
     top: .5rem;
 
+}
+
+.userPage-root .userPage .editIcon{
+    position: absolute;
+    right: 0;
+    top: 1rem;
 }

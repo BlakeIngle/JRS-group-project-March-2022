@@ -17,22 +17,17 @@ export default function UserPage() {
     <div className="userPage-root">
       <div className="userPage">
         <h2>WELCOME {review.userName}</h2>
-        <EditIcon
-          sx={{
-            display: "flex",
-            alignContent: "right",
-            justifyContent: "right",
-          }}
-        />
+        <EditIcon className="editIcon" />
       </div>
       <div className="favorites">{review.userName}'s Favorites List: </div>
       <div className="favoritesBox">
         <Card
           sx={{
             margin: "1rem",
-            width: "60%",
+            width: "45%",
             backgroundColor: "#ffffff88",
-            boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px",
+            boxShadow:
+              "rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;",
           }}
         >
           <CardActionArea>
@@ -42,7 +37,7 @@ export default function UserPage() {
             />
             <div className="icon">{Emojis.burger}</div>
           </CardActionArea>
-          <CardContent>
+          <CardContent sx={{}}>
             <Link
               href="https://www.poestavern.com/"
               target="_blank"
