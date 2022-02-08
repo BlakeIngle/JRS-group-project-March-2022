@@ -1,20 +1,24 @@
 import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router';
 import { Emojis } from '../../assets/DishIcon';
 import { useApi } from '../../services/api.service';
-import '../DishPage/DishPage.css'
+import '../DishPage/Dishes.css'
 import DishSearch from '../Searches/DishSearch';
+import RestaurantSearch from '../Searches/RestaurantSearch';
 
 
-export default function DishPage({ dishId, name, meal, cuisine }) {
+export default function DishPage() {
 
-    const [dishes, setDishes] = useState([]);
-
+    const {dishId} = useParams();
     const api = useApi();
 
-    function getDishes() {
-        api.getAllDishes()
+    const [dish, setDish] = useState([]);
+
+
+    function getDish(dishId) {
+        api.getDishById(dishId)
             .then(res => {
-                setDishes(res.data.dishes)
+                setDish(res.data.dish)
             })
             .catch(err => {
                 console.error(err)
@@ -22,22 +26,17 @@ export default function DishPage({ dishId, name, meal, cuisine }) {
     };
 
     useEffect(() => {
-        getDishes();
-        // console.log(dishes);
+        getDish(dishId);
     }, []);
 
-
-    function DishItem({ id, name, meal, cuisine }) {
-        return (
-            <div className='dish-item'>{Emojis[name]} {name}</div>
-        )
-    }
-
+console.log(dish);
 
     return (
         <div>
-                <DishSearch />
             <div className='dish-page-root'>
+                <h2> {Emojis[dish.name] }{dish.name}</h2>
+                <hr />
+                <RestaurantSearch />
                 {/* <div className='dishes-list'>
                     {dishes.map(dish => {
                         return (

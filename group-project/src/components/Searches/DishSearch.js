@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useState } from "react";
 import { Emojis } from "../../assets/DishIcon";
 import { useApi } from "../../services/api.service";
-import '../DishPage/DishPage.css'
+import '../DishPage/Dishes.css'
 
 export default function DishSearch() {
 
@@ -29,6 +29,7 @@ export default function DishSearch() {
       .replace("-", "");
   }
 
+
   useEffect(() => {
     // get the dishes
     api
@@ -52,7 +53,7 @@ export default function DishSearch() {
           setDishText(e.target.value);
         }}
       />
-      <div className="dishes-list">
+      <div className="dish-container">
         {dishes
           ?.filter((d) => isSimilar(dishText, d.name))
           .map((d, i) => (

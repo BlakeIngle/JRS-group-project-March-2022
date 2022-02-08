@@ -6,14 +6,17 @@ import HomePage from './components/HomePage/HomePage';
 import RestaurantCard from './components/RestaurantCard/RestaurantCard';
 import FoodMap from './components/Map/FoodMap';
 import DishPage from './components/DishPage/DishPage';
+import DishSearch from './components/Searches/DishSearch';
 
 function App() {
+
   return (
     <div className="App">
       <BrowserRouter>
         <Routes>
           <Route path="" element={<HomePage />}>
-            <Route path="/" element={<DishPage />}></Route>
+            <Route path="/" element={<DishSearch />}></Route>
+            <Route path="dishes/:dishId" element={<DishPage />}></Route>
             <Route path="login" element={<LoginPage />}></Route>
             <Route path="review" element={<RestaurantCard />}></Route>
             <Route path="signup" element={<SignUpPage />}></Route>
