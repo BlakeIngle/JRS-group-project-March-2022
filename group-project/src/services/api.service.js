@@ -20,6 +20,10 @@ const api = {
     return axios.get(`${URL}/dishes`);
   },
 
+  getDishById: (dishId) => {
+    return axios.get(`${URL}/dishes/${dishId}`)
+  },
+
   getRestrauntsByName,
 };
 
