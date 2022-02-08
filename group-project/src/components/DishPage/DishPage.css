@@ -1,0 +1,24 @@
+.dishes-page-root {
+    width: 100%;
+}
+.dishes-list {
+    /* border: solid red 1px; */
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 90vw;
+    height: 75vh;
+    padding: 1rem 1rem 3rem;
+    text-align: left;
+
+    justify-content: flex-start;
+    align-items: flex-start;
+
+    overflow: auto;
+}
+
+.dishes-list .dish-item {
+    list-style: none;
+    margin: 0.2rem 0.5rem;
+    cursor: pointer;
+}
