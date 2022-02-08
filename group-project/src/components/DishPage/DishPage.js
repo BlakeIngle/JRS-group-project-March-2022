@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Emojis } from '../../assets/DishIcon';
 import { useApi } from '../../services/api.service';
 import '../DishPage/DishPage.css'
+import DishSearch from '../Searches/DishSearch';
 
 
 export default function DishPage({ dishId, name, meal, cuisine }) {
@@ -34,8 +35,10 @@ export default function DishPage({ dishId, name, meal, cuisine }) {
 
 
     return (
-        <div className='dish-page-root'>
-            <div className='dishes-list'>
+        <div>
+                <DishSearch />
+            <div className='dish-page-root'>
+                {/* <div className='dishes-list'>
                     {dishes.map(dish => {
                         return (
                             <DishItem key={dish.id}
@@ -43,6 +46,7 @@ export default function DishPage({ dishId, name, meal, cuisine }) {
                             />
                         )
                     })}
+                </div> */}
             </div>
             {/* RestaurantCards go here */}
         </div>

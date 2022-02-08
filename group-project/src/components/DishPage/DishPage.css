@@ -1,24 +1,58 @@
-.dishes-page-root {
+.dish-page-root {
     width: 100%;
 }
-.dishes-list {
-    /* border: solid red 1px; */
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    width: 90vw;
-    height: 75vh;
-    padding: 1rem 1rem 3rem;
-    text-align: left;
 
-    justify-content: flex-start;
-    align-items: flex-start;
-
-    overflow: auto;
+.search {
+    /* padding-top: 3rem; */
+    position: relative;
 }
 
-.dishes-list .dish-item {
-    list-style: none;
-    margin: 0.2rem 0.5rem;
+.search input{
+    width: 80vw;
+    margin: 0.5rem;
+    outline: none;
+    padding: 0.3rem;
+    font-size: 1rem
+    /* position: relative; */
+}
+
+.search .icon {
+    font-size: 1.2rem;
+    vertical-align: middle;
+    opacity: 50%;
+    /* left: 0.5rem; */
+
+}
+
+.dishes-list {
+    /* display: flex;
+    flex-direction: column;
+    flex-wrap:wrap; */
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    max-width:90vw;
+    height: 100%;
+    padding: 1rem 1rem;
+    text-align: left;
+    margin: auto;
+
+    /* justify-content: center;
+    align-content:center; */
+
+    /* overflow: auto; */
+}
+
+.dish-item {
+    font-size: 1.2rem;
+    display: flex;
+    height: calc(font-size);
+    /* height: 2.6rem; */
+    margin: 0.2rem 0.2rem;
     cursor: pointer;
+    /* text-indent: -1.6rem;
+    margin-left: 1.6rem; */
+}
+
+.dish-item:hover {
+    background-color: aliceblue;
 }
