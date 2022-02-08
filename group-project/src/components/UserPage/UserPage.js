@@ -1,8 +1,8 @@
 import React from "react";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import { Card, CardActionArea, CardContent, Link } from "@mui/material";
-import EditIcon from "@mui/icons-material/Edit";
 import { Emojis } from "../../assets/DishIcon";
+import ProfileModal from "../Modal/ProfileModal";
 import "./UserPage.css";
 
 export default function UserPage() {
@@ -13,11 +13,12 @@ export default function UserPage() {
     restaurantName: "Poe's Tavern",
   };
 
+
   return (
     <div className="userPage-root">
       <div className="userPage">
-        <h2>WELCOME {review.userName}</h2>
-        <EditIcon className="editIcon" />
+        <h2 className="welcome">WELCOME {review.userName}</h2>
+        <ProfileModal />
       </div>
       <div className="favorites">{review.userName}'s Favorites List: </div>
       <div className="favoritesBox">
