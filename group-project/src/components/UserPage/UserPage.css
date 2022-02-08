@@ -1,0 +1,32 @@
+.userPage-root{
+    margin: 0;
+    padding: 0;
+
+}
+.userPage-root .userPage{
+    position: relative;
+    font-weight: bolder;
+    display: flex;
+    justify-content: center;
+}
+
+
+.userPage-root .favorites{
+    margin-top: 5rem;
+    padding: 1rem;
+    display: flex;
+    flex-direction: row;
+
+    font-size: larger;
+    font-weight: bolder;
+
+}
+
+.userPage-root .favoritesBox .icon{
+    font-size: x-large;
+
+    position: absolute;
+    right: .5rem;
+    top: .5rem;
+
+}
