@@ -1,7 +1,7 @@
 const axios = require("axios");
 const URL = `http://localhost:8080/api`;
 
-function getRestrauntsByName(name) {
+function getRestaurantsByName(name) {
   return axios.get(`${URL}/restaurants?name=${name}`);
 }
 
@@ -30,7 +30,7 @@ const api = {
     return axios.get(`${URL}/dishes/${dishName}`)
   },
 
-  getRestrauntsByName,
+  getRestaurantsByName,
 };
 
 function useApi() {
