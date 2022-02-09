@@ -1,0 +1,56 @@
+.search {
+    /* padding-top: 3rem; */
+    position: relative;
+}
+
+.dish-page-root hr {
+    width: 90vw;
+}
+
+.search input{
+    width: 80vw;
+    margin: 0.5rem;
+    outline: none;
+    padding: 0.3rem;
+    font-size: 1rem
+    /* position: relative; */
+}
+
+.search .icon {
+    font-size: 1.2rem;
+    vertical-align: middle;
+    opacity: 50%;
+    /* left: 0.5rem; */
+
+}
+
+.dish-container {
+    columns: 2;
+    padding: 0 1rem 1rem;
+    text-align: left;
+    margin: auto;
+    margin-bottom: 3rem;
+    justify-content: flex-start;
+    align-items:stretch;
+    overflow: auto;
+    width: 80vw;
+}
+
+.dish-item {
+    font-size: 1.5rem;
+    white-space: nowrap;
+    /* height: calc(font-size); */
+    /* margin: 0.2rem 0.2rem; */
+    cursor: pointer;
+}
+
+.dish-item:hover {
+    background-color: aliceblue;
+}
+
+@media screen and (min-width: 700px) {
+    .dish-container {
+        columns: 3;
+        column-width: auto;
+    }
+}

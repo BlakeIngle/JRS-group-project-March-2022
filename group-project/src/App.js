@@ -41,18 +41,13 @@ function App() {
             <Route path="" element={<HomePage />}>
               <Route path="/" element={<DishPage />}></Route>
               <Route path="login" element={<LoginPage />}></Route>
-              <Route path="review" element={<RestaurantCard />}></Route>
+              <Route
+                path="review/:reviewId"
+                element={<RestaurantCard />}
+              ></Route>
               <Route path="signup" element={<SignUpPage />}></Route>
               <Route path="map" element={<FoodMap />}></Route>
-              <Route
-                path="user/:userId"
-                element={
-                  <p>
-                    Replace this component in App.js with the &lt;UserPage /&gt;
-                    component
-                  </p>
-                }
-              ></Route>
+              {/* <Route path="user/:userId" element={<UserPage />}></Route> */}
             </Route>
             <Route
               path="*"

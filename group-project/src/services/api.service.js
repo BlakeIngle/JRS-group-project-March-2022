@@ -22,6 +22,10 @@ const api = {
     return axios.get(`${URL}/users/email/${email}`);
   },
 
+  getDishById: (dishId) => {
+    return axios.get(`${URL}/dishes/${dishId}`)
+  },
+
   getRestrauntsByName,
 };
 

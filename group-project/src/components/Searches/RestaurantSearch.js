@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useApi } from "../../services/api.service";
+import '../DishPage/Dishes.css'
 
 export default function RestaurantSearch() {
   const http = useApi();
@@ -35,8 +36,10 @@ export default function RestaurantSearch() {
   }, [inputText]);
 
   return (
-    <div className="restaurant-search">
-      <input type="text" value={inputText} onChange={onInputChange} />
+    <div className="restaurant search">
+      <input type="text" value={inputText}
+        onChange={onInputChange}
+      placeholder="Search restaurants"/>
       <span>
         <Restaurants restaurants={restaurantsResults} />
       </span>

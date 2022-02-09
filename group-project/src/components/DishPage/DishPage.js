@@ -1,32 +1,54 @@
-import React, { useEffect } from "react";
-import { Emojis } from "../../assets/DishIcon";
-import { useApi } from "../../services/api.service";
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router';
+import { Emojis } from '../../assets/DishIcon';
+import { useApi } from '../../services/api.service';
+import '../DishPage/Dishes.css'
+import DishSearch from '../Searches/DishSearch';
+import RestaurantSearch from '../Searches/RestaurantSearch';
 
-export default function DishPage({ dishId, name, meal, cuisine }) {
-  const api = useApi();
 
-  function getDishes() {
-    api
-      .getAllDishes()
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-  }
+export default function DishPage() {
 
-  useEffect(() => {
-    getDishes();
-  }, []);
+    const {dishId} = useParams();
+    const api = useApi();
 
-  // const dishId = 1;
-  // const dishIcon = dishIcons[(dishId - 1)].emoji;
+    const [dish, setDish] = useState([]);
 
-  return (
-    <div className="dish-page-root">
-      <h2>Restaurant</h2>
-      {/* RestaurantCards go here */}
-    </div>
-  );
+
+    function getDish(dishId) {
+        api.getDishById(dishId)
+            .then(res => {
+                setDish(res.data.dish)
+            })
+            .catch(err => {
+                console.error(err)
+            })
+    };
+
+    useEffect(() => {
+        getDish(dishId);
+    }, []);
+
+console.log(dish);
+
+    return (
+        <div>
+            <div className='dish-page-root'>
+                <h2> {Emojis[dish.name] }{dish.name}</h2>
+                <hr />
+                <RestaurantSearch />
+                {/* <div className='dishes-list'>
+                    {dishes.map(dish => {
+                        return (
+                            <DishItem key={dish.id}
+                                {...dish}
+                            />
+                        )
+                    })}
+                </div> */}
+            </div>
+            {/* RestaurantCards go here */}
+        </div>
+    );
+
 }

@@ -21,7 +21,7 @@ exports.getAllDishes = (req, res) => {
 exports.getDishById = (req, res) => {
   const { dishId } = req.params;
 
-  const query = `SELECT * FROM dishes WHERE id = ?;`;
+  const query = `SELECT * FROM dishes.dish WHERE id = ?;`;
   const placeholders = [dishId];
 
   db.query(query, placeholders, (err, results) => {

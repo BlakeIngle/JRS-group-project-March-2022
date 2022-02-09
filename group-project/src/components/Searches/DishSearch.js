@@ -1,7 +1,12 @@
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useState } from "react";
-import { useApi } from "../../services/axios.services";
+import { Emojis } from "../../assets/DishIcon";
+import { useApi } from "../../services/api.service";
+import '../DishPage/Dishes.css'
 
 export default function DishSearch() {
+
   var api = useApi();
   var [dishText, setDishText] = useState("");
   const [dishes, setDishes] = useState([]);
@@ -24,6 +29,7 @@ export default function DishSearch() {
       .replace("-", "");
   }
 
+
   useEffect(() => {
     // get the dishes
     api
@@ -38,6 +44,7 @@ export default function DishSearch() {
 
   return (
     <div className="search">
+      <FontAwesomeIcon className="icon" icon={faSearch} />
       <input
         type="text"
         placeholder="Search Dishes"
@@ -46,11 +53,14 @@ export default function DishSearch() {
           setDishText(e.target.value);
         }}
       />
-      {dishes
-        ?.filter((d) => isSimilar(dishText, d.name))
-        .map((d, i) => (
-          <p key={i}>{d.name}</p>
-        ))}
+      <div className="dish-container">
+        {dishes
+          ?.filter((d) => isSimilar(dishText, d.name))
+          .map((d, i) => (
+            <div className="dish-item"
+              key={i}>{Emojis[d.name]}{d.name}</div>
+          ))}
+      </div>
     </div>
   );
 }
