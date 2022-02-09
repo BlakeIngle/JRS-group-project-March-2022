@@ -57,6 +57,13 @@
     text-transform: capitalize;
 }
 
+.placeholder-text {
+    font-size: 1.4rem;
+    /* font-style: italic; */
+    /* font-weight: bold; */
+    color: #00000098;;
+}
+
 @media screen and (min-width: 700px) {
     .dish-container {
         columns: 3;
