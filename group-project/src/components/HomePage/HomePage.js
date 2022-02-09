@@ -29,7 +29,7 @@ function Header() {
       </Link>
       <span className="user-options">
         {state.user ? (
-          <Link to={`/user/${state.user.id}`}>
+          <Link to={`/profile`}>
             <span className="icon">
               <FontAwesomeIcon icon={faUser} />
             </span>

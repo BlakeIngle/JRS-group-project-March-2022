@@ -10,7 +10,7 @@ import { createContext, useState, useEffect } from "react";
 import { useLocalStorage } from "./services/localStorage.service";
 import UserPage from "./components/UserPage/UserPage";
 
-export const Context = createContext();
+export var Context = createContext();
 
 function App() {
   const storage = useLocalStorage();
@@ -48,7 +48,7 @@ function App() {
               ></Route>
               <Route path="signup" element={<SignUpPage />}></Route>
               <Route path="map" element={<FoodMap />}></Route>
-              <Route path="user/:userId" element={<UserPage />}></Route>
+              <Route path="profile" element={<UserPage />}></Route>
             </Route>
             <Route
               path="*"

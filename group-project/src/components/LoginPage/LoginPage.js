@@ -56,7 +56,7 @@ function LoginForm() {
         .then((res) => {
           storage.saveUser(res.data.user);
           setState({ ...state, user: res.data.user });
-          navigate(`/user/${res.data.user.id}`);
+          navigate(`/profile`);
         })
         .catch((err) => {
           console.error(err);
