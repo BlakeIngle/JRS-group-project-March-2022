@@ -52,3 +52,7 @@ body {
 .signup input {
   margin: 0.25rem;
 }
+
+.signup .email-taken {
+  outline-color: red;
+}

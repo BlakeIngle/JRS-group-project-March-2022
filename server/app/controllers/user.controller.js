@@ -28,7 +28,8 @@ exports.getUserById = (req, res) => {
   });
 };
 
-exports.getUserByEmail = (email, res) => {
+exports.getUserByEmail = (req, res) => {
+  const { email } = req.params;
   const query = `SELECT user.id, user.email, user.password, user.firstName
                     FROM dishes.user
                     WHERE user.email = ? ;`;

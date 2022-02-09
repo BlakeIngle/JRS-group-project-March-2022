@@ -6,10 +6,11 @@ import '../DishPage/Dishes.css'
 import DishSearch from '../Searches/DishSearch';
 import RestaurantSearch from '../Searches/RestaurantSearch';
 
-
 export default function DishPage() {
 
-    const {dishId} = useParams();
+    const [hasReviews, setHasReviews] = useState(false)
+
+    const { dishId } = useParams();
     const api = useApi();
 
     const [dish, setDish] = useState([]);
@@ -27,14 +28,13 @@ export default function DishPage() {
 
     useEffect(() => {
         getDish(dishId);
+        
     }, []);
-
-console.log(dish);
 
     return (
         <div>
             <div className='dish-page-root'>
-                <h2> {Emojis[dish.name] }{dish.name}</h2>
+                <h2 className='dish-name'>{Emojis[dish.name]}The Forking Best {dish.name}{Emojis[dish.name]}</h2>
                 <hr />
                 <RestaurantSearch />
                 {/* <div className='dishes-list'>
@@ -47,6 +47,11 @@ console.log(dish);
                     })}
                 </div> */}
             </div>
+            {!hasReviews &&
+                <div>
+                    <br />
+                    <p className='placeholder-text'>Be the first to review this dish!</p>
+                </div>}
             {/* RestaurantCards go here */}
         </div>
     );

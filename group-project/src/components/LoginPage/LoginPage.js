@@ -8,15 +8,16 @@ import { useLocalStorage } from "../../services/localStorage.service";
 
 export default function LoginPage() {
   return (
-    <div className="login-root">
+    <div className="login">
       <h2 className="login-header">Login</h2>
       <LoginForm />
       <Link to="/signup">
         <button type="button">Signup</button>
       </Link>
-      <a href="#" className="forgotPassword">
+      <br />
+      {/*<a href="#" className="forgotPassword">
         Forgot My Username/Password
-      </a>
+      </a>*/}
     </div>
   );
 }
@@ -82,6 +83,7 @@ function LoginForm() {
         type="text"
         name="email"
         value={user.email}
+        style={{ "--animationTime": `${animationTime}ms` }}
         onChange={handleChange}
         placeholder="Email"
       />
@@ -93,6 +95,7 @@ function LoginForm() {
         type="password"
         name="password"
         value={user.password}
+        style={{ "--animationTime": `${animationTime}ms` }}
         onChange={handleChange}
         placeholder="Password"
       />

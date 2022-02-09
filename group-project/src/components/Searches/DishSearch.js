@@ -1,11 +1,15 @@
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { Emojis } from "../../assets/DishIcon";
 import { useApi } from "../../services/api.service";
+import { useLocation } from 'react-router';
 import '../DishPage/Dishes.css'
 
 export default function DishSearch() {
+
+  const location = useLocation();
 
   var api = useApi();
   var [dishText, setDishText] = useState("");
@@ -29,7 +33,6 @@ export default function DishSearch() {
       .replace("-", "");
   }
 
-
   useEffect(() => {
     // get the dishes
     api
@@ -42,23 +45,34 @@ export default function DishSearch() {
       });
   }, []);
 
+  useEffect(() => {
+    // clear search bar when logo is clicked from homepage
+    setDishText('')
+  },[location])
+
   return (
     <div className="search">
-      <FontAwesomeIcon className="icon" icon={faSearch} />
-      <input
-        type="text"
-        placeholder="Search Dishes"
-        value={dishText}
-        onChange={(e) => {
-          setDishText(e.target.value);
-        }}
-      />
+      <div className="search-bar">
+        <FontAwesomeIcon className="icon" icon={faSearch} />
+        <input
+          type="text"
+          placeholder="Search Dishes"
+          value={dishText}
+          onChange={(e) => {
+            setDishText(e.target.value);
+          }} />
+      </div>
       <div className="dish-container">
         {dishes
           ?.filter((d) => isSimilar(dishText, d.name))
           .map((d, i) => (
-            <div className="dish-item"
-              key={i}>{Emojis[d.name]}{d.name}</div>
+            <div key={i}>
+              <Link to={`/dishes/${d.id}`}>
+                <div className="dish-item"
+                >{Emojis[d.name]} {d.name}
+                </div>
+              </Link>
+            </div>
           ))}
       </div>
     </div>

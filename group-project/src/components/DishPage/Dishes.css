@@ -3,6 +3,13 @@
     position: relative;
 }
 
+.search-bar {
+    position: fixed;
+    left: 0;
+    right: 0;
+    background-color: white;
+}
+
 .dish-page-root hr {
     width: 90vw;
 }
@@ -25,15 +32,21 @@
 }
 
 .dish-container {
+    /* position: fixed; */
     columns: 2;
-    padding: 0 1rem 1rem;
+    padding: 3rem 1rem 1rem;
     text-align: left;
     margin: auto;
     margin-bottom: 3rem;
     justify-content: flex-start;
     align-items:stretch;
-    overflow: auto;
     width: 80vw;
+    overflow: auto;
+}
+
+.dish-container a {
+    text-decoration: none;
+    color: inherit;
 }
 
 .dish-item {
@@ -46,6 +59,17 @@
 
 .dish-item:hover {
     background-color: aliceblue;
+}
+
+.dish-name {
+    text-transform: capitalize;
+}
+
+.placeholder-text {
+    font-size: 1.4rem;
+    /* font-style: italic; */
+    /* font-weight: bold; */
+    color: #00000098;;
 }
 
 @media screen and (min-width: 700px) {
