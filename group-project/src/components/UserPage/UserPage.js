@@ -1,26 +1,71 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-import { Card, CardActionArea, CardContent, Link } from "@mui/material";
+import LogoutIcon from "@mui/icons-material/Logout";
+import {
+  Avatar,
+  Button,
+  Card,
+  CardActionArea,
+  CardContent,
+  Divider,
+  Link,
+  TextField,
+} from "@mui/material";
 import { Emojis } from "../../assets/DishIcon";
-import ProfileModal from "../Modal/ProfileModal";
 import "./UserPage.css";
+import { useLocalStorage } from "../../services/localStorage.service";
+import { Context } from "../../App";
+import { useNavigate } from "react-router";
 
 export default function UserPage() {
-  let review = {
-    userId: "1",
-    userName: "Greg",
-    body: "It's simply the best, better than all the rest",
-    restaurantName: "Poe's Tavern",
-  };
+  const { state, setState } = useContext(Context);
 
+  const navigate = useNavigate();
+
+  const storage = useLocalStorage();
+
+  function logoutClicked() {
+    // log out
+    setState({ ...state, user: null });
+    storage.removeActiveUser();
+    navigate("/"); // 'home' page
+  }
+
+  useEffect(() => {
+    if (state.user) {
+      console.log("use effect state variable");
+      // someone is loggin in and viewing their own page
+      // show the logout button
+    } else {
+      //not logged in
+      navigate("/");
+    }
+  }, []);
+
+  if (!state.user) {
+    return <p>No user found</p>;
+  }
 
   return (
     <div className="userPage-root">
       <div className="userPage">
-        <h2 className="welcome">WELCOME {review.userName}</h2>
-        <ProfileModal />
+        <Avatar
+          sx={{
+            backgroundColor: "lightblue",
+            width: 80,
+            height: 80,
+            margin: "1rem",
+            color: "black",
+          }}
+        >
+          {state.user.firstName}
+        </Avatar>
+
+        <h2 className="welcome">Welcome {state.user.firstName}</h2>
       </div>
-      <div className="favorites">{review.userName}'s Favorites List: </div>
+      <Divider />
+
+      <div className="favorites">{state.user.firstName}'s Favorites List: </div>
       <div className="favoritesBox">
         <Card
           sx={{
@@ -44,13 +89,68 @@ export default function UserPage() {
               target="_blank"
               rel="noopener"
             >
-              {review.restaurantName}
+              {state.user.firstName}
             </Link>
           </CardContent>
           <CardActionArea sx={{ padding: "1rem" }}>
-            {review.body}
+            {state.user.email}
           </CardActionArea>
         </Card>
+      </div>
+      <br />
+      <br />
+      <div className="editInformation">
+        <Divider />
+        <h4 style={{ display: "flex", textDecoration: "underline" }}>
+          Profile Information
+        </h4>
+
+        <TextField
+          disabled="disabled"
+          label="First Name"
+          defaultValue={state.user.firstName}
+          type="text"
+          variant="outlined"
+          sx={{ display: "flex", marginTop: "1rem" }}
+        />
+        <TextField
+          disabled="disabled"
+          label="Email"
+          defaultValue={state.user.email}
+          type="email"
+          variant="outlined"
+          sx={{ display: "flex", marginTop: "1rem" }}
+        />
+        <TextField
+          type="password"
+          label="Current Password"
+          variant="outlined"
+          sx={{ display: "flex", marginTop: "1rem" }}
+        />
+        <TextField
+          type="password"
+          label="New Password"
+          variant="outlined"
+          sx={{ display: "flex", marginTop: "1rem" }}
+        />
+        <TextField
+          type="password"
+          label="Confirm New Password"
+          variant="outlined"
+          sx={{ display: "flex", marginTop: "1rem" }}
+        />
+        <br />
+        <Button variant="contained">Save</Button>
+        <Divider />
+
+        <Button
+          variant="contained"
+          startIcon={<LogoutIcon />}
+          sx={{ position: "absolute", right: 0 }}
+          onClick={logoutClicked}
+        >
+          Logout
+        </Button>
       </div>
     </div>
   );
