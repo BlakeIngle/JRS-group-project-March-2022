@@ -30,7 +30,6 @@ export default function DishSearch() {
       .replace("-", "");
   }
 
-
   useEffect(() => {
     // get the dishes
     api
@@ -43,26 +42,34 @@ export default function DishSearch() {
       });
   }, []);
 
+  useEffect(() => {
+    // clear search bar when logo is clicked from homepage
+    setDishText('')
+  },[location])
+
   return (
     <div className="search">
-      <FontAwesomeIcon className="icon" icon={faSearch} />
-      <input
-        type="text"
-        placeholder="Search Dishes"
-        value={dishText}
-        onChange={(e) => {
-          setDishText(e.target.value);
-        }}
-      />
+      <div className="search-bar">
+        <FontAwesomeIcon className="icon" icon={faSearch} />
+        <input
+          type="text"
+          placeholder="Search Dishes"
+          value={dishText}
+          onChange={(e) => {
+            setDishText(e.target.value);
+          }} />
+      </div>
       <div className="dish-container">
         {dishes
           ?.filter((d) => isSimilar(dishText, d.name))
           .map((d, i) => (
-            <Link to={`/dishes/${d.id}`}>
-              <div className="dish-item"
-                key={i}>{Emojis[d.name]} {d.name}
-              </div>
-            </Link>
+            <div key={i}>
+              <Link to={`/dishes/${d.id}`}>
+                <div className="dish-item"
+                >{Emojis[d.name]} {d.name}
+                </div>
+              </Link>
+            </div>
           ))}
       </div>
     </div>
