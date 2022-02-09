@@ -1,0 +1,38 @@
+.userPage-root{
+    margin: 0;
+    padding: 0;
+
+}
+.userPage-root .userPage{
+    position: relative;
+    height: 4rem;
+    width: 100vw;
+
+    border-bottom: solid rgba(0, 0, 0, 0.404) 1px;
+
+    display: flex;
+    justify-content: left;
+
+    background-color: rgba(162, 163, 163, 0.418);
+}
+
+
+.userPage-root .favorites{
+    padding: 1rem;
+    display: flex;
+    flex-direction: row;
+
+    font-size: larger;
+    font-weight: bolder;
+
+}
+
+.userPage-root .favoritesBox .icon{
+    font-size: x-large;
+
+    position: absolute;
+    right: .5rem;
+    top: .5rem;
+
+}
+

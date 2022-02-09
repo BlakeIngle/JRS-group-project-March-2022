@@ -7,6 +7,7 @@ import RestaurantCard from './components/RestaurantCard/RestaurantCard';
 import FoodMap from './components/Map/FoodMap';
 import DishPage from './components/DishPage/DishPage';
 import DishSearch from './components/Searches/DishSearch';
+import UserPage from './components/UserPage/UserPage';
 
 function App() {
 
@@ -21,6 +22,7 @@ function App() {
             <Route path="review" element={<RestaurantCard />}></Route>
             <Route path="signup" element={<SignUpPage />}></Route>
             <Route path="map" element={<FoodMap />}></Route>
+            <Route path="user" element={<UserPage />}></Route>
           </Route>
           <Route path="*" element={<div>404 - page does not exist</div>}></Route>
         </Routes>
