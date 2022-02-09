@@ -6,7 +6,6 @@ import '../DishPage/Dishes.css'
 import DishSearch from '../Searches/DishSearch';
 import RestaurantSearch from '../Searches/RestaurantSearch';
 
-
 export default function DishPage() {
 
     const [hasReviews, setHasReviews] = useState(false)
@@ -29,9 +28,8 @@ export default function DishPage() {
 
     useEffect(() => {
         getDish(dishId);
+        
     }, []);
-
-    console.log(dish);
 
     return (
         <div>

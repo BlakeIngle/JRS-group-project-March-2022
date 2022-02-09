@@ -3,6 +3,13 @@
     position: relative;
 }
 
+.search-bar {
+    position: fixed;
+    left: 0;
+    right: 0;
+    background-color: white;
+}
+
 .dish-page-root hr {
     width: 90vw;
 }
@@ -25,15 +32,16 @@
 }
 
 .dish-container {
+    /* position: fixed; */
     columns: 2;
-    padding: 0 1rem 1rem;
+    padding: 3rem 1rem 1rem;
     text-align: left;
     margin: auto;
     margin-bottom: 3rem;
     justify-content: flex-start;
     align-items:stretch;
-    overflow: auto;
     width: 80vw;
+    overflow: auto;
 }
 
 .dish-container a {
