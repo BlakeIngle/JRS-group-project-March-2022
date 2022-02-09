@@ -83,6 +83,7 @@ function LoginForm() {
         type="text"
         name="email"
         value={user.email}
+        style={{ "--animationTime": `${animationTime}ms` }}
         onChange={handleChange}
         placeholder="Email"
       />
@@ -94,6 +95,7 @@ function LoginForm() {
         type="password"
         name="password"
         value={user.password}
+        style={{ "--animationTime": `${animationTime}ms` }}
         onChange={handleChange}
         placeholder="Password"
       />
