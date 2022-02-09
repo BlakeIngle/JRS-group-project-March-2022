@@ -4,9 +4,12 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Emojis } from "../../assets/DishIcon";
 import { useApi } from "../../services/api.service";
+import { useLocation } from 'react-router';
 import '../DishPage/Dishes.css'
 
 export default function DishSearch() {
+
+  const location = useLocation();
 
   var api = useApi();
   var [dishText, setDishText] = useState("");
