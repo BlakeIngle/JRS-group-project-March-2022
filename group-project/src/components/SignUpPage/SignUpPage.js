@@ -16,7 +16,7 @@ export default function SignUpPage() {
       .then((res) => {
         const user = res.data.user;
         storage.saveUser(user);
-        navigate(`/user/${user.id}`);
+        navigate(`/profile`);
       })
       .catch((err) => {
         console.error(err);
@@ -79,7 +79,7 @@ function SignUpForm({ onSubmit, api }) {
               setIsEmailTaken(true);
             })
             .catch((err) => {
-              if (err.response.status == 404) {
+              if (err.response.status === 404) {
                 setIsEmailTaken(false);
               } else {
                 console.error(err);
