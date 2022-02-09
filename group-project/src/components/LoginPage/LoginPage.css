@@ -1,45 +1,36 @@
 :root {
   --inputLabelText: #d2e2e2;
-  --inputLabelText: #000000;
   --headerText: #e7dddd;
-  --headerText: #000000;
-  --buttonTextColor: rgb(247, 243, 243);
-  --buttonTextColor: rgb(0, 0, 0);
-  --buttonBackgroundColor: rgba(255, 255, 255, 0.473);
   --backgroundImage: url(https://www.wallpapertip.com/wmimgs/54-549491_background-for-food-website.jpg);
 }
 
 body {
-  /* background-image: var(--backgroundImage); */
+  /* border: solid rgb(224, 9, 9) 1px; */
   margin: auto 0;
   padding: 0;
 }
 
-.login-root {  
-  margin: 7rem;
-  background-color: rgba(0, 0, 0, 0.616);
-  height: 100%;
-  font-size: larger;
-  font-family: monospace;
+.login-header {
+  color: var(--headerText);
+  /* border: solid rgb(9, 255, 0) 1px; */
+}
+
+.login {
+  margin: 5rem;
+  background-color: rgba(0, 0, 0, 0.705);
   border-radius: 8px;
+  /* border: solid rgb(9, 255, 0) 1px; */
 }
 
-.login-root label {
-    display: inline-block;
-    width: 6rem;
-    text-align: right;
-    color: var(--inputLabelText);
+.login label {
+  display: inline-block;
+  width: 7rem;
+  text-align: right;
+  color: var(--inputLabelText);
+  /* border: solid red 1px; */
 }
 
-.login-root input {
-  position: relative;
-  margin: 0.25rem;
-  /* display: flex;
-  justify-content: center; */
-}
-
-.login-root button {
-  
+.login button {
   font: inherit;
   font-weight: 900;
 
@@ -50,22 +41,14 @@ body {
   padding: 0.25rem;
 
   border-radius: 4px;
-  background-color: var(--buttonBackgroundColor);
-  color: var(--buttonTextColor);
 }
 
-.login-root button:hover {
+.login button:hover {
   color: rgba(255, 255, 255, 0.925);
   background-color: rgba(255, 255, 255, 0.767);
   cursor: pointer;
 }
 
-.forgotPassword {
-  position: absolute;
-  margin-top: 4rem;
-  color: rgb(247, 244, 244);
-}
-
-.login-header{
-  color: var(--headerText);
+.login input {
+  margin: 0.25rem;
 }
