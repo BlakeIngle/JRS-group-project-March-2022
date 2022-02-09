@@ -1,8 +1,5 @@
-import React from "react";
-
-const api = {
+const localStore = {
   saveUser: (user) => {
-    console.log(user);
     const value = JSON.stringify(user);
     localStorage.setItem("activeUser", value);
   },
@@ -15,6 +12,6 @@ const api = {
 };
 
 function useLocalStorage() {
-  return api;
+  return localStore;
 }
 export { useLocalStorage };

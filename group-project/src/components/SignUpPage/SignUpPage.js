@@ -1,25 +1,26 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./SignUpPage.css";
+
+import { useApi } from "../../services/api.service";
+import { useLocalStorage } from "../../services/localStorage.service";
 
 export default function SignUpPage() {
   const navigate = useNavigate();
+  const api = useApi();
+  var storage = useLocalStorage();
 
   function attemptSignUp(user) {
-    // http
-    //   .createNewUser(user)
-    //   .then((res) => {
-    //     const user = res.data.user;
-    //     console.log(user);
-    //     localStorageService.saveUser(user);
-    //     navigate(`/user/${user.id}`);
-    //     // nav to new user's page
-    //   })
-    //   .catch((err) => {
-    //     console.log("Error in Attempt SignUp Function", err);
-    //   });
-    // console.log("attempt sign up function");
+    api
+      .createNewUser(user)
+      .then((res) => {
+        const user = res.data.user;
+        storage.saveUser(user);
+        navigate(`/user/${user.id}`);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   }
 
   return (
@@ -28,7 +29,7 @@ export default function SignUpPage() {
         <h2 className="signup-header">Sign Up</h2>
         {/* <hr /> */}
         <br />
-        <SignUpForm onSubmit={attemptSignUp} />
+        <SignUpForm onSubmit={attemptSignUp} api={api} />
         <Link to="/login">
           <button type="button">Login</button>
         </Link>
@@ -37,7 +38,7 @@ export default function SignUpPage() {
   );
 }
 
-function SignUpForm({ onSubmit }) {
+function SignUpForm({ onSubmit, api }) {
   const [user, setUser] = useState({
     firstName: "",
     lastName: "",
@@ -45,6 +46,7 @@ function SignUpForm({ onSubmit }) {
     password: "",
   });
   const [isEmailTaken, setIsEmailTaken] = useState(false);
+  const [searchTimeout, setSearchTimeout] = useState(null);
 
   function handleChange(e) {
     //name property on input form
@@ -65,22 +67,28 @@ function SignUpForm({ onSubmit }) {
     }
   }
 
-  //   useEffect(() => {
-  //     http
-  //       .getUserByEmail(user.email)
-  //       .then((res) => {
-  //         setIsEmailTaken(true);
-  //       })
-  //       .catch((err) => {
-  //         if (err.response.status == 404) {
-  //           setIsEmailTaken(false);
-  //         } else if (err.response.status == 401) {
-  //           setIsEmailTaken(true);
-  //         } else {
-  //           console.error(err);
-  //         }
-  //       });
-  //   }, [user.email]);
+  useEffect(() => {
+    clearTimeout(searchTimeout);
+
+    setSearchTimeout(
+      setTimeout(() => {
+        if (user.email) {
+          api
+            .getUserByEmail(user.email)
+            .then((res) => {
+              setIsEmailTaken(true);
+            })
+            .catch((err) => {
+              if (err.response.status == 404) {
+                setIsEmailTaken(false);
+              } else {
+                console.error(err);
+              }
+            });
+        }
+      }, 1500)
+    );
+  }, [user.email]);
 
   return (
     <form onSubmit={handleSubmit}>
@@ -92,16 +100,6 @@ function SignUpForm({ onSubmit }) {
           value={user.firstName}
           onChange={handleChange}
           placeholder="First Name"
-        />
-      </div>
-      <div className="lastName">
-        <label> Last Name: </label>
-        <input
-          type="text"
-          name="lastName"
-          value={user.lastName}
-          onChange={handleChange}
-          placeholder="Last Name"
         />
       </div>
       <div className="signup-email">
