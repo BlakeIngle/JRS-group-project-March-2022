@@ -48,7 +48,7 @@ export default function DishSearch() {
   useEffect(() => {
     // clear search bar when logo is clicked from homepage
     setDishText('')
-  },[location])
+  }, [location])
 
   return (
     <div className="search">
@@ -67,7 +67,7 @@ export default function DishSearch() {
           ?.filter((d) => isSimilar(dishText, d.name))
           .map((d, i) => (
             <div key={i}>
-              <Link to={`/dishes/${d.id}`}>
+              <Link to={`dish/${d.name}`}>
                 <div className="dish-item"
                 >{Emojis[d.name]} {d.name}
                 </div>

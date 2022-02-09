@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useRef } from 'react';
-import { useLocation } from 'react-router';
+import { useLocation, useParams } from 'react-router';
 import './HomePage.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus, faSearch, faUser } from '@fortawesome/free-solid-svg-icons'
@@ -12,13 +12,13 @@ export default function HomePage() {
 
     const location = useLocation();
 
-    const splitPath = location.pathname.split("/")[1];
+    const isDishPage = location.pathname.split("/")[1] === 'dish'
 
     const footerRef = useRef(null);
 
     useEffect(() => {
         // make footer visible if url is "/dishes/..."
-        if (splitPath == "dishes") {
+        if (isDishPage) {
             footerRef.current.classList.add("visible")
         };
     }, [location])

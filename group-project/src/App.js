@@ -9,6 +9,7 @@ import DishPage from "./components/DishPage/DishPage";
 import { createContext, useState, useEffect } from "react";
 import { useLocalStorage } from "./services/localStorage.service";
 import UserPage from "./components/UserPage/UserPage";
+import DishSearch from "./components/Searches/DishSearch";
 
 export const Context = createContext();
 
@@ -40,7 +41,8 @@ function App() {
         <BrowserRouter>
           <Routes>
             <Route path="" element={<HomePage />}>
-              <Route path="/" element={<DishPage />}></Route>
+              <Route path="/" element={<DishSearch />}></Route>
+              <Route path="dish/:dishName" element={<DishPage />}></Route>
               <Route path="login" element={<LoginPage />}></Route>
               <Route
                 path="review/:reviewId"
