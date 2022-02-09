@@ -1,7 +1,10 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router";
 import "./LoginPage.css";
+import { Context } from "../../App";
+import { useApi } from "../../services/api.service";
+import { useLocalStorage } from "../../services/localStorage.service";
 
 export default function LoginPage() {
   return (
@@ -19,9 +22,14 @@ export default function LoginPage() {
 }
 
 function LoginForm() {
+  var { state, setState } = useContext(Context);
+
+  const storage = useLocalStorage();
+  const api = useApi();
   const navigate = useNavigate();
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
+  const animationTime = 300;
 
   const [user, setUser] = useState({
     email: "",
@@ -43,22 +51,26 @@ function LoginForm() {
   function handleSubmit(e) {
     e.preventDefault();
     if (user.email && user.password) {
-      // onSubmit(user);
-      // {
-      //   http
-      //     .login(user)
-      //     .then((res) => {
-      //       // localStorageService.saveUser(res.data.user);
-      //       // setState({ ...state, user: res.data.user });
-      //       // navigate(`/user/${res.data.user.id}`);
-      //     })
-      //     .catch((err) => {
-      //       //maybe status code 404 misspelled email
-      //       //maybe 4xx -> good email, bad password
-      //       // console.error(err);
-      //       setUser({ email: "", password: "" });
-      //     });
-      // }
+      api
+        .login(user)
+        .then((res) => {
+          storage.saveUser(res.data.user);
+          setState({ ...state, user: res.data.user });
+          navigate(`/user/${res.data.user.id}`);
+        })
+        .catch((err) => {
+          console.error(err);
+
+          emailRef.current.classList.add("shake");
+          passwordRef.current.classList.add("shake");
+
+          setUser({ email: "", password: "" });
+
+          setTimeout(() => {
+            emailRef.current.classList.remove("shake");
+            passwordRef.current.classList.remove("shake");
+          }, animationTime);
+        });
     }
   }
 

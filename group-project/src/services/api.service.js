@@ -15,9 +15,11 @@ const api = {
   updateUser: (user) => {
     return axios.put(`${URL}/users/${user.id}`, user);
   },
-
   getAllDishes: () => {
     return axios.get(`${URL}/dishes`);
+  },
+  getUserByEmail: (email) => {
+    return axios.get(`${URL}/users/email/${email}`);
   },
 
   getRestrauntsByName,
