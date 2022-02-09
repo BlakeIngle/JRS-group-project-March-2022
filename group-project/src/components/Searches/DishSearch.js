@@ -1,6 +1,7 @@
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { Emojis } from "../../assets/DishIcon";
 import { useApi } from "../../services/api.service";
 import '../DishPage/Dishes.css'
@@ -57,8 +58,11 @@ export default function DishSearch() {
         {dishes
           ?.filter((d) => isSimilar(dishText, d.name))
           .map((d, i) => (
-            <div className="dish-item"
-              key={i}>{Emojis[d.name]}{d.name}</div>
+            <Link to={`/dishes/${d.id}`}>
+              <div className="dish-item"
+                key={i}>{Emojis[d.name]} {d.name}
+              </div>
+            </Link>
           ))}
       </div>
     </div>

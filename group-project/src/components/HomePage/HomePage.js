@@ -28,7 +28,7 @@ function Header() {
             <Link to="/login">
                 <span className='user-options'>
                     {userLoggedIn ? <span className='icon'><FontAwesomeIcon icon={faUser} /></span>
-                        : <span className='login'>Login / Sign Up</span>}
+                        : <span className='login'>Login</span>}
                 </span>
             </Link>
         </div>

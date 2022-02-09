@@ -36,6 +36,11 @@
     width: 80vw;
 }
 
+.dish-container a {
+    text-decoration: none;
+    color: inherit;
+}
+
 .dish-item {
     font-size: 1.5rem;
     white-space: nowrap;
@@ -46,6 +51,10 @@
 
 .dish-item:hover {
     background-color: aliceblue;
+}
+
+.dish-name {
+    text-transform: capitalize;
 }
 
 @media screen and (min-width: 700px) {

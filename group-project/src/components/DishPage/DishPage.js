@@ -34,7 +34,7 @@ console.log(dish);
     return (
         <div>
             <div className='dish-page-root'>
-                <h2> {Emojis[dish.name] }{dish.name}</h2>
+                <h1 className='dish-name'> {Emojis[dish.name] }{dish.name}</h1>
                 <hr />
                 <RestaurantSearch />
                 {/* <div className='dishes-list'>
