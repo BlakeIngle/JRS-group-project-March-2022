@@ -4,7 +4,6 @@ import LoginPage from "./components/LoginPage/LoginPage";
 import SignUpPage from "./components/SignUpPage/SignUpPage";
 import HomePage from "./components/HomePage/HomePage";
 import RestaurantCard from "./components/RestaurantCard/RestaurantCard";
-import FoodMap from "./components/Map/FoodMap";
 import DishPage from "./components/DishPage/DishPage";
 import { createContext, useState, useEffect } from "react";
 import { useLocalStorage } from "./services/localStorage.service";
@@ -49,7 +48,6 @@ function App() {
                 element={<RestaurantCard />}
               ></Route>
               <Route path="signup" element={<SignUpPage />}></Route>
-              <Route path="map" element={<FoodMap />}></Route>
               <Route path="profile" element={<UserPage />}></Route>
             </Route>
             <Route
