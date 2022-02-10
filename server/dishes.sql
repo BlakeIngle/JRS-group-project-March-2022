@@ -86,5 +86,6 @@ VALUES
   (42, 'french fries', 'appetizers', 'american'),
   (43, 'onion rings', 'appetizers', 'american'),
   (44, 'poke', 'entrees', 'american'),
-  (45, 'falafel', 'entrees', 'mediterranean');
+  (45, 'falafel', 'entrees', 'mediterranean'),
+  (46, 'bbq', 'entrees', 'american');
 

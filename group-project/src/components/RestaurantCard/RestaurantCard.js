@@ -1,8 +1,8 @@
 import React from 'react';
 import './RestaurantCard.css'
-import dishIcons from '../../assets/DishEmoji.json'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faExternalLinkAlt, faMapMarkerAlt, faThumbsUp } from '@fortawesome/free-solid-svg-icons';
+import { Emojis } from '../../assets/DishIcon';
 
 export default function RestaurantCard(review) {
 
@@ -13,9 +13,11 @@ export default function RestaurantCard(review) {
     restaurantId: "fd7843wnk393",
     restaurantName: "Poe's Tavern",
     dishId: 1,
+    dishName: "burger"
   };
 
-  const dishIcon = dishIcons[review.dishId - 1].emoji;
+
+  const dishIcon = Emojis[review.dishName];
 
   return (
     <div className='restaurant-card-root'>

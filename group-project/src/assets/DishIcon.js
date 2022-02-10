@@ -44,5 +44,6 @@ export const Emojis = {
     'french fries': "🍟",
     'onion rings': "🧅",
     poke: "🍚",
-    falafel: "🧆"
+    falafel: "🧆",
+    bbq: "🐖"
 }
