@@ -38,7 +38,7 @@ export default function HomePage() {
         return (
             <div className='header-root'>
                 <Link to="/">
-                    <img className='logo' src="https://i.postimg.cc/T3bd2sHn/forkingbest-logo-white-rgb-100px-72ppi.png"></img>
+                    <img className='logo' src="https://i.postimg.cc/mDNJ78Zs/forking-logo-white.png"></img>
                     <span className='app-name'>The Forking Best</span>
                 </Link>
                 <span className="user-options">
