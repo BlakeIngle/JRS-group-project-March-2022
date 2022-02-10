@@ -2,7 +2,7 @@
     background-color: #333;
     color: #fff;
 
-    height: 2rem;
+    height: 2.2rem;
     padding: 0.5rem;
     max-width: 100vw;
     position: sticky;
@@ -23,10 +23,6 @@
     margin: 0.4rem;
 }
 
-.header-root .icon {
-    cursor: pointer;
-}
-
 .header-root .app-name {
     text-align: left;
     font-size: 1.4rem;
@@ -39,19 +35,21 @@
     color: inherit;
 }
 
-.header-root .icon {
-    font-size: 1.3rem;
-}
-
 .header-root .user-options {
     cursor: pointer;
     border: solid #aaa 1px;
-    padding: 0.2rem 0.8rem;
+    padding: 0.3rem 0.8rem;
     border-radius: 4px;
 }
 
+.header-root .user-options .icon {
+    cursor: pointer;
+    font-size: 1.2rem;
+}
+
 .header-root .user-options:hover {
-    background-color: rgb(184, 108, 23);
+    background-color: #fff;
+    color: #333;
 }
 
 .footer-root {
