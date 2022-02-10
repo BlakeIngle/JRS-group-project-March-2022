@@ -1,51 +1,51 @@
-.userPage-root{
-    margin: 0;
-    padding: 0;
-
+.user-page-root{
+    /* margin: 0;
+    padding: 0; */
 }
 
-.userPage-root .userPage .welcome{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    
-}
-
-.userPage-root .userPage .welcome{
-    margin: 0;
-    padding: 0;
-    position: relative;
-    top:-4rem;
-    font-family: sans-serif;
-}
-
-
-
-.userPage-root .userPage{
-    position: relative;
-    height: 6rem;
-    width: 100vw;
-}
-
-
-
-.userPage-root .favorites{
-    padding: 1rem;
+.user-page-root .top-section {
     display: flex;
     flex-direction: row;
-
-    font-size: 16px;
-    font-weight: bolder;
-    text-decoration: underline;
-
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    padding: 1rem 1.5rem;
+    /* height: 5rem; */
+    /* position: relative; */
 }
 
-.userPage-root .favoritesBox .icon{
-    font-size: x-large;
 
-    position: absolute;
-    right: .5rem;
-    top: .5rem;
-
+.user-page-root .top-section .avatar {
+    margin: 0;
 }
 
+.user-page-root .favorites{
+    /* padding: 1rem; */
+    /* display: flex;
+    /* text-decoration: underline; */
+}
+
+.user-page-root .favoritesBox {
+    /* position: relative; */
+    width: 100%;
+    /* border: solid red 1px; */
+}
+
+.user-page-root .favoritesBox > * {
+    /* border: solid blue 1px; */
+    width: 90%;
+    max-width: 1000px;
+    margin: 3rem auto;
+}
+
+.user-page-root .favoritesBox .icons{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    /* align-items: center; */
+    font-size: 2rem;
+    padding: 0.2rem;
+}
+
+.user-page-root .favoritesBox .icons .emoji {
+}

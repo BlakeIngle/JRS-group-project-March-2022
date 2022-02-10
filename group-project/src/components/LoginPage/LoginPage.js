@@ -8,7 +8,7 @@ import { useLocalStorage } from "../../services/localStorage.service";
 
 export default function LoginPage() {
   return (
-    <div className="login">
+    <div className="login-root">
       <h2 className="login-header">Login</h2>
       <LoginForm />
       <Link to="/signup">
