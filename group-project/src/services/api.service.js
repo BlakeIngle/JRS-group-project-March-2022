@@ -26,6 +26,10 @@ const api = {
     return axios.get(`${URL}/dishes/${dishId}`);
   },
 
+  getDishByName: (dishName) => {
+    return axios.get(`${URL}/dishes/${dishName}`);
+  },
+
   getReviewByUserId: (userId) => {
     return axios.get(`${URL}/reviews/${userId}`);
   },
