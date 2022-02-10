@@ -21,12 +21,28 @@ const api = {
   getUserByEmail: (email) => {
     return axios.get(`${URL}/users/email/${email}`);
   },
-
   getDishById: (dishId) => {
-    return axios.get(`${URL}/dishes/${dishId}`)
+    return axios.get(`${URL}/dishes/${dishId}`);
   },
-
   getRestrauntsByName,
+  getReviewByUserId: (userId) => {
+    return axios.get(`${URL}/reviews/${userId}`);
+  },
+  getRestaurantsByDishId: (dishId) => {
+    return axios.get(`${URL}/restaurants/${dishId}`);
+  },
+  getReviewsByRestaurantId: (restaurantId) => {
+    return axios.get(`${URL}/reviews/${restaurantId}`);
+  },
+  addNewReview: (review) => {
+    return axios.post(`${URL}/reviews`, review);
+  },
+  updateReview: (review) => {
+    return axios.put(`${URL}/reviews/${review.id}`, review);
+  },
+  deleteReview: (review) => {
+    return axios.delete(`${URL}/reviews/${review.id}`);
+  },
 };
 
 function useApi() {
