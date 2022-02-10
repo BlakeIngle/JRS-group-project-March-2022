@@ -1,7 +1,7 @@
 const axios = require("axios");
 const URL = `http://localhost:8080/api`;
 
-function getRestrauntsByName(name) {
+function getRestaurantsByName(name) {
   return axios.get(`${URL}/restaurants?name=${name}`);
 }
 
@@ -15,6 +15,7 @@ const api = {
   updateUser: (user) => {
     return axios.put(`${URL}/users/${user.id}`, user);
   },
+
   getAllDishes: () => {
     return axios.get(`${URL}/dishes`);
   },
@@ -24,12 +25,9 @@ const api = {
   getDishById: (dishId) => {
     return axios.get(`${URL}/dishes/${dishId}`);
   },
-  getRestrauntsByName,
+
   getReviewByUserId: (userId) => {
     return axios.get(`${URL}/reviews/${userId}`);
-  },
-  getRestaurantsByDishId: (dishId) => {
-    return axios.get(`${URL}/restaurants/${dishId}`);
   },
   getReviewsByRestaurantId: (restaurantId) => {
     return axios.get(`${URL}/reviews/${restaurantId}`);
@@ -43,6 +41,12 @@ const api = {
   deleteReview: (review) => {
     return axios.delete(`${URL}/reviews/${review.id}`);
   },
+
+  getRestaurantsByDish: (dishName) => {
+    return axios.get(`${URL}/restaurants/${dishName}`);
+  },
+
+  getRestaurantsByName,
 };
 
 function useApi() {

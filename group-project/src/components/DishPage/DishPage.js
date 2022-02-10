@@ -10,16 +10,23 @@ export default function DishPage() {
 
     const [hasReviews, setHasReviews] = useState(false)
 
-    const { dishId } = useParams();
+    const { dishName } = useParams();
     const api = useApi();
 
     const [dish, setDish] = useState([]);
 
-
-    function getDish(dishId) {
-        api.getDishById(dishId)
+    function getDish() {
+        api.getDishByName(dishName)
             .then(res => {
-                setDish(res.data.dish)
+                const dish = res.data.dish;
+                setDish(dish);
+                // api.getTopRestaurants(res.data.id)
+                // .then(res => {
+                //      setRestaurants(res.data.restaurants)                   
+                // })
+                // .catch(err => {
+                //     console.error(err)
+                // })
             })
             .catch(err => {
                 console.error(err)
@@ -27,9 +34,11 @@ export default function DishPage() {
     };
 
     useEffect(() => {
-        getDish(dishId);
-        
+        getDish();
+
     }, []);
+
+    // console.log(dishName);
 
     return (
         <div>

@@ -21,7 +21,7 @@ export default function RestaurantSearch() {
       setTimeout(() => {
         if (inputText) {
           http
-            .getRestrauntsByName(inputText)
+            .getRestaurantsByName(inputText)
             .then((results) => {
               if (results.data) {
                 setRestaurantsResults(results.data.restaurants);
