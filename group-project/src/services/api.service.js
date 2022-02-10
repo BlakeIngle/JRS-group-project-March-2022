@@ -15,12 +15,12 @@ const api = {
   updateUser: (user) => {
     return axios.put(`${URL}/users/${user.id}`, user);
   },
+  getUserByEmail: (email) => {
+    return axios.get(`${URL}/users/email/${email}`);
+  },
 
   getAllDishes: () => {
     return axios.get(`${URL}/dishes`);
-  },
-  getUserByEmail: (email) => {
-    return axios.get(`${URL}/users/email/${email}`);
   },
   getDishById: (dishId) => {
     return axios.get(`${URL}/dishes/${dishId}`);
@@ -42,8 +42,8 @@ const api = {
     return axios.delete(`${URL}/reviews/${review.id}`);
   },
 
-  getRestaurantsByDish: (dishName) => {
-    return axios.get(`${URL}/restaurants/${dishName}`);
+  getRestaurantsByDish: (dishName, location) => {
+    return axios.get(`${URL}/restaurants/${dishName}?location=${location}`);
   },
 
   getRestaurantsByName,
