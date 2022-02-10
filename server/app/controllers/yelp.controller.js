@@ -24,7 +24,9 @@ exports.getRestaurantsByQuery = (req, res) => {
   const location = "Charleston, SC";
 
   yelp
-    .get(`/search?term=${name}&location=${location}&categories=restaurants&sort_by=distance`)
+    .get(
+      `/search?term=${name}&location=${location}&categories=restaurants&sort_by=distance`
+    )
     .then((results) => {
       if (results.data.length === 0) {
         res.status(404).send({ message: "No matches" });
