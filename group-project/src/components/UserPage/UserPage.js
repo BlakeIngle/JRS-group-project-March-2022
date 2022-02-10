@@ -33,7 +33,7 @@ export default function UserPage() {
 
   useEffect(() => {
     if (state.user) {
-      console.log("use effect state variable");
+      // console.log("use effect state variable");
       // someone is loggin in and viewing their own page
       // show the logout button
     } else {
@@ -47,58 +47,89 @@ export default function UserPage() {
   }
 
   return (
-    <div className="userPage-root">
-      <div className="userPage">
-        <Avatar
-          sx={{
-            backgroundColor: "lightblue",
-            width: 80,
-            height: 80,
-            margin: "1rem",
-            color: "black",
-          }}
-        >
-          {state.user.firstName}
+    <div className="user-page-root">
+      <div className="top-section">
+          <Avatar
+            className="avatar"
+            sx={{
+              backgroundColor: "lightblue",
+              width: 80,
+              height: 80,
+              margin: "1rem",
+              color: "black",
+            }}
+          >
+            {state.user.firstName}
         </Avatar>
-
-        <h2 className="welcome">Welcome {state.user.firstName}</h2>
+        <h2 className="welcome">Welcome, {state.user.firstName}!</h2>
       </div>
       <Divider />
-
-      <div className="favorites">{state.user.firstName}'s Favorites List: </div>
-      <div className="favoritesBox">
-        <Card
-          sx={{
-            margin: "1rem",
-            width: "45%",
-            backgroundColor: "#ffffff88",
-            boxShadow:
-              "rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;",
-          }}
-        >
-          <CardActionArea>
-            <FavoriteIcon
-              className="favoriteIcon"
-              sx={{ fontSize: 40, color: "red", display: "flex", width: "12%" }}
-            />
-            <div className="icon">{Emojis.burger}</div>
-          </CardActionArea>
-          <CardContent sx={{}}>
-            <Link
-              href="https://www.poestavern.com/"
-              target="_blank"
-              rel="noopener"
-            >
-              {state.user.firstName}
-            </Link>
-          </CardContent>
-          <CardActionArea sx={{ padding: "1rem" }}>
-            {state.user.email}
-          </CardActionArea>
-        </Card>
+      <div className="favorites">
+        <h2>{state.user.firstName}'s Favorites</h2>
+        <div className="favoritesBox">
+          <Card
+            sx={{
+              margin: "1rem",
+              width: "45%",
+              backgroundColor: "#ffffff88",
+              boxShadow:
+                "rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;",
+            }}
+          >
+            <CardActionArea className="icons">
+              <FavoriteIcon
+                className="favoriteIcon"
+                sx={{ fontSize: 40, color: "red", display: "flex", width: "12%" }}
+              />
+              <div className="emoji">{Emojis.burger}</div>
+            </CardActionArea>
+            <CardContent sx={{}}>
+              <Link
+                href="https://www.poestavern.com/"
+                target="_blank"
+                rel="noopener"
+              >
+                {state.user.firstName}
+              </Link>
+            </CardContent>
+            <CardActionArea sx={{ padding: "1rem" }}>
+              {state.user.email}
+            </CardActionArea>
+          </Card>
+          <Card
+            sx={{
+              margin: "1rem",
+              width: "45%",
+              backgroundColor: "#ffffff88",
+              boxShadow:
+                "rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;",
+            }}
+          >
+            <CardActionArea>
+              <FavoriteIcon
+                className="favoriteIcon"
+                sx={{ fontSize: 40, color: "red", display: "flex", width: "12%" }}
+              />
+              <div className="icon">{Emojis.burger}</div>
+            </CardActionArea>
+            <CardContent sx={{}}>
+              <Link
+                href="https://www.poestavern.com/"
+                target="_blank"
+                rel="noopener"
+              >
+                {state.user.firstName}
+              </Link>
+            </CardContent>
+            <CardActionArea sx={{ padding: "1rem" }}>
+              {state.user.email}
+            </CardActionArea>
+          </Card>
+        </div>
       </div>
       <br />
       <br />
+
       <div className="editInformation">
         <Divider />
         <h4 style={{ display: "flex", textDecoration: "underline" }}>
