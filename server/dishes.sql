@@ -19,6 +19,26 @@ CREATE TABLE `dishes`.`dish` (
   PRIMARY KEY (`id`)
 );
 
+CREATE TABLE `dishes`.`review` (
+  `id` INT NOT NULL AUTO_INCREMENT UNIQUE,
+  `userId` VARCHAR(45) NOT NULL,
+  `dishId` INT NOT NULL,
+  `restaurantId` VARCHAR(255) NOT NULL,
+  
+  `dateCreated` DATETIME NOT NULL DEFAULT (current_date()),
+
+  `body` VARCHAR(255) NULL,
+
+  PRIMARY KEY (`id`),
+
+  FOREIGN KEY (`userId`)
+        REFERENCES `user`(`id`),
+  FOREIGN KEY (`dishId`)
+        REFERENCES `dish`(`id`)
+);
+
+
+
 INSERT INTO
   `dishes`.`dish` (`id`, `name`, `meal`, `cuisine`)
 VALUES
@@ -67,3 +87,4 @@ VALUES
   (43, 'onion rings', 'appetizers', 'american'),
   (44, 'poke', 'entrees', 'american'),
   (45, 'falafel', 'entrees', 'mediterranean');
+
