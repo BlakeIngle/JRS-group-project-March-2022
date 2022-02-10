@@ -15,14 +15,26 @@ export default function DishSearch() {
   var [dishText, setDishText] = useState("");
   const [dishes, setDishes] = useState([]);
 
-  function isSimilar(subString, mainString) {
+  function isSimilar(subString, mainString, meal, cuisine) {
     if (!subString) {
       return true;
     }
     subString = formatStr(subString);
     mainString = formatStr(mainString);
+    meal = formatStr(meal);
+    cuisine = formatStr(cuisine);
 
-    return mainString.includes(subString);
+    const matchesName = mainString.includes(subString);
+    const matchesMeal = meal.includes(subString);
+    const matchesCuisine = cuisine.includes(subString);
+
+    if (matchesName) {
+      return matchesName
+    } else if (matchesMeal) {
+      return matchesMeal
+    } else {
+      return matchesCuisine
+    }
   }
 
   function formatStr(s) {
@@ -64,7 +76,7 @@ export default function DishSearch() {
       </div>
       <div className="dish-container">
         {dishes
-          ?.filter((d) => isSimilar(dishText, d.name))
+          ?.filter((d) => isSimilar(dishText, d.name, d.meal, d.cuisine))
           .map((d, i) => (
             <div key={i}>
               <Link to={`dish/${d.name}`}>
