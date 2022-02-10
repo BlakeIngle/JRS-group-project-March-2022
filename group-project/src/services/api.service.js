@@ -15,19 +15,35 @@ const api = {
   updateUser: (user) => {
     return axios.put(`${URL}/users/${user.id}`, user);
   },
-  getAllDishes: () => {
-    return axios.get(`${URL}/dishes`);
-  },
   getUserByEmail: (email) => {
     return axios.get(`${URL}/users/email/${email}`);
   },
 
-  // getDishById: (dishId) => {
-  //   return axios.get(`${URL}/dishes/${dishId}`)
-  // },
-  
-  getDishByName: (dishName) => {
-    return axios.get(`${URL}/dishes/${dishName}`)
+  getAllDishes: () => {
+    return axios.get(`${URL}/dishes`);
+  },
+  getDishById: (dishId) => {
+    return axios.get(`${URL}/dishes/${dishId}`);
+  },
+
+  getReviewByUserId: (userId) => {
+    return axios.get(`${URL}/reviews/${userId}`);
+  },
+  getReviewsByRestaurantId: (restaurantId) => {
+    return axios.get(`${URL}/reviews/${restaurantId}`);
+  },
+  addNewReview: (review) => {
+    return axios.post(`${URL}/reviews`, review);
+  },
+  updateReview: (review) => {
+    return axios.put(`${URL}/reviews/${review.id}`, review);
+  },
+  deleteReview: (review) => {
+    return axios.delete(`${URL}/reviews/${review.id}`);
+  },
+
+  getRestaurantsByDish: (dishName, location) => {
+    return axios.get(`${URL}/restaurants/${dishName}?location=${location}`);
   },
 
   getRestaurantsByName,
