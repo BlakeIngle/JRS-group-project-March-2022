@@ -91,19 +91,17 @@ export default function DishPage() {
           {Emojis[dish?.name]}
         </h2>
         <hr />
-        <form onSubmit={getRestaurantsByZipCode}>
-          <div className="zip-code-form">
-            <FontAwesomeIcon icon={faMapMarkerAlt} />
-            <input
-              type="text"
-              className="zip-code-input"
-              name="location"
-              placeholder="New Zip Code..."
-              onChange={(e) => setInputText(e.target.value)}
-              value={inputText}
-            />
-          </div>
-        </form>
+        <div className="zip-code-form">
+          <FontAwesomeIcon icon={faMapMarkerAlt} />
+          <input
+            type="text"
+            className="zip-code-input"
+            name="location"
+            placeholder="New Zip Code..."
+            onChange={(e) => setInputText(e.target.value)}
+            value={inputText}
+          />
+        </div>
         <div className="restaurant-list">
           {restaurants.map((r) => (
             <RestaurantCard key={r.id} {...r} />
