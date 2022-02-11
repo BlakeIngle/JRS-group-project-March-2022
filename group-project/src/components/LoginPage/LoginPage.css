@@ -15,7 +15,7 @@ body {
   /* border: solid rgb(9, 255, 0) 1px; */
 }
 
-.login-root {
+.login {
   margin: 5rem;
   background-color: rgba(0, 0, 0, 0.705);
   border-radius: 8px;
