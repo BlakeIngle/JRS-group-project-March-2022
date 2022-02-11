@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { Emojis } from "../../assets/DishIcon";
 import { useApi } from "../../services/api.service";
 import "../DishPage/Dishes.css";
 import { useGeolocation } from "../../services/geolocation.service";
-import RestaurantSearch from "../Searches/RestaurantSearch";
 import RestaurantCard from "../RestaurantCard/RestaurantCard";
+import ReviewForm from "../ReviewForm/ReviewForm";
 
 export default function DishPage() {
   const { dishName } = useParams();
@@ -54,7 +54,6 @@ export default function DishPage() {
     });
   }, []);
 
-  // console.log(dishName);
 
   return (
     <div>
@@ -64,12 +63,14 @@ export default function DishPage() {
           {Emojis[dish?.name]}
         </h2>
         <hr />
+        <ReviewForm />
         <div className="restaurant-list">
           {restaurants.map((r) => (
             <RestaurantCard key={r.id} {...r} />
           ))}
         </div>
       </div>
+
       {!hasReviews && (
         <div>
           <br />
@@ -79,4 +80,6 @@ export default function DishPage() {
       {/* RestaurantCards go here */}
     </div>
   );
+
+
 }
