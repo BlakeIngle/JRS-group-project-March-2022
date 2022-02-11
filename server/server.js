@@ -18,6 +18,7 @@ require("./app/index");
 require("./app/routes/user.routes")(app);
 require("./app/routes/dish.routes")(app);
 require("./app/routes/restaurants.routes")(app);
+require("./app/routes/review.routes")(app);
 
 const PORT = 8080;
 app.listen(PORT, () => {
