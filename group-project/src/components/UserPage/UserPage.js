@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import LogoutIcon from "@mui/icons-material/Logout";
 import {
@@ -10,18 +10,23 @@ import {
   Divider,
   Link,
   TextField,
+  Tooltip,
 } from "@mui/material";
 import { Emojis } from "../../assets/DishIcon";
 import "./UserPage.css";
 import { useLocalStorage } from "../../services/localStorage.service";
 import { Context } from "../../App";
 import { useNavigate } from "react-router";
+import { deepOrange } from "@mui/material/colors";
+import { useApi } from "../../services/api.service";
+import ChangePasswordForm from "./ChangePasswordForm";
 
 export default function UserPage() {
+  const [isChangePasswordOpen, setIsChangePasswordOpen] = useState(false);
+
   const { state, setState } = useContext(Context);
-
+  const api = useApi();
   const navigate = useNavigate();
-
   const storage = useLocalStorage();
 
   function logoutClicked() {
@@ -29,6 +34,10 @@ export default function UserPage() {
     setState({ ...state, user: null });
     storage.removeActiveUser();
     navigate("/"); // 'home' page
+  }
+
+  function togglePasswordChangeAccordion() {
+    setIsChangePasswordOpen(!isChangePasswordOpen);
   }
 
   useEffect(() => {
@@ -51,38 +60,39 @@ export default function UserPage() {
       <div className="userPage">
         <Avatar
           sx={{
-            backgroundColor: "lightblue",
+            bgcolor: deepOrange[500],
             width: 80,
             height: 80,
             margin: "1rem",
             color: "black",
           }}
         >
-          {state.user.firstName}
+          <p style={{ fontSize: "3.1rem" }}>
+            {state.user.firstName.charAt(0).toUpperCase()}
+          </p>
         </Avatar>
 
         <h2 className="welcome">Welcome {state.user.firstName}</h2>
       </div>
       <Divider />
 
-      <div className="favorites">{state.user.firstName}'s Favorites List: </div>
+      <div className="favorites">{state.user.firstName}'s Favorite's:</div>
       <div className="favoritesBox">
         <Card
           sx={{
             margin: "1rem",
-            width: "45%",
+            width: "80%",
             backgroundColor: "#ffffff88",
             boxShadow:
               "rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;",
           }}
         >
-          <CardActionArea>
-            <FavoriteIcon
-              className="favoriteIcon"
-              sx={{ fontSize: 40, color: "red", display: "flex", width: "12%" }}
-            />
-            <div className="icon">{Emojis.burger}</div>
-          </CardActionArea>
+          <FavoriteIcon
+            className="favoriteIcon"
+            sx={{ fontSize: 40, color: "red", display: "flex", width: "12%" }}
+          />
+          <div className="icon">{Emojis.burger}</div>
+
           <CardContent sx={{}}>
             <Link
               href="https://www.poestavern.com/"
@@ -121,32 +131,26 @@ export default function UserPage() {
           variant="outlined"
           sx={{ display: "flex", marginTop: "1rem" }}
         />
-        <TextField
-          type="password"
-          label="Current Password"
-          variant="outlined"
-          sx={{ display: "flex", marginTop: "1rem" }}
-        />
-        <TextField
-          type="password"
-          label="New Password"
-          variant="outlined"
-          sx={{ display: "flex", marginTop: "1rem" }}
-        />
-        <TextField
-          type="password"
-          label="Confirm New Password"
-          variant="outlined"
-          sx={{ display: "flex", marginTop: "1rem" }}
-        />
-        <br />
-        <Button variant="contained">Save</Button>
+
+        <div className="dropDown">
+          <br />
+          <Tooltip title="Edit Password" arrow>
+            <Button
+              variant="outlined"
+              onClick={togglePasswordChangeAccordion}
+            >
+              <p className="rightIcon">Change Password</p>
+            </Button>
+          </Tooltip>
+          {isChangePasswordOpen && <ChangePasswordForm user={state.user} close={togglePasswordChangeAccordion} />}
+        </div>
+
         <Divider />
 
         <Button
           variant="contained"
           startIcon={<LogoutIcon />}
-          sx={{ position: "absolute", right: 0 }}
+          sx={{ marginTop: "1.5rem" }}
           onClick={logoutClicked}
         >
           Logout

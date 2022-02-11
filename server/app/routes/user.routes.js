@@ -11,4 +11,6 @@ module.exports = (app) => {
   app.put("/api/users/:userId", validateWebToken, users.updateUserById);
 
   app.delete("/api/users/:userId", validateWebToken, users.deleteUserById);
+
+  app.put('/api/users/newpassword/:userId', validateWebToken, users.changePassword)
 };

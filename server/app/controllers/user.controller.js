@@ -192,3 +192,55 @@ exports.deleteUserById = (req, res) => {
     }
   });
 };
+
+exports.changePassword = (req, res) => {
+  // get the password and new password from body
+  const { password, newPassword } = req.body;
+  const { userId } = req.params;
+
+  // validate password is correct
+  const query1 = `SELECT password FROM dishes.user 
+                    WHERE id = ?;`;
+
+  const placeholders = [userId];
+
+  db.query(query1, placeholders, async (err, results) => {
+    if (err) {
+      res.status(500).send({ error: err, message: "Error updating password" });
+    } else {
+      if (results.length == 0) {
+        res.status(404).send({ message: "Error getting user's password" });
+      } else {
+        // now we have the password
+
+        const passwordMatched = await bcrypt.compare(
+          password,
+          results[0].password
+        );
+
+        if (passwordMatched) {
+          // change password in DB with new password (encrypted)
+          const query2 = `UPDATE user 
+                          SET password = ?
+                          WHERE user.id = ? ;`;
+
+          const encryptedPassword = await bcrypt.hash(newPassword, saltRounds);
+
+          const placeholders = [encryptedPassword, userId];
+          
+          db.query(query2, placeholders, (err, results) => {
+            if (err) {
+              res.status(500).send({ error: err, message: "Error updating password" });
+            } else {
+              res.send({
+                message: "Password updated successfully.",
+              });
+            }
+          })
+        } else {
+          res.status(400).send({message: "Error updating password."});
+        }
+      }
+    }
+  });
+};

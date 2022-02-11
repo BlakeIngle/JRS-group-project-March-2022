@@ -5,6 +5,13 @@ function getRestaurantsByName(name) {
   return axios.get(`${URL}/restaurants?name=${name}`);
 }
 
+function changePassword(user, password, newPassword) {
+  return axios.put(
+    `${URL}/users/newpassword/${user.id}`,
+    { password, newPassword, token: user.token }
+  );
+}
+
 const api = {
   login: (user) => {
     return axios.post(`${URL}/users/login`, user);
@@ -15,6 +22,7 @@ const api = {
   updateUser: (user) => {
     return axios.put(`${URL}/users/${user.id}`, user);
   },
+  changePassword,
   getUserByEmail: (email) => {
     return axios.get(`${URL}/users/email/${email}`);
   },
