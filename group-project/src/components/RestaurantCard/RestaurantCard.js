@@ -16,7 +16,12 @@ export default function RestaurantCard({
 }) {
   const { city, country, state, address1, address2, address3, zip_code } =
     location;
+  const googleUrl =
+    "https://www.google.com/maps/search/" + name + "@" + location.zip_code;
 
+  const handleClick = () => {
+    window.open(googleUrl);
+  };
   return (
     <div className="restaurant-card-root">
       <div className="top-row">
@@ -25,12 +30,13 @@ export default function RestaurantCard({
         </span>
         <span>{total_favorites || 0}</span>
         <span className="links">
-          <FontAwesomeIcon icon={faMapMarkerAlt} />
-          <FontAwesomeIcon icon={faExternalLinkAlt} />
+          <a onClick={handleClick}>
+            <FontAwesomeIcon icon={faMapMarkerAlt} />
+          </a>
           <a href={url}>
             <img
               src="https://i.postimg.cc/d1QLsskm/yelp-logo-cmyk.png"
-              height="10"
+              height="15"
             />
           </a>
         </span>
