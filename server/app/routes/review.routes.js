@@ -8,7 +8,7 @@ module.exports = (app) => {
     reviews.getReviewByRestaurantId
   );
 
-  app.post("/api/reviews/addReview", reviews.addNewReview);
+  app.post("/api/reviews", reviews.addNewReview);
 
   app.put("/api/reviews/:userId", reviews.updateReview);
 

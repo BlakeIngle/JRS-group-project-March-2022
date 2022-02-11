@@ -67,26 +67,12 @@ exports.getReviewByRestaurantId = (req, res) => {
 };
 
 exports.addNewReview = (req, res) => {
-  const pairs = Object.entries(req.body);
+  const { dishId, restaurantId, userId, body } = req.body;
 
-  var columns = ""; // `id, userId, restaurantId, dishId, body, dateCreated`
-  var values = ""; // `123
-  const placeholders = [];
+  const query = `INSERT INTO dishes.review (dishId, restaurantId, userId, body)
+                      values (?, ?, ?, ?);`;
 
-  for (let i = 0; i < pairs.length; i++) {
-    let [key, value] = pairs[i];
-    columns += (i != 0 ? ", " : "") + "??";
-    placeholders.push(key);
-  }
-
-  for (let i = 0; i < pairs.length; i++) {
-    let [key, value] = pairs[i];
-    values += (i != 0 ? ", " : "") + "?";
-    placeholders.push(value);
-  }
-
-  const query = `INSERT INTO dishes.review (${columns})
-                      values (${values});`;
+  const placeholders = [dishId, restaurantId, userId, body];
 
   db.query(query, placeholders, (err, results) => {
     if (err) {
