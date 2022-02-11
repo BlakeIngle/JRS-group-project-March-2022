@@ -4,8 +4,9 @@ import { Emojis } from "../../assets/DishIcon";
 import { useApi } from "../../services/api.service";
 import "../DishPage/Dishes.css";
 import { useGeolocation } from "../../services/geolocation.service";
-import RestaurantSearch from "../Searches/RestaurantSearch";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import RestaurantCard from "../RestaurantCard/RestaurantCard";
+import { faMapMarkerAlt } from "@fortawesome/free-solid-svg-icons";
 
 export default function DishPage() {
   const { dishName } = useParams();
@@ -13,8 +14,10 @@ export default function DishPage() {
   const getCoordinatesPromise = useGeolocation();
 
   const [dish, setDish] = useState(null);
-  const [hasReviews, setHasReviews] = useState(false);
-  const [restaurants, setRestaurants] = useState([]);
+  const [restaurants, setRestaurants] = useState([]); // the displayed list
+  const [originalResults, setOriginalResults] = useState([]); // the first list of restaurants from coordinates
+  const [searchTimeout, setSearchTimeout] = useState(null);
+  var [inputText, setInputText] = useState("");
 
   function getDish() {
     api
@@ -22,24 +25,22 @@ export default function DishPage() {
       .then((res) => {
         const dish = res.data.dish;
         setDish(dish);
-        // api.getTopRestaurants(res.data.id)
-        // .then(res => {
-        //      setRestaurants(res.data.restaurants)
-        // })
-        // .catch(err => {
-        //     console.error(err)
-        // })
       })
       .catch((err) => {
         console.error(err);
       });
   }
 
+  /**
+   * Set original results of restaurants. Should only be called once on init
+   * @param {*} latitude
+   * @param {*} longitude
+   */
   function getRestaurantsByLatLong(latitude, longitude) {
     api
       .getRestaurantsByDish(dishName, { latitude, longitude })
       .then((results) => {
-        setRestaurants(results.data.restaurants);
+        setOriginalResults(results.data.restaurants);
       })
       .catch((err) => {
         console.error(err);
@@ -47,14 +48,40 @@ export default function DishPage() {
       });
   }
 
+  function getRestaurantsByZipCode(inputText) {
+    api
+      .getRestaurantsByDish(dishName, inputText)
+      .then((results) => {
+        setRestaurants(results.data.restaurants);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }
+
   useEffect(() => {
     getDish();
+    if (!inputText) {
+      setRestaurants(originalResults);
+    } else {
+      clearTimeout(searchTimeout);
+      setSearchTimeout(
+        setTimeout(() => {
+          getRestaurantsByZipCode(inputText);
+        }, 1500)
+      );
+    }
+  }, [inputText]);
+
+  useEffect(() => {
+    setRestaurants(originalResults);
+  }, [originalResults]);
+
+  useEffect(() => {
     getCoordinatesPromise.then(({ latitude, longitude }) => {
       getRestaurantsByLatLong(latitude, longitude);
     });
   }, []);
-
-  // console.log(dishName);
 
   return (
     <div>
@@ -64,19 +91,25 @@ export default function DishPage() {
           {Emojis[dish?.name]}
         </h2>
         <hr />
+        <form onSubmit={getRestaurantsByZipCode}>
+          <div className="zip-code-form">
+            <FontAwesomeIcon icon={faMapMarkerAlt} />
+            <input
+              type="text"
+              className="zip-code-input"
+              name="location"
+              placeholder="New Zip Code..."
+              onChange={(e) => setInputText(e.target.value)}
+              value={inputText}
+            />
+          </div>
+        </form>
         <div className="restaurant-list">
           {restaurants.map((r) => (
             <RestaurantCard key={r.id} {...r} />
           ))}
         </div>
       </div>
-      {!hasReviews && (
-        <div>
-          <br />
-          <p className="placeholder-text">Be the first to review this dish!</p>
-        </div>
-      )}
-      {/* RestaurantCards go here */}
     </div>
   );
 }

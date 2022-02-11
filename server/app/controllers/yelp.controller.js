@@ -51,13 +51,6 @@ exports.getRestaurantsByDish = (req, res) => {
     locationParam = `location=${location}&`;
   }
 
-  console.log(locationParam);
-
-  locationParam = "location=Charleston, SC&";
-  console.log(
-    `/search?${locationParam}categories=restaurants&sort_by=distance&limit=50`
-  );
-
   yelp
     .get(
       `/search?${locationParam}categories=restaurants&sort_by=distance&limit=50`
