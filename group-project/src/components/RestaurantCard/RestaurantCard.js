@@ -22,6 +22,9 @@ export default function RestaurantCard({
   const handleClick = () => {
     window.open(googleUrl);
   };
+  const handleYelpClick = () => {
+    window.open(url);
+  };
   return (
     <div className="restaurant-card-root">
       <div className="top-row">
@@ -33,7 +36,7 @@ export default function RestaurantCard({
           <a onClick={handleClick}>
             <FontAwesomeIcon icon={faMapMarkerAlt} />
           </a>
-          <a href={url}>
+          <a onClick={handleYelpClick}>
             <img
               src="https://i.postimg.cc/d1QLsskm/yelp-logo-cmyk.png"
               height="15"
