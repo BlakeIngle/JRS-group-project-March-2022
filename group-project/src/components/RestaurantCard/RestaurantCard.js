@@ -1,37 +1,45 @@
-import React from 'react';
-import './RestaurantCard.css'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faExternalLinkAlt, faMapMarkerAlt, faThumbsUp } from '@fortawesome/free-solid-svg-icons';
-import { Emojis } from '../../assets/DishIcon';
+import React from "react";
+import "./RestaurantCard.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faExternalLinkAlt,
+  faMapMarkerAlt,
+} from "@fortawesome/free-solid-svg-icons";
 
-export default function RestaurantCard(review) {
+export default function RestaurantCard({
+  id,
+  name,
+  location,
+  url,
+  image_url,
+  total_favorites,
+}) {
+  const { city, country, state, address1, address2, address3, zip_code } =
+    location;
+  const googleUrl =
+    "https://www.google.com/maps/search/" + name + "@" + location.zip_code;
 
-  review = {
-    userId: "1",
-    userName: "Greg",
-    body: "It's simply the best, better than all the rest",
-    restaurantId: "fd7843wnk393",
-    restaurantName: "Poe's Tavern",
-    dishId: 1,
-    dishName: "burger"
+  const handleClick = () => {
+    window.open(googleUrl);
   };
-
-
-  const dishIcon = Emojis[review.dishName];
-
   return (
-    <div className='restaurant-card-root'>
-      <div className='top-row'>
-        <span className='dish-icon'>{dishIcon}</span>
-        <span><h2>{review.restaurantName}</h2></span>
-        <span className='links'>
-          <FontAwesomeIcon icon={faMapMarkerAlt} />
-          <FontAwesomeIcon icon={faExternalLinkAlt} />
+    <div className="restaurant-card-root">
+      <div className="top-row">
+        <span>
+          <h2>{name}</h2>
         </span>
-      </div>
-
-      <p>{review.userName} says: "{review.body}"</p>
-      <div className='agree-icon'><FontAwesomeIcon icon={faThumbsUp} />
+        <span>{total_favorites || 0}</span>
+        <span className="links">
+          <a onClick={handleClick}>
+            <FontAwesomeIcon icon={faMapMarkerAlt} />
+          </a>
+          <a href={url}>
+            <img
+              src="https://i.postimg.cc/d1QLsskm/yelp-logo-cmyk.png"
+              height="15"
+            />
+          </a>
+        </span>
       </div>
     </div>
   );

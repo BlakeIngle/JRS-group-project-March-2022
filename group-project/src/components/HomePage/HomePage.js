@@ -41,19 +41,17 @@ export default function HomePage() {
                     <img className='logo' src="https://i.postimg.cc/mDNJ78Zs/forking-logo-white.png"></img>
                     <span className='app-name'>The Forking Best</span>
                 </Link>
-                <span className="user-options">
                     {state.user ? (
-                        <Link to={`profile`}>
-                            <span className="icon">
+                        <Link to={`profile`} className="user-options">
+                            <span className=" icon">
                                 <FontAwesomeIcon icon={faUser} />
                             </span>
                         </Link>
                     ) : (
-                        <Link to="/login">
-                            <span className="login">Login</span>
+                        <Link to="/login" className="user-options">
+                            <span>Login</span>
                         </Link>
                     )}
-                </span>
             </div>
         )
     }

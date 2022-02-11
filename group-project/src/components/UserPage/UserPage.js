@@ -42,7 +42,7 @@ export default function UserPage() {
 
   useEffect(() => {
     if (state.user) {
-      console.log("use effect state variable");
+      // console.log("use effect state variable");
       // someone is loggin in and viewing their own page
       // show the logout button
     } else {
@@ -56,8 +56,8 @@ export default function UserPage() {
   }
 
   return (
-    <div className="userPage-root">
-      <div className="userPage">
+    <div className="user-page-root">
+      <div className="top-section">
         <Avatar
           sx={{
             bgcolor: deepOrange[500],
@@ -71,13 +71,12 @@ export default function UserPage() {
             {state.user.firstName.charAt(0).toUpperCase()}
           </p>
         </Avatar>
-
-        <h2 className="welcome">Welcome {state.user.firstName}</h2>
+        <h2 className="welcome">Welcome, {state.user.firstName}!</h2>
       </div>
       <Divider />
 
       <div className="favorites">{state.user.firstName}'s Favorite's:</div>
-      <div className="favoritesBox">
+      <div className="favorites-box">
         <Card
           sx={{
             margin: "1rem",
@@ -107,8 +106,10 @@ export default function UserPage() {
           </CardActionArea>
         </Card>
       </div>
+
       <br />
       <br />
+
       <div className="editInformation">
         <Divider />
         <h4 style={{ display: "flex", textDecoration: "underline" }}>
@@ -135,14 +136,16 @@ export default function UserPage() {
         <div className="dropDown">
           <br />
           <Tooltip title="Edit Password" arrow>
-            <Button
-              variant="outlined"
-              onClick={togglePasswordChangeAccordion}
-            >
+            <Button variant="outlined" onClick={togglePasswordChangeAccordion}>
               <p className="rightIcon">Change Password</p>
             </Button>
           </Tooltip>
-          {isChangePasswordOpen && <ChangePasswordForm user={state.user} close={togglePasswordChangeAccordion} />}
+          {isChangePasswordOpen && (
+            <ChangePasswordForm
+              user={state.user}
+              close={togglePasswordChangeAccordion}
+            />
+          )}
         </div>
 
         <Divider />

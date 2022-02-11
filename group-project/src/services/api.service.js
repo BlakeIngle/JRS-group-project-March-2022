@@ -55,7 +55,14 @@ const api = {
   },
 
   getRestaurantsByDish: (dishName, location) => {
-    return axios.get(`${URL}/restaurants/${dishName}?location=${location}`);
+    if (location.latitude && location.longitude) {
+      return axios.get(
+        `${URL}/restaurants/${dishName}?latitude=${location.latitude}&longitude=${location.longitude}`
+      );
+    } else {
+      // location = 'new york' or 'NYC' or '29470' etc.
+      return axios.get(`${URL}/restaurants/${dishName}?location=${location}`);
+    }
   },
 
   getRestaurantsByName,

@@ -1,19 +1,12 @@
-
-function useGeolocation() {
-  navigator.geolocation.getCurrentPosition(
-    (position) => {
-      console.log("got location")
-      return {
-        latitude: position.coords.latitude,
-        longitude: position.coords.longitude,
-      };
-    },
-    (error) => {
-      console.error(error);
-      return null;
-    }
-  );
-  console.log("location not returned")
-}
+const useGeolocation = async () => {
+  const pos = await new Promise((resolve, reject) => {
+    navigator.geolocation.getCurrentPosition(resolve, reject);
+  });
+  console.log(pos);
+  return {
+    latitude: pos.coords.latitude,
+    longitude: pos.coords.longitude,
+  };
+};
 
 export { useGeolocation };

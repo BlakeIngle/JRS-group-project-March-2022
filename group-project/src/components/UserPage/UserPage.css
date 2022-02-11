@@ -1,50 +1,59 @@
-.userPage-root{
-    margin: 0;
-    padding: 0;
+.user-page-root{
+    /* margin: 0;
+    padding: 0; */
 }
 
-.userPage-root .userPage .welcome{
+.user-page-root .top-section {
     display: flex;
-    justify-content: center;
+    flex-direction: row;
+    justify-content: space-between;
     align-items: center;
-    
+    gap: 10px;
+    padding: 1rem 1.5rem;
+    /* height: 5rem; */
+    /* position: relative; */
 }
 
-.userPage-root .userPage .welcome{
+
+.user-page-root .top-section .avatar {
     margin: 0;
-    padding: 0;
-    position: relative;
-    top:-4rem;
-    font-family: sans-serif;
 }
 
 
 
-.userPage-root .userPage{
+.user-page-root .user-page{
     position: relative;
     height: 6rem;
     width: 100vw;
 
 }
 
+.user-page-root .favorites-box {
+    /* position: relative; */
+    width: 100%;
+    /* border: solid red 1px; */
+}
 
+.user-page-root .favorites-box > * {
+    /* border: solid blue 1px; */
+    width: 90%;
+    max-width: 1000px;
+    margin: 3rem auto;
+}
 
-.userPage-root .favorites{
-    padding: 1rem;
+.user-page-root .favorites-box .icons{
     display: flex;
     flex-direction: row;
+    
+    justify-content: space-between;
+    font-size: 2rem;
+    padding: 0.2rem;
 
-    font-size: 16px;
     font-weight: bolder;
     text-decoration: underline;
-
 }
 
 
-.userPage-root .favoritesBox .icon{
+.user-page-root .favorites-box .icon{
     font-size: x-large;
-    
-
-
 }
-
