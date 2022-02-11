@@ -12,7 +12,7 @@ export default function LoginPage() {
       <h2 className="login-header">Login</h2>
       <LoginForm />
       <Link to="/signup">
-        <button type="button">Signup</button>
+        <button type="button">Sign Up</button>
       </Link>
       <br />
       {/*<a href="#" className="forgotPassword">
