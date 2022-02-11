@@ -8,11 +8,11 @@ import { useLocalStorage } from "../../services/localStorage.service";
 
 export default function LoginPage() {
   return (
-    <div className="login-root">
+    <div className="login">
       <h2 className="login-header">Login</h2>
       <LoginForm />
       <Link to="/signup">
-        <button type="button">Signup</button>
+        <button type="button">Sign Up</button>
       </Link>
       <br />
       {/*<a href="#" className="forgotPassword">
@@ -77,29 +77,30 @@ function LoginForm() {
 
   return (
     <form onSubmit={handleSubmit}>
-      <label>Email: </label>
-      <input
-        ref={emailRef}
-        type="text"
-        name="email"
-        value={user.email}
-        style={{ "--animationTime": `${animationTime}ms` }}
-        onChange={handleChange}
-        placeholder="Email"
-      />
-
-      <br />
-      <label>Password: </label>
-      <input
-        ref={passwordRef}
-        type="password"
-        name="password"
-        value={user.password}
-        style={{ "--animationTime": `${animationTime}ms` }}
-        onChange={handleChange}
-        placeholder="Password"
-      />
-
+      <div className="email">
+        <label>Email: </label>
+        <input
+          ref={emailRef}
+          type="text"
+          name="email"
+          value={user.email}
+          style={{ "--animationTime": `${animationTime}ms` }}
+          onChange={handleChange}
+          placeholder="Email"
+        />
+      </div>
+      <div>
+        <label>Password: </label>
+        <input
+          ref={passwordRef}
+          type="password"
+          name="password"
+          value={user.password}
+          style={{ "--animationTime": `${animationTime}ms` }}
+          onChange={handleChange}
+          placeholder="Password"
+        />
+      </div>
       <br />
       <button type="submit" disabled={!user.email || !user.password}>
         Login

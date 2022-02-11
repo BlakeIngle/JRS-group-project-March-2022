@@ -2,6 +2,7 @@ const axios = require("axios");
 const db = require("../index");
 const YELP_URL = `https://api.yelp.com/v3/businesses`;
 const API_KEY = require("../config/yelp.config").key;
+const cache = require("../cache");
 
 const yelp = axios.create({
   baseURL: YELP_URL,
@@ -42,6 +43,12 @@ exports.getRestaurantsByDish = (req, res) => {
   const { latitude, longitude, location } = req.query;
   const { dishName } = req.params;
 
+  const cachedRestaurants = cache.get(location);
+  if (cachedRestaurants) {
+    sortRestaurantsByRank(cachedRestaurants, res, dishName);
+    return;
+  }
+
   //if latitude and longitude -> use those
   //  else if location -> use that (zip code, address, state, city etc.)
   let locationParam = "";
@@ -51,23 +58,15 @@ exports.getRestaurantsByDish = (req, res) => {
     locationParam = `location=${location}&`;
   }
 
-  console.log(locationParam);
-
-  locationParam = "location=Charleston, SC&";
-  console.log(
-    `/search?${locationParam}categories=restaurants&sort_by=distance&limit=50`
-  );
-
   yelp
     .get(
       `/search?${locationParam}categories=restaurants&sort_by=distance&limit=50`
     )
     .then((results) => {
-      console.log(results.data.businesses[0]);
       try {
+        cache.save(location, results.data.businesses);
         sortRestaurantsByRank(results.data.businesses, res, dishName);
       } catch (error) {
-        console.log("its not working???");
         res
           .status(500)
           .send({ error: error, message: "the error is not from yelp" });
@@ -86,9 +85,6 @@ exports.getRestaurantsByDish = (req, res) => {
  * @param {any[]} businesses - array of businesses from Yelp Fusion API
  */
 function sortRestaurantsByRank(businesses, res, dishName) {
-  // buisnisess -> [restaurant1, restaurant2, ...]
-  console.log("were here now", businesses);
-
   var restaruantIds = businesses.map((b) => b.id);
 
   var qMarks = businesses
