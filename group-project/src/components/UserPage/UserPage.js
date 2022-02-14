@@ -14,7 +14,6 @@ import Review from "../Review/Review";
 export default function UserPage() {
   // const { dishName } = useParams();
   const [isChangePasswordOpen, setIsChangePasswordOpen] = useState(false);
-  const [isReviewCardGone, setIsReviewCardGone] = useState(true);
   const [reviews, setReviews] = useState([]);
   const { state, setState } = useContext(Context);
   // const [dish, setDish] = useState(null);
@@ -86,6 +85,7 @@ export default function UserPage() {
             height: 80,
             margin: "1rem",
             color: "black",
+            boxShadow: "0px 6px 5px #ccc;",
           }}
         >
           <p style={{ fontSize: "3.1rem" }}>
