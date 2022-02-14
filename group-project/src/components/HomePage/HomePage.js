@@ -13,6 +13,7 @@ export default function HomePage() {
     const location = useLocation();
 
     const isDishPage = location.pathname.split("/")[1] === 'dish'
+    const isLoginPage = location.pathname.split("/")[1] === 'login'
 
     const footerRef = useRef(null);
 
@@ -41,17 +42,17 @@ export default function HomePage() {
                     <img className='logo' src="https://i.postimg.cc/mDNJ78Zs/forking-logo-white.png"></img>
                     <span className='app-name'>The Forking Best</span>
                 </Link>
-                    {state.user ? (
-                        <Link to={`profile`} className="user-options">
-                            <span className=" icon">
-                                <FontAwesomeIcon icon={faUser} />
-                            </span>
-                        </Link>
-                    ) : (
-                        <Link to="/login" className="user-options">
-                            <span>Login</span>
-                        </Link>
-                    )}
+                {!isLoginPage && (state.user ? (
+                    <Link to={`profile`} className="user-options">
+                        <span className=" icon">
+                            <FontAwesomeIcon icon={faUser} />
+                        </span>
+                    </Link>
+                ) : (
+                    <Link to="/login" className="user-options">
+                        <span>Login</span>
+                    </Link>
+                ))}
             </div>
         )
     }

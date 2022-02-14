@@ -11,6 +11,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMapMarkerAlt } from "@fortawesome/free-solid-svg-icons";
 import Loader from "../Loader/Loader";
 import { Context } from "../../App";
+import { Link } from "react-router-dom";
 
 export default function DishPage() {
   const { dishName } = useParams();
@@ -105,8 +106,10 @@ export default function DishPage() {
     <div>
       <div className="dish-page-root">
         <h2 className="dish-name">
-          {Emojis[dish?.name]}The Forking Best {dish?.name}
-          {Emojis[dish?.name]}
+          <Link to="">
+            {Emojis[dish?.name]}The Forking Best {dish?.name}
+            {Emojis[dish?.name]}
+          </Link>
         </h2>
         <hr />
         {/* {!hasReviews && (
@@ -131,10 +134,13 @@ export default function DishPage() {
             onClick={toggleForm}>
             Add A Review
           </div>
-            : <div className="add-review-btn"
-              style={{filter: "opacity(40%"}}>
-              Login to review
-            </div>}
+            : <Link to={"/login"}>
+              <div className="add-review-btn"
+                style={{ filter: "opacity(50%" }}>
+                Login to review
+              </div>
+            </Link>
+          }
         </div>
         {formIsOpen && <ReviewForm toggleForm={toggleForm} />}
         {isLoading ? (
