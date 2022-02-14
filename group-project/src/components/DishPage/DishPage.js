@@ -7,6 +7,7 @@ import { useGeolocation } from "../../services/geolocation.service";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import RestaurantCard from "../RestaurantCard/RestaurantCard";
 import { faMapMarkerAlt } from "@fortawesome/free-solid-svg-icons";
+import Loader from "../Loader/Loader";
 
 export default function DishPage() {
   const { dishName } = useParams();
@@ -18,6 +19,7 @@ export default function DishPage() {
   const [originalResults, setOriginalResults] = useState([]); // the first list of restaurants from coordinates
   const [searchTimeout, setSearchTimeout] = useState(null);
   var [inputText, setInputText] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
 
   function getDish() {
     api
@@ -67,6 +69,7 @@ export default function DishPage() {
       clearTimeout(searchTimeout);
       setSearchTimeout(
         setTimeout(() => {
+          setIsLoading(true);
           getRestaurantsByZipCode(inputText);
         }, 1500)
       );
@@ -76,6 +79,12 @@ export default function DishPage() {
   useEffect(() => {
     setRestaurants(originalResults);
   }, [originalResults]);
+
+  useEffect(() => {
+    if (restaurants.length > 0) {
+      setIsLoading(false);
+    }
+  }, [restaurants]);
 
   useEffect(() => {
     getCoordinatesPromise.then(({ latitude, longitude }) => {
@@ -102,11 +111,19 @@ export default function DishPage() {
             value={inputText}
           />
         </div>
-        <div className="restaurant-list">
-          {restaurants.map((r) => (
-            <RestaurantCard key={r.id} {...r} />
-          ))}
-        </div>
+        {isLoading ? (
+          <div>
+            <Loader />
+          </div>
+        ) : (
+          <div>
+            <div className="restaurant-list">
+              {restaurants.map((r) => (
+                <RestaurantCard key={r.id} {...r} />
+              ))}
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
