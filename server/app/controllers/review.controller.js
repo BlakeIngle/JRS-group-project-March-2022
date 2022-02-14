@@ -3,7 +3,11 @@ const yelp = require("./yelp.controller");
 
 exports.getReviewByUserId = (req, res) => {
   const { userId } = req.params;
-  const query = `SELECT * FROM dishes.review WHERE userId = ?;`;
+  const query = `SELECT review.id, review.restaurantId, review.body, dish.name AS dish
+                  FROM dishes.review 
+                  INNER JOIN dish
+                    ON dish.id = review.dishId
+                  WHERE userId = ?;`;
   const placeholders = [userId];
 
   db.query(query, placeholders, (err, results) => {

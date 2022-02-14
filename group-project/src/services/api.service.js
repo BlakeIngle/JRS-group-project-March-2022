@@ -37,12 +37,11 @@ const api = {
   getDishByName: (dishName) => {
     return axios.get(`${URL}/dishes/${dishName}`);
   },
-
   getReviewByUserId: (userId) => {
     return axios.get(`${URL}/reviews/${userId}`);
   },
   getReviewsByRestaurantId: (restaurantId) => {
-    return axios.get(`${URL}/reviews/${restaurantId}`);
+    return axios.get(`${URL}/reviews/restaurant/${restaurantId}`);
   },
   addNewReview: (review) => {
     return axios.post(`${URL}/reviews`, review);
@@ -50,8 +49,8 @@ const api = {
   updateReview: (review) => {
     return axios.put(`${URL}/reviews/${review.id}`, review);
   },
-  deleteReview: (review) => {
-    return axios.delete(`${URL}/reviews/${review.id}`);
+  deleteReview: (reviewId) => {
+    return axios.delete(`${URL}/reviews/${reviewId}`);
   },
 
   getRestaurantsByDish: (dishName, location) => {

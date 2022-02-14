@@ -3,10 +3,7 @@ module.exports = (app) => {
 
   app.get("/api/reviews/:userId", reviews.getReviewByUserId);
   app.get("/api/reviews/dishes/:dishId", reviews.getReviewsByDishId);
-  app.get(
-    "/api/reviews/restaurants/:restaurantId",
-    reviews.getReviewByRestaurantId
-  );
+  app.get("/api/reviews/restaurants/:restaurantId", reviews.getReviewByRestaurantId);
 
   app.post("/api/reviews", reviews.addNewReview);
 
