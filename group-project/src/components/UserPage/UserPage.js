@@ -1,30 +1,23 @@
 import React, { useContext, useEffect, useState } from "react";
-import FavoriteIcon from "@mui/icons-material/Favorite";
 import LogoutIcon from "@mui/icons-material/Logout";
-import {
-  Avatar,
-  Button,
-  Card,
-  CardActionArea,
-  CardContent,
-  Divider,
-  Link,
-  TextField,
-  Tooltip,
-} from "@mui/material";
-import { Emojis } from "../../assets/DishIcon";
+import { Avatar, Button, Divider, TextField, Tooltip } from "@mui/material";
 import "./UserPage.css";
 import { useLocalStorage } from "../../services/localStorage.service";
 import { Context } from "../../App";
-import { useNavigate } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import { deepOrange } from "@mui/material/colors";
 import { useApi } from "../../services/api.service";
 import ChangePasswordForm from "./ChangePasswordForm";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Review from "../Review/Review";
 
-export default function UserPage({ userId }) {
+export default function UserPage() {
+  // const { dishName } = useParams();
   const [isChangePasswordOpen, setIsChangePasswordOpen] = useState(false);
+  const [isReviewCardGone, setIsReviewCardGone] = useState(true);
   const [reviews, setReviews] = useState([]);
   const { state, setState } = useContext(Context);
+  // const [dish, setDish] = useState(null);
   const api = useApi();
   const navigate = useNavigate();
   const storage = useLocalStorage();
@@ -38,29 +31,34 @@ export default function UserPage({ userId }) {
 
   function togglePasswordChangeAccordion() {
     setIsChangePasswordOpen(!isChangePasswordOpen);
+    console.log(isChangePasswordOpen);
   }
 
-  function getReviewsById() {
+  function getReviews() {
     api
       .getReviewByUserId(state.user.id)
       .then((res) => {
         setReviews(res.data.reviews);
-        console.log("Review data:", res.data.reviews);
       })
       .catch((err) => {
-        console.error(err);
+        console.error(err.reponse);
       });
   }
 
-  useEffect(() => {
-    getReviewsById();
-  }, []);
-
+  function deleteReviewCard(reviewId) {
+    console.log("deleting review", reviewId);
+    api
+      .deleteReview(reviewId)
+      .then((res) => {
+        setReviews(reviews.filter((r) => r.id !== reviewId));
+      })
+      .catch((err) => {
+        console.error(err.response);
+      });
+  }
   useEffect(() => {
     if (state.user) {
-      // console.log("use effect state variable");
-      // someone is loggin in and viewing their own page
-      // show the logout button
+      getReviews();
     } else {
       //not logged in
       navigate("/");
@@ -70,6 +68,13 @@ export default function UserPage({ userId }) {
   if (!state.user) {
     return <p>No user found</p>;
   }
+
+  // const googleUrl =
+  //   "https://www.google.com/maps/search/" + name + "@" + location;
+
+  // const handleClick = () => {
+  //   window.open(dishName);
+  // };
 
   return (
     <div className="user-page-root">
@@ -90,32 +95,15 @@ export default function UserPage({ userId }) {
         <h2 className="welcome">Welcome, {state.user.firstName}!</h2>
       </div>
       <Divider />
+      <br />
       <div className="favorites">{state.user.firstName}'s Favorite's:</div>
-      {reviews.map((review) => {
-        return (
-          <div className="favorites-box">
-            <div className="favorite-card-review">{review.body}</div>
-
-            <div className="icon">
-              {Emojis.burger}
-              {review.dishId}
-            </div>
-            <div className="favorite-icon">
-              <FavoriteIcon />
-            </div>
-            <div className="rest-title">
-              <Link
-                href="https://www.poestavern.com/"
-                target="_blank"
-                rel="noopener"
-              >
-                {review.restaurantId}
-              </Link>
-            </div>
-          </div>
-        );
-      })}
-
+      {reviews.map((review) => (
+        <Review
+          key={review.id}
+          {...review}
+          deleteReviewCard={deleteReviewCard}
+        />
+      ))}
       <br />
       <br />
       <div className="editInformation">
