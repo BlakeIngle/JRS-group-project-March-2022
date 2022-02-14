@@ -1,30 +1,82 @@
-import React, { useRef, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import './ReviewForm.css'
 import RestaurantSearch from '../Searches/RestaurantSearch'
 import { useLocation } from 'react-router'
 import { Emojis } from '../../assets/DishIcon';
+import { useApi } from '../../services/api.service';
+import { Context } from '../../App';
 
-export default function ReviewForm() {
+export default function ReviewForm({ toggleForm }) {
 
     const location = useLocation();
-    const dishName = location.pathname.split("/")[2];
-    const [restaurantName, setRestaurantName] = useState(null);
-    const formRef = useRef(null);
+    const api = useApi();
+    const { state } = useContext(Context);
 
+    const dishName = location.pathname.split("/")[2].replaceAll("%20", " ");
+    const [restaurantName, setRestaurantName] = useState(null);
+    const [restaurant, setRestaurant] = useState({});
+    const formRef = useRef(null);
+    const [review, setReview] = useState({
+        dishId: "",
+        restaurantId: restaurant.id,
+        userId: state.user.id,
+        body: ""
+    });
 
     function handleCancel() {
-        formRef.current.classList.toggle("hidden")
+        // formRef.current.classList.toggle("hidden")
+        toggleForm();
         setRestaurantName(null);
+    }
+
+    function handleChange(e) {
+        setReview({
+            ...review,
+            [e.target.name]: e.target.value
+        });
     }
 
     function handleSubmit(e) {
         e.preventDefault();
+        console.log(review);
+        api
+            .addNewReview(review)
+            .then((res) => {
+                toggleForm();
+            })
+            .catch((err) => {
+                console.error(err);
+            });
     }
+
+    useEffect(() => {
+        setReview({
+            ...review,
+            restaurantId: restaurant.id,
+        })
+        // console.log(review);
+    }, [restaurant]);
+
+    useEffect(() => {
+        api
+            .getDishByName(dishName)
+            .then((res) => {
+                const dish = res.data.dish.id;
+                setReview({
+                    ...review,
+                    dishId: dish
+                })
+                // console.log(review);
+            })
+            .catch((err) => {
+                console.error(err);
+            });
+    }, []);
 
     return (
         <div className='review-form-root' ref={formRef}>
+            <h2>Who has the best {dishName}?</h2>
             <form onSubmit={handleSubmit}>
-                <h2>Who has the Forking Best {dishName}?</h2>
                 {restaurantName &&
                     <div className='user-selection'>
                         <div className='label'>
@@ -36,12 +88,12 @@ export default function ReviewForm() {
                         </div>
                         <div className='review-body'>
                             <label className='label' htmlFor='reviewBody'>Optional review:</label>
-                            <textarea className='text-input' name="reviewBody" maxLength={255} rows={5}></textarea>
+                            <textarea className='text-input' name="body" maxLength={255} value={review.body} onChange={handleChange}></textarea>
                             {/* <input className='text-input' type="text" name="reviewBody"></input> */}
                             <div className=' label char-limit'>(255 char max)</div>
                         </div>
                     </div>}
-                <RestaurantSearch restaurantName={restaurantName} setRestaurantName={setRestaurantName} />
+                <RestaurantSearch restaurant={restaurant} setRestaurant={setRestaurant} restaurantName={restaurantName} setRestaurantName={setRestaurantName} />
                 <div className='buttons'>
                     <button type="button" onClick={handleCancel}>Cancel</button>
                     <button type="submit">Save</button>

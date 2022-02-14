@@ -16,18 +16,18 @@ export default function HomePage() {
 
     const footerRef = useRef(null);
 
-    useEffect(() => {
-        // make footer visible if url is "/dishes/..."
-        if (isDishPage) {
-            footerRef.current.classList.add("visible")
-        };
-    }, [location])
+    // useEffect(() => {
+    //     // make footer visible if url is "/dishes/..."
+    //     if (isDishPage) {
+    //         footerRef.current.classList.add("visible")
+    //     };
+    // }, [location])
 
     return (
         <div className='home-page-root'>
             <Header />
             <Outlet />
-            <Footer />
+            {/* <Footer /> */}
         </div>
     );
 
