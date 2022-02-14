@@ -10,11 +10,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // import RestaurantCard from "../RestaurantCard/RestaurantCard";
 import { faMapMarkerAlt } from "@fortawesome/free-solid-svg-icons";
 import Loader from "../Loader/Loader";
+import { Context } from "../../App";
 
 export default function DishPage() {
   const { dishName } = useParams();
   const api = useApi();
   const getCoordinatesPromise = useGeolocation();
+  const { state } = useContext(Context);
 
   const [dish, setDish] = useState(null);
   const [restaurants, setRestaurants] = useState([]); // the displayed list
@@ -125,12 +127,16 @@ export default function DishPage() {
               value={inputText}
             />
           </div>
-          <div className="add-review-btn"
-          onClick={toggleForm}>
+          {state.user ? <div className="add-review-btn"
+            onClick={toggleForm}>
             Add A Review
           </div>
+            : <div className="add-review-btn"
+              style={{filter: "opacity(40%"}}>
+              Login to review
+            </div>}
         </div>
-        {formIsOpen && <ReviewForm toggleForm={ toggleForm}/>}
+        {formIsOpen && <ReviewForm toggleForm={toggleForm} />}
         {isLoading ? (
           <div>
             <Loader />
