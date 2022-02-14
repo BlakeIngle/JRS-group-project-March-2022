@@ -14,6 +14,11 @@
     margin: auto;
 }
 
+.dish-page-root a {
+    text-decoration: none;
+    color: inherit;
+}
+
 .dish-page-root hr {
     max-width: 90vw;
 }
@@ -40,11 +45,18 @@
 }
 
 .dish-page-options .add-review-btn {
-    color: #fff;
-    background-color: #444;
+    color: #eee;
+    background-color: #333;
     padding: 0.4rem 0.8rem;
     border-radius: 6px;
     cursor: pointer;
+    /* transition: all 200ms; */
+}
+
+.dish-page-options .add-review-btn:hover {
+    color: #fff;
+    background-color: #444;
+    /* transition: all 200ms; */
 }
 
 .search input{
