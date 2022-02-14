@@ -11,7 +11,7 @@ exports.getReviewByUserId = (req, res) => {
       res.status(500).send({ error: err, message: "Error retrieving reviews" });
     } else {
       if (results.length == 0) {
-        res.staus(404).send({ message: "No reviews found." });
+        res.status(404).send({ message: "No reviews found." });
       } else {
         res.send({ reviews: results });
       }
