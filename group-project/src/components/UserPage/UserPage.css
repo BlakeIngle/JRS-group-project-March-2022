@@ -1,17 +1,10 @@
-.user-page-root{
-    /* margin: 0;
-    padding: 0; */
-}
-
-.user-page-root .top-section {
+/* .user-page-root .top-section {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
     gap: 10px;
     padding: 1rem 1.5rem;
-    /* height: 5rem; */
-    /* position: relative; */
 }
 
 
@@ -29,13 +22,15 @@
 }
 
 .user-page-root .favorites-box {
-    /* position: relative; */
-    width: 100%;
-    /* border: solid red 1px; */
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: solid red 1px;
 }
 
 .user-page-root .favorites-box > * {
-    /* border: solid blue 1px; */
+    border: solid blue 1px;
     width: 90%;
     max-width: 1000px;
     margin: 3rem auto;
@@ -53,7 +48,66 @@
     text-decoration: underline;
 }
 
+*/
 
-.user-page-root .favorites-box .icon{
-    font-size: x-large;
+
+.user-page-root .favorites-box {
+  position: relative;
+
+  margin: 1.5rem;
+  height: 20vh;
+  width: 80vw;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 }
+
+.user-page-root .favorites-box .rest-title {
+  display: flex;
+  position: absolute;
+
+  top: 0;
+
+  width: 30vw;
+  height: 5vh;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.user-page-root .favorites-box .favorite-card-review {
+
+  position: absolute;
+  bottom: 0;
+
+  width: 70%;
+  height: 30%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.user-page-root .favorites-box .icon {
+    font-size: x-large;
+  
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: .5rem;
+  }
+
+  .user-page-root .favorites-box .favorite-icon {
+    color: red;
+  
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: .5rem;
+  }

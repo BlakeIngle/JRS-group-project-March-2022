@@ -21,9 +21,9 @@ import { deepOrange } from "@mui/material/colors";
 import { useApi } from "../../services/api.service";
 import ChangePasswordForm from "./ChangePasswordForm";
 
-export default function UserPage() {
+export default function UserPage({ userId }) {
   const [isChangePasswordOpen, setIsChangePasswordOpen] = useState(false);
-
+  const [reviews, setReviews] = useState([]);
   const { state, setState } = useContext(Context);
   const api = useApi();
   const navigate = useNavigate();
@@ -39,6 +39,22 @@ export default function UserPage() {
   function togglePasswordChangeAccordion() {
     setIsChangePasswordOpen(!isChangePasswordOpen);
   }
+
+  function getReviewsById() {
+    api
+      .getReviewByUserId(state.user.id)
+      .then((res) => {
+        setReviews(res.data.reviews);
+        console.log("Review data:", res.data.reviews);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }
+
+  useEffect(() => {
+    getReviewsById();
+  }, []);
 
   useEffect(() => {
     if (state.user) {
@@ -74,42 +90,34 @@ export default function UserPage() {
         <h2 className="welcome">Welcome, {state.user.firstName}!</h2>
       </div>
       <Divider />
-
       <div className="favorites">{state.user.firstName}'s Favorite's:</div>
-      <div className="favorites-box">
-        <Card
-          sx={{
-            margin: "1rem",
-            width: "80%",
-            backgroundColor: "#ffffff88",
-            boxShadow:
-              "rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;",
-          }}
-        >
-          <FavoriteIcon
-            className="favoriteIcon"
-            sx={{ fontSize: 40, color: "red", display: "flex", width: "12%" }}
-          />
-          <div className="icon">{Emojis.burger}</div>
+      {reviews.map((review) => {
+        return (
+          <div className="favorites-box">
+            <div className="favorite-card-review">{review.body}</div>
 
-          <CardContent sx={{}}>
-            <Link
-              href="https://www.poestavern.com/"
-              target="_blank"
-              rel="noopener"
-            >
-              {state.user.firstName}
-            </Link>
-          </CardContent>
-          <CardActionArea sx={{ padding: "1rem" }}>
-            {state.user.email}
-          </CardActionArea>
-        </Card>
-      </div>
+            <div className="icon">
+              {Emojis.burger}
+              {review.dishId}
+            </div>
+            <div className="favorite-icon">
+              <FavoriteIcon />
+            </div>
+            <div className="rest-title">
+              <Link
+                href="https://www.poestavern.com/"
+                target="_blank"
+                rel="noopener"
+              >
+                {review.restaurantId}
+              </Link>
+            </div>
+          </div>
+        );
+      })}
 
       <br />
       <br />
-
       <div className="editInformation">
         <Divider />
         <h4 style={{ display: "flex", textDecoration: "underline" }}>
