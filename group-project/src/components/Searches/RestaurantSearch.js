@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useApi } from "../../services/api.service";
 // import '../DishPage/Dishes.css'
 
-export default function RestaurantSearch({ restaurantName, setRestaurantName }) {
+export default function RestaurantSearch({ restaurant, setRestaurant, restaurantName, setRestaurantName }) {
 
   const http = useApi();
 
@@ -39,7 +39,7 @@ export default function RestaurantSearch({ restaurantName, setRestaurantName }) 
   useEffect(() => {
     setRestaurantsResults([]);
     setInputText("")
-  }, [restaurantName]);
+  }, [restaurant.name]);
 
   return (
     <div className="search-root">
@@ -53,20 +53,23 @@ export default function RestaurantSearch({ restaurantName, setRestaurantName }) 
 
 
   function Restaurants({ restaurants }) {
+
     return (
       <div className="restaurants-list">
         {restaurants.map((restaurant) => (
-          <Restaurant key={restaurant.id} name={restaurant.name} address={restaurant.location.address1} />
+          <Restaurant key={restaurant.id} restaurant={restaurant} name={restaurant.name} address={restaurant.location.address1} />
         ))}
       </div>
     );
   }
 
-  function Restaurant({ name, address }) {
+  function Restaurant({ restaurant, name, address }) {
 
     function updateRestaurant() {
-      setRestaurantName(name)
+      setRestaurantName(name);
+      setRestaurant(restaurant);
     }
+
     return (
       <div className="restaurant"
         onClick={updateRestaurant}>

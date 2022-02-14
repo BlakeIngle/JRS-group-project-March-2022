@@ -1,7 +1,7 @@
 .restaurant-card-root {
   margin: 0.8rem auto;
   background-color: lightgray;
-  width: 700px;
+  /* width: 700px; */
   max-width: 90vw;
   padding: 0.8rem;
   border-radius: 8px;
