@@ -136,8 +136,8 @@ function reorderBuisnesses(businesses, idsInOrder) {
 
     restaurant.total_favorites = total;
 
-    businesses.unshift(restaurant);
     businesses.splice(ri, 1);
+    businesses.unshift(restaurant);
   }
 
   return businesses;
