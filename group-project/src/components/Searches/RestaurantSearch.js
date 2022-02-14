@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useApi } from "../../services/api.service";
-import '../DishPage/Dishes.css'
+// import '../DishPage/Dishes.css'
 
-export default function RestaurantSearch() {
+export default function RestaurantSearch({ restaurantName, setRestaurantName }) {
+
   const http = useApi();
 
   var [inputText, setInputText] = useState("");
@@ -35,32 +36,43 @@ export default function RestaurantSearch() {
     );
   }, [inputText]);
 
+  useEffect(() => {
+    setRestaurantsResults([]);
+    setInputText("")
+  }, [restaurantName]);
+
   return (
-    <div className="restaurant search">
-      <input type="text" value={inputText}
+    <div className="search-root">
+      <input className='text-input' type="text" value={inputText}
         onChange={onInputChange}
-      placeholder="Search restaurants"/>
-      <span>
-        <Restaurants restaurants={restaurantsResults} />
-      </span>
+        placeholder="Search restaurants"
+      />
+      <Restaurants restaurants={restaurantsResults} />
     </div>
   );
-}
 
-function Restaurants({ restaurants }) {
-  return (
-    <div className="restaurant">
-      {restaurants.map((restaurant) => (
-        <Restaurant key={restaurant.id} name={restaurant.name} />
-      ))}
-    </div>
-  );
-}
 
-function Restaurant({ name }) {
-  return (
-    <div>
-      <h3>{name}</h3>
-    </div>
-  );
+  function Restaurants({ restaurants }) {
+    return (
+      <div className="restaurants-list">
+        {restaurants.map((restaurant) => (
+          <Restaurant key={restaurant.id} name={restaurant.name} address={restaurant.location.address1} />
+        ))}
+      </div>
+    );
+  }
+
+  function Restaurant({ name, address }) {
+
+    function updateRestaurant() {
+      setRestaurantName(name)
+    }
+    return (
+      <div className="restaurant"
+        onClick={updateRestaurant}>
+        <div>{name}</div> <div className='address'>{address}</div>
+      </div>
+    );
+  }
+
 }

@@ -1,11 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { Emojis } from "../../assets/DishIcon";
 import { useApi } from "../../services/api.service";
 import "../DishPage/Dishes.css";
 import { useGeolocation } from "../../services/geolocation.service";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import RestaurantCard from "../RestaurantCard/RestaurantCard";
+import ReviewForm from "../ReviewForm/ReviewForm";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import RestaurantCard from "../RestaurantCard/RestaurantCard";
 import { faMapMarkerAlt } from "@fortawesome/free-solid-svg-icons";
 import Loader from "../Loader/Loader";
 
@@ -116,15 +118,22 @@ export default function DishPage() {
             <Loader />
           </div>
         ) : (
-          <div>
-            <div className="restaurant-list">
-              {restaurants.map((r) => (
-                <RestaurantCard key={r.id} {...r} />
-              ))}
-            </div>
+          <div className="restaurant-list">
+            {restaurants.map((r) => (
+              <RestaurantCard key={r.id} {...r} />
+            ))}
           </div>
         )}
+        <ReviewForm />
       </div>
+
+      {/* {!hasReviews && (
+        <div>
+          <br />
+          <p className="placeholder-text">Be the first to review this dish!</p>
+        </div>
+      )} */}
+      {/* RestaurantCards go here */}
     </div>
   );
 }
