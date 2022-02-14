@@ -21,6 +21,7 @@ export default function DishPage() {
   const [originalResults, setOriginalResults] = useState([]); // the first list of restaurants from coordinates
   const [searchTimeout, setSearchTimeout] = useState(null);
   var [inputText, setInputText] = useState("");
+  const [formIsOpen, setFormIsOpen] = useState(false)
   const [isLoading, setIsLoading] = useState(true);
 
   function getDish() {
@@ -63,6 +64,10 @@ export default function DishPage() {
       });
   }
 
+  function toggleForm() {
+    setFormIsOpen(!formIsOpen);
+  }
+
   useEffect(() => {
     getDish();
     if (!inputText) {
@@ -102,17 +107,30 @@ export default function DishPage() {
           {Emojis[dish?.name]}
         </h2>
         <hr />
-        <div className="zip-code-form">
-          <FontAwesomeIcon icon={faMapMarkerAlt} />
-          <input
-            type="text"
-            className="zip-code-input"
-            name="location"
-            placeholder="New Zip Code..."
-            onChange={(e) => setInputText(e.target.value)}
-            value={inputText}
-          />
+        {/* {!hasReviews && (
+        <div>
+          <br />
+          <p className="placeholder-text">Be the first to review this dish!</p>
         </div>
+      )} */}
+        <div className="dish-page-options">
+          <div className="zip-code-form">
+            <FontAwesomeIcon icon={faMapMarkerAlt} />
+            <input
+              type="text"
+              className="zip-code-input"
+              name="location"
+              placeholder="New Zip Code..."
+              onChange={(e) => setInputText(e.target.value)}
+              value={inputText}
+            />
+          </div>
+          <div className="add-review-btn"
+          onClick={toggleForm}>
+            Add A Review
+          </div>
+        </div>
+        {formIsOpen && <ReviewForm toggleForm={ toggleForm}/>}
         {isLoading ? (
           <div>
             <Loader />
@@ -124,15 +142,8 @@ export default function DishPage() {
             ))}
           </div>
         )}
-        <ReviewForm />
       </div>
 
-      {/* {!hasReviews && (
-        <div>
-          <br />
-          <p className="placeholder-text">Be the first to review this dish!</p>
-        </div>
-      )} */}
       {/* RestaurantCards go here */}
     </div>
   );
