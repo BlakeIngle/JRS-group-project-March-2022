@@ -1,7 +1,7 @@
 import React, { useContext, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router";
-import "./LoginPage.css";
+import "../SignUpPage/LoginSignUp.css";
 import { Context } from "../../App";
 import { useApi } from "../../services/api.service";
 import { useLocalStorage } from "../../services/localStorage.service";
@@ -11,10 +11,10 @@ export default function LoginPage() {
     <div className="login">
       <h2 className="login-header">Login</h2>
       <LoginForm />
+      <div className="form-message">OR</div>
       <Link to="/signup">
         <button type="button">Sign Up</button>
       </Link>
-      <br />
       {/*<a href="#" className="forgotPassword">
         Forgot My Username/Password
       </a>*/}
@@ -77,29 +77,31 @@ function LoginForm() {
 
   return (
     <form onSubmit={handleSubmit}>
-      <div className="email">
-        <label>Email: </label>
-        <input
-          ref={emailRef}
-          type="text"
-          name="email"
-          value={user.email}
-          style={{ "--animationTime": `${animationTime}ms` }}
-          onChange={handleChange}
-          placeholder="Email"
-        />
-      </div>
-      <div>
-        <label>Password: </label>
-        <input
-          ref={passwordRef}
-          type="password"
-          name="password"
-          value={user.password}
-          style={{ "--animationTime": `${animationTime}ms` }}
-          onChange={handleChange}
-          placeholder="Password"
-        />
+      <div className="form-inputs">
+        {/* <div className="email"> */}
+          <label>Email</label>
+          <input
+            ref={emailRef}
+            type="text"
+            name="email"
+            value={user.email}
+            style={{ "--animationTime": `${animationTime}ms` }}
+            onChange={handleChange}
+            placeholder="Email"
+          />
+        {/* </div> */}
+        {/* <div> */}
+          <label>Password</label>
+          <input
+            ref={passwordRef}
+            type="password"
+            name="password"
+            value={user.password}
+            style={{ "--animationTime": `${animationTime}ms` }}
+            onChange={handleChange}
+            placeholder="Password"
+          />
+        {/* </div> */}
       </div>
       <br />
       <button type="submit" disabled={!user.email || !user.password}>

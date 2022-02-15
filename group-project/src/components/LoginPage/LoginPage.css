@@ -15,8 +15,11 @@ body {
   /* border: solid rgb(9, 255, 0) 1px; */
 }
 
-.login {
-  margin: 5rem;
+.login,
+.signup {
+  margin: auto;
+  width: 90vw;
+  max-width: 700px;
   background-color: rgba(0, 0, 0, 0.705);
   border-radius: 8px;
   /* border: solid rgb(9, 255, 0) 1px; */

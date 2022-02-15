@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import "./SignUpPage.css";
+import "./LoginSignUp.css";
 
 import { useApi } from "../../services/api.service";
 import { useLocalStorage } from "../../services/localStorage.service";
@@ -9,7 +9,7 @@ export default function SignUpPage() {
   const navigate = useNavigate();
   const api = useApi();
   var storage = useLocalStorage();
-
+ 
   function attemptSignUp(user) {
     api
       .createNewUser(user)
@@ -24,16 +24,13 @@ export default function SignUpPage() {
   }
 
   return (
-    <div>
-      <div className="signup">
-        <h2 className="signup-header">Sign Up</h2>
-        {/* <hr /> */}
-        <br />
-        <SignUpForm onSubmit={attemptSignUp} api={api} />
-        <Link to="/login">
-          <button type="button">Login</button>
-        </Link>
-      </div>
+    <div className="signup">
+      <h2 className="signup-header">Sign Up</h2>
+      <SignUpForm onSubmit={attemptSignUp} api={api} />
+      <div className="form-message">Already have an account?</div>
+      <Link to="/login">
+        <button type="button">Login</button>
+      </Link>
     </div>
   );
 }
@@ -92,41 +89,43 @@ function SignUpForm({ onSubmit, api }) {
 
   return (
     <form onSubmit={handleSubmit}>
-      <div className="firstName">
-        <label> First Name: </label>
-        <input
-          type="text"
-          name="firstName"
-          value={user.firstName}
-          onChange={handleChange}
-          placeholder="First Name"
-        />
-      </div>
-      <div className="signup-email">
-        {isEmailTaken && (
-          <p className="error-message">*Email is already taken*</p>
-        )}
-        <label>Email:</label>
-        <input
-          type="text"
-          className={isEmailTaken ? "email-taken" : " "}
-          name="email"
-          required
-          value={user.email}
-          onChange={handleChange}
-          placeholder="Email..."
-        />
-      </div>
+      <div className="form-inputs">
+        {/* <div className="firstName"> */}
+          <label>First Name</label>
+          <input
+            type="text"
+            name="firstName"
+            value={user.firstName}
+            onChange={handleChange}
+            placeholder="First Name"
+          />
+        {/* </div> */}
+        {/* <div className="signup-email"> */}
+          {isEmailTaken && (
+            <p className="error-message">*Email is already taken*</p>
+          )}
+          <label>Email *</label>
+          <input
+            type="text"
+            className={isEmailTaken ? "email-taken" : " "}
+            name="email"
+            required
+            value={user.email}
+            onChange={handleChange}
+            placeholder="Email..."
+          />
+        {/* </div> */}
 
-      <div className="signup-password">
-        <label>Password: </label>
-        <input
-          type="password"
-          name="password"
-          value={user.password}
-          onChange={handleChange}
-          placeholder="Password..."
-        />
+        {/* <div className="signup-password"> */}
+          <label>Password *</label>
+          <input
+            type="password"
+            name="password"
+            value={user.password}
+            onChange={handleChange}
+            placeholder="Password..."
+          />
+        {/* </div> */}
       </div>
       <br />
       <button type="submit" disabled={!user.email || !user.password}>

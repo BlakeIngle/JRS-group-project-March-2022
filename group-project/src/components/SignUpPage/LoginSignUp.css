@@ -1,0 +1,94 @@
+:root {
+  --inputLabelText: #d2e2e2;
+  --headerText: #e7dddd;
+  --backgroundImage: url(https://www.wallpapertip.com/wmimgs/54-549491_background-for-food-website.jpg);
+}
+
+.login,
+.signup {
+  margin: 2rem auto;
+  width: 80vw;
+  max-width: 700px;
+  background-color: rgba(0, 0, 0, 0.705);
+  border-radius: 8px;
+  padding: 1rem;
+  color: #eee;
+}
+
+.login-header,
+.signup-header {
+  color: var(--headerText);
+  margin: 0 0 1rem;
+  font-size: 1.7rem;
+  /* border: solid rgb(9, 255, 0) 1px; */
+}
+
+.form-inputs {
+  display: flex;
+  flex-direction: column;
+  /* align-items:flex-end; */
+
+  /* display: grid;
+  grid-template-columns: 2fr 3fr;
+  align-items: center; */
+  width: 90%;
+  max-width: 400px;
+  margin: auto;
+}
+
+.form-inputs > * {
+  /* display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;  */
+}
+
+.login label,
+.signup label {
+  /* display: inline-block; */
+  /* width: 7rem; */
+  /* position: absolute; */
+  left: 4rem;
+  /* font-size: 0.9rem; */
+  margin-right: 5px;
+  text-align: left;
+  color: var(--inputLabelText);
+  user-select: none;
+  /* border: solid red 1px; */
+}
+
+.form-message {
+  user-select: none;
+  margin-bottom: 5px;
+}
+
+.login button,
+.signup button {
+  font: inherit;
+  font-weight: 900;
+  border: none;
+  width: 8rem;
+  margin-bottom: 0.5rem;
+  padding: 0.25rem;
+
+  border-radius: 4px;
+}
+
+.login button:hover,
+.signup button:hover {
+  color: rgba(255, 255, 255, 0.925);
+  background-color: rgba(255, 255, 255, 0.767);
+  cursor: pointer;
+}
+
+.login input,
+.signup input {
+  margin: 0.2rem 0 1rem;
+  font-size: 1.1rem;
+  height: 1.9rem;
+  vertical-align:middle;
+}
+
+.signup .email-taken {
+  outline-color: red;
+}
