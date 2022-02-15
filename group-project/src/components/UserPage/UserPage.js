@@ -10,16 +10,18 @@ import { useApi } from "../../services/api.service";
 import ChangePasswordForm from "./ChangePasswordForm";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Review from "../Review/Review";
+import { useGeolocation } from "../../services/geolocation.service";
 
 export default function UserPage() {
-  // const { dishName } = useParams();
+  const { dishName } = useParams();
   const [isChangePasswordOpen, setIsChangePasswordOpen] = useState(false);
   const [reviews, setReviews] = useState([]);
   const { state, setState } = useContext(Context);
-  // const [dish, setDish] = useState(null);
+  const [originalResults, setOriginalResults] = useState([]); // the first list of restaurants from coordinates
   const api = useApi();
   const navigate = useNavigate();
   const storage = useLocalStorage();
+  const getCoordinatesPromise = useGeolocation();
 
   function logoutClicked() {
     // log out
@@ -65,6 +67,25 @@ export default function UserPage() {
     }
   }, []);
 
+  function getRestaurantsByLatLong(latitude, longitude) {
+    api
+      .getRestaurantsByDish(dishName, { latitude, longitude })
+      .then((results) => {
+        setOriginalResults(results.data.restaurants);
+        return results.data.restaurants;
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }
+
+  useEffect(() => {
+    getCoordinatesPromise.then(async ({ latitude, longitude }) => {
+      await getRestaurantsByLatLong(latitude, longitude);
+      setOriginalResults([])
+    });
+  }, []);
+
   if (!state.user) {
     return <p>No user found</p>;
   }
@@ -72,13 +93,6 @@ export default function UserPage() {
   
   const firstName = state.user.firstName;
   const email = state.user.email;
-
-  // const googleUrl =
-  //   "https://www.google.com/maps/search/" + name + "@" + location;
-
-  // const handleClick = () => {
-  //   window.open(dishName);
-  // };
 
   return (
     <div className="user-page-root">
@@ -118,7 +132,7 @@ export default function UserPage() {
         </h4>
 
         <TextField
-          disabled="disabled"
+          disabled
           label="First Name"
           defaultValue={state.user.firstName}
           type="text"
@@ -126,7 +140,7 @@ export default function UserPage() {
           sx={{ display: "flex", marginTop: "1rem" }}
         />
         <TextField
-          disabled="disabled"
+          disabled
           label="Email"
           defaultValue={state.user.email}
           type="email"
@@ -134,11 +148,15 @@ export default function UserPage() {
           sx={{ display: "flex", marginTop: "1rem" }}
         />
 
-        <div className="dropDown">
+        <div className="drop-down">
           <br />
           <Tooltip title="Edit Password" arrow>
-            <Button variant="outlined" onClick={togglePasswordChangeAccordion}>
-              <p className="rightIcon">Change Password</p>
+            <Button
+              className="right-icon"
+              variant="contained"
+              onClick={togglePasswordChangeAccordion}
+            >
+              <p>Change Password</p>
             </Button>
           </Tooltip>
           {isChangePasswordOpen && (
