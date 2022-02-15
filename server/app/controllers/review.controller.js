@@ -3,7 +3,7 @@ const yelp = require("./yelp.controller");
 
 exports.getReviewByUserId = (req, res) => {
   const { userId } = req.params;
-  const query = `SELECT review.id, review.restaurantId, review.body, dish.name AS dish
+  const query = `SELECT review.id, review.restaurantId, review.body, review.restaurantName, dish.name AS dish
                   FROM dishes.review 
                   INNER JOIN dish
                     ON dish.id = review.dishId
@@ -71,12 +71,12 @@ exports.getReviewByRestaurantId = (req, res) => {
 };
 
 exports.addNewReview = (req, res) => {
-  const { dishId, restaurantId, userId, body } = req.body;
+  const { dishId, restaurantId, userId, body, restaurantName } = req.body;
 
-  const query = `INSERT INTO dishes.review (dishId, restaurantId, userId, body)
-                      values (?, ?, ?, ?);`;
+  const query = `INSERT INTO dishes.review (dishId, restaurantId, userId, body, restaurantName)
+                      values (?, ?, ?, ?, ?);`;
 
-  const placeholders = [dishId, restaurantId, userId, body];
+  const placeholders = [dishId, restaurantId, userId, body, restaurantName];
 
   db.query(query, placeholders, (err, results) => {
     if (err) {
