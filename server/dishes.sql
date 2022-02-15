@@ -24,6 +24,7 @@ CREATE TABLE `dishes`.`review` (
   `userId` VARCHAR(45) NOT NULL,
   `dishId` INT NOT NULL,
   `restaurantId` VARCHAR(255) NOT NULL,
+  `restaurantName` VARCHAR(255) NULL,
   
   `dateCreated` DATETIME NOT NULL DEFAULT (current_date()),
 
