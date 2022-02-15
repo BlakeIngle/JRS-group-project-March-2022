@@ -55,6 +55,7 @@ export default function UserPage() {
         console.error(err.response);
       });
   }
+
   useEffect(() => {
     if (state.user) {
       getReviews();
@@ -67,6 +68,10 @@ export default function UserPage() {
   if (!state.user) {
     return <p>No user found</p>;
   }
+
+  
+  const firstName = state.user.firstName;
+  const email = state.user.email;
 
   // const googleUrl =
   //   "https://www.google.com/maps/search/" + name + "@" + location;
@@ -92,11 +97,11 @@ export default function UserPage() {
             {state.user.firstName.charAt(0).toUpperCase()}
           </p>
         </Avatar>
-        <h2 className="welcome">Welcome, {state.user.firstName}!</h2>
+        <h2 className="welcome">Welcome, {firstName ? firstName : email}!</h2>
       </div>
       <Divider />
       <br />
-      <div className="favorites">{state.user.firstName}'s Favorite's:</div>
+      <div className="favorites">{firstName ? firstName : email}'s Favorites:</div>
       {reviews.map((review) => (
         <Review
           key={review.id}
