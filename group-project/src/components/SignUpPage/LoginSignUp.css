@@ -20,41 +20,23 @@
   color: var(--headerText);
   margin: 0 0 1rem;
   font-size: 1.7rem;
-  /* border: solid rgb(9, 255, 0) 1px; */
 }
 
 .form-inputs {
   display: flex;
   flex-direction: column;
-  /* align-items:flex-end; */
-
-  /* display: grid;
-  grid-template-columns: 2fr 3fr;
-  align-items: center; */
   width: 90%;
   max-width: 400px;
   margin: auto;
 }
 
-.form-inputs > * {
-  /* display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;  */
-}
-
 .login label,
 .signup label {
-  /* display: inline-block; */
-  /* width: 7rem; */
-  /* position: absolute; */
   left: 4rem;
-  /* font-size: 0.9rem; */
   margin-right: 5px;
   text-align: left;
   color: var(--inputLabelText);
   user-select: none;
-  /* border: solid red 1px; */
 }
 
 .form-message {
@@ -91,4 +73,38 @@
 
 .signup .email-taken {
   outline-color: red;
+}
+
+.dialog-root {
+  background-color: #000000a6;
+  /* position: absolute; */
+  /* height: 100vh; */
+  position:absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dialog-root .dialog-wrapper {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+}
+
+.dialog-root .dialog-container {
+  position: absolute;
+  top: 55%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #333;
+  border-radius: 8px;
+  background-color: #eee;
+  padding: 0 0.4rem;
+  /* margin: 5rem 0; */
+  max-height: 85vh;
+  width: 90vw;
+  max-width: 800px;
+  overflow: auto;
+
 }

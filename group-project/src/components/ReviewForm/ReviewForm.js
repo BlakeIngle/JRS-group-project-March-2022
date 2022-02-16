@@ -6,19 +6,19 @@ import { Emojis } from "../../assets/DishIcon";
 import { useApi } from "../../services/api.service";
 import { Context } from "../../App";
 
-export default function ReviewForm({ toggleForm }) {
+export default function ReviewForm({ toggleForm, randomDish }) {
   const location = useLocation();
   const api = useApi();
   const { state } = useContext(Context);
+  const dishName = location.pathname.split("/")[2]?.replaceAll("%20", " ");
 
-  const dishName = location.pathname.split("/")[2].replaceAll("%20", " ");
   const [restaurantName, setRestaurantName] = useState(null);
   const [restaurant, setRestaurant] = useState({});
   const formRef = useRef(null);
   const [review, setReview] = useState({
     dishId: "",
     restaurantId: restaurant.id,
-    userId: state.user.id,
+    userId: state.user?.id,
     body: "",
     restaurantName: restaurant.name,
   });
@@ -74,16 +74,19 @@ export default function ReviewForm({ toggleForm }) {
       });
   }, []);
 
+
   return (
     <div className="review-form-root" ref={formRef}>
-      <h2>Who has the best {dishName}?</h2>
+      <h2>Who has the best {dishName ? dishName : randomDish.name}?</h2>
       <form onSubmit={handleSubmit}>
         {restaurantName && (
           <div className="user-selection">
             <div className="label">Your selection:</div>
             <div className="selected-restaurant">
-              <span>{restaurantName}</span>
-              <span>{Emojis[dishName]}</span>
+              <div>{restaurantName}</div>
+              {restaurant.location.address1 &&
+                <div style={{ fontSize: "0.9rem", filter: "contrast(50%)"}}>{restaurant.location.address1}</div>}
+              {/* <span>{Emojis[dishName]}</span> */}
             </div>
             <div className="review-body">
               <label className="label" htmlFor="reviewBody">
@@ -95,7 +98,7 @@ export default function ReviewForm({ toggleForm }) {
                 maxLength={255}
                 value={review.body}
                 onChange={handleChange}
-              ></textarea>
+                ></textarea>
               {/* <input className='text-input' type="text" name="reviewBody"></input> */}
               <div className=" label char-limit">(255 char max)</div>
             </div>
@@ -117,70 +120,4 @@ export default function ReviewForm({ toggleForm }) {
     </div>
   );
 
-  // function RestaurantSearch() {
-  //     const http = useApi();
-
-  //     var [inputText, setInputText] = useState("");
-  //     var [restaurantsResults, setRestaurantsResults] = useState([]);
-
-  //     const [searchTimeout, setSearchTimeout] = useState(null);
-
-  //     function onInputChange(e) {
-  //         setInputText(e.target.value);
-  //     }
-
-  //     useEffect(() => {
-  //         clearTimeout(searchTimeout);
-
-  //         setSearchTimeout(
-  //             setTimeout(() => {
-  //                 if (inputText) {
-  //                     http
-  //                         .getRestaurantsByName(inputText)
-  //                         .then((results) => {
-  //                             if (results.data) {
-  //                                 setRestaurantsResults(results.data.restaurants);
-  //                             }
-  //                         })
-  //                         .catch((err) => {
-  //                             console.error(err);
-  //                         });
-  //                 }
-  //             }, 1500)
-  //         );
-  //     }, [inputText]);
-
-  //     return (
-  //         <div className="search-root">
-  //             <input className='text-input' type="text" value={inputText}
-  //                 onChange={onInputChange}
-  //                 placeholder="Search restaurants"
-  //             />
-  //             <Restaurants restaurants={restaurantsResults} />
-  //         </div>
-  //     );
-  // }
-
-  // function Restaurants({ restaurants }) {
-  //     return (
-  //         <div className="restaurants-list">
-  //             {restaurants.map((restaurant) => (
-  //                 <Restaurant key={restaurant.id} name={restaurant.name} address={restaurant.location.address1} />
-  //             ))}
-  //         </div>
-  //     );
-  // }
-
-  // function Restaurant({ name, address }) {
-
-  //     function updateRestaurant() {
-  //         setRestaurantName(name)
-  //     }
-  //     return (
-  //         <div className="restaurant"
-  //             onClick={updateRestaurant}>
-  //             <div>{name}</div> <div className='address'>{address}</div>
-  //         </div>
-  //     );
-  // }
 }

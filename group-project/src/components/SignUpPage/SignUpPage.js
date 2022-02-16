@@ -1,37 +1,64 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./LoginSignUp.css";
 
 import { useApi } from "../../services/api.service";
 import { useLocalStorage } from "../../services/localStorage.service";
+import { Context } from "../../App";
+import ReviewForm from "../ReviewForm/ReviewForm";
+import { Emojis } from "../../assets/DishIcon";
+import RestaurantSearch from "../Searches/RestaurantSearch";
 
 export default function SignUpPage() {
+  const { state, setState } = useContext(Context);
   const navigate = useNavigate();
   const api = useApi();
   var storage = useLocalStorage();
- 
-  function attemptSignUp(user) {
+  const [isDialogOpen, setIsDialogOpen] = useState(false)
+
+  function loginNewUser(user) {
     api
-      .createNewUser(user)
+      .login(user)
       .then((res) => {
-        const user = res.data.user;
-        storage.saveUser(user);
         navigate(`/profile`);
+        storage.saveUser(res.data.user);
+        setState({ ...state, user: res.data.user });
       })
       .catch((err) => {
         console.error(err);
       });
   }
 
+
+  function attemptSignUp(user) {
+    api
+      .createNewUser(user)
+      .then((res) => {
+        const user = res.data.user;
+        storage.saveUser(user);
+        setIsDialogOpen(true);
+        navigate(`/profile`);
+        // loginNewUser(user)
+      })
+      .catch((err) => {
+        console.error(err);
+      })
+
+  }
+
   return (
-    <div className="signup">
-      <h2 className="signup-header">Sign Up</h2>
-      <SignUpForm onSubmit={attemptSignUp} api={api} />
-      <div className="form-message">Already have an account?</div>
-      <Link to="/login">
-        <button type="button">Login</button>
-      </Link>
-    </div>
+    <>
+      <div className="signup">
+        <h2 className="signup-header">Sign Up</h2>
+        <SignUpForm onSubmit={attemptSignUp} api={api} />
+        <div className="form-message">Already have an account?</div>
+        <Link to="/login">
+          <button type="button">Login</button>
+        </Link>
+      </div>
+
+      {/* {isDialogOpen && <NewUserDialog user={state.user} />} */}
+    </>
   );
 }
 
@@ -91,40 +118,40 @@ function SignUpForm({ onSubmit, api }) {
     <form onSubmit={handleSubmit}>
       <div className="form-inputs">
         {/* <div className="firstName"> */}
-          <label>First Name</label>
-          <input
-            type="text"
-            name="firstName"
-            value={user.firstName}
-            onChange={handleChange}
-            placeholder="First Name"
-          />
+        <label>First Name</label>
+        <input
+          type="text"
+          name="firstName"
+          value={user.firstName}
+          onChange={handleChange}
+          placeholder="First Name"
+        />
         {/* </div> */}
         {/* <div className="signup-email"> */}
-          {isEmailTaken && (
-            <p className="error-message">*Email is already taken*</p>
-          )}
-          <label>Email *</label>
-          <input
-            type="text"
-            className={isEmailTaken ? "email-taken" : " "}
-            name="email"
-            required
-            value={user.email}
-            onChange={handleChange}
-            placeholder="Email..."
-          />
+        {isEmailTaken && (
+          <p className="error-message">*Email is already taken*</p>
+        )}
+        <label>Email *</label>
+        <input
+          type="text"
+          className={isEmailTaken ? "email-taken" : " "}
+          name="email"
+          required
+          value={user.email}
+          onChange={handleChange}
+          placeholder="Email..."
+        />
         {/* </div> */}
 
         {/* <div className="signup-password"> */}
-          <label>Password *</label>
-          <input
-            type="password"
-            name="password"
-            value={user.password}
-            onChange={handleChange}
-            placeholder="Password..."
-          />
+        <label>Password *</label>
+        <input
+          type="password"
+          name="password"
+          value={user.password}
+          onChange={handleChange}
+          placeholder="Password..."
+        />
         {/* </div> */}
       </div>
       <br />
@@ -133,4 +160,36 @@ function SignUpForm({ onSubmit, api }) {
       </button>
     </form>
   );
+}
+
+function NewUserDialog(user) {
+
+  function getRandomDish() {
+    let random = Math.floor(Math.random() * (Object.entries(Emojis).length + 1))
+    const name = Object.entries(Emojis)[random][0]
+    const emoji = Object.entries(Emojis)[random][1]
+    const randomDish = {
+      name,
+      emoji
+    }
+    return randomDish;
+  }
+
+  const randomDish = getRandomDish();
+
+
+  return (
+    <div className="dialog-root">
+      <div className="dialog-wrapper">
+        <div className="dialog-container">
+          <h3>Welcome to The Forking Best!</h3>
+          <p>To get started, choose your favorite
+            <br />
+            {randomDish.emoji}<b>{randomDish.name}</b>{randomDish.emoji}
+          </p>
+          <ReviewForm randomDish={randomDish} />
+        </div>
+      </div>
+    </div>
+  )
 }
