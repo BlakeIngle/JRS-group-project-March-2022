@@ -150,7 +150,7 @@ export default function DishPage() {
         ) : (
           <div className="restaurant-list">
             {restaurants.map((r) => (
-              <RestaurantCard key={r.id} {...r} />
+              <RestaurantCard key={r.id} dishName={dish.name} {...r}/>
             ))}
           </div>
         )}

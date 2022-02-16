@@ -1,29 +1,56 @@
 .restaurant-card-root {
   margin: 0.8rem auto;
   background-color: lightgray;
-  /* width: 700px; */
   max-width: 90vw;
   padding: 0.8rem;
   border-radius: 8px;
 }
 
 .restaurant-card-root h2 {
-  margin: 0 0 0.5rem;
+  text-align: left;
+  /* margin: 0 0 0.5rem; */
 }
 
 .restaurant-card-root .top-row {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items: center;
 }
 
 .restaurant-card-root .dish-icon {
   font-size: 1.3rem;
 }
 
-.restaurant-card-root .links > * {
+.restaurant-card-root .reviews {
+  /* width: 100%; */
+  text-align: left;
+  /* display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 5px; */
+}
+
+.restaurant-card-root .reviews span {
+  margin-left: 1.6rem
+}
+
+.restaurant-card-root .icon {
+  font-size: 1.2rem;
+  cursor: pointer;
+  position: absolute;
+  left: 0.8rem;
+  bottom: 1rem;
+}
+
+.restaurant-card-root .icon:hover {
   font-size: 1.3rem;
-  margin-left: 0.8rem;
+  transition: all ease-in-out 100ms;
+  transform:scale(110%);
+}
+
+.restaurant-card-root .links > * {
   cursor: pointer;
 }
 
