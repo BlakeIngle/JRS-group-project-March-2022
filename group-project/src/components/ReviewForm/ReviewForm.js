@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import "./ReviewForm.css";
 import RestaurantSearch from "../Searches/RestaurantSearch";
-import { useLocation } from "react-router";
+import { Navigate, useLocation, useNavigate } from "react-router";
 import { Emojis } from "../../assets/DishIcon";
 import { useApi } from "../../services/api.service";
 import { Context } from "../../App";
@@ -9,6 +9,7 @@ import { Context } from "../../App";
 export default function ReviewForm({ toggleForm, randomDish }) {
   const location = useLocation();
   const api = useApi();
+  const navigate = useNavigate();
   const { state } = useContext(Context);
   const dishName = location.pathname.split("/")[2]?.replaceAll("%20", " ");
 
@@ -24,9 +25,9 @@ export default function ReviewForm({ toggleForm, randomDish }) {
   });
 
   function handleCancel() {
-    // formRef.current.classList.toggle("hidden")
     toggleForm();
     setRestaurantName(null);
+    navigate(`/profile`);
   }
 
   function handleChange(e) {
@@ -38,11 +39,12 @@ export default function ReviewForm({ toggleForm, randomDish }) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    console.log(review);
     api
       .addNewReview(review)
       .then((res) => {
         toggleForm();
+        randomDish && navigate(`/profile`);
+
       })
       .catch((err) => {
         console.error(err);
@@ -55,23 +57,36 @@ export default function ReviewForm({ toggleForm, randomDish }) {
       restaurantId: restaurant.id,
       restaurantName: restaurant.name,
     });
-    // console.log(review);
   }, [restaurant]);
 
   useEffect(() => {
-    api
-      .getDishByName(dishName)
+    if (randomDish) {
+      api
+      .getDishByName(randomDish.name)
       .then((res) => {
         const dish = res.data.dish.id;
         setReview({
           ...review,
           dishId: dish,
         });
-        // console.log(review);
       })
       .catch((err) => {
         console.error(err);
       });
+    } else {
+      api
+        .getDishByName(dishName)
+        .then((res) => {
+          const dish = res.data.dish.id;
+          setReview({
+            ...review,
+            dishId: dish,
+          });
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    }
   }, []);
 
 
@@ -85,7 +100,7 @@ export default function ReviewForm({ toggleForm, randomDish }) {
             <div className="selected-restaurant">
               <div>{restaurantName}</div>
               {restaurant.location.address1 &&
-                <div style={{ fontSize: "0.9rem", filter: "contrast(50%)"}}>{restaurant.location.address1}</div>}
+                <div style={{ fontSize: "0.9rem", filter: "contrast(50%)" }}>{restaurant.location.address1}</div>}
               {/* <span>{Emojis[dishName]}</span> */}
             </div>
             <div className="review-body">
@@ -98,7 +113,7 @@ export default function ReviewForm({ toggleForm, randomDish }) {
                 maxLength={255}
                 value={review.body}
                 onChange={handleChange}
-                ></textarea>
+              ></textarea>
               {/* <input className='text-input' type="text" name="reviewBody"></input> */}
               <div className=" label char-limit">(255 char max)</div>
             </div>
