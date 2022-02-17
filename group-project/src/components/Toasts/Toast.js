@@ -18,7 +18,6 @@ export default function Toast({
   sticky,
   removeToast,
 }) {
-
   const [isLeaving, setIsLeaving] = useState(false);
 
   let icon = faExclamation;
@@ -50,7 +49,11 @@ export default function Toast({
   }
 
   return (
-    <div className={`toast-root ${status} ${sticky && "sticky"} ${isLeaving && 'slide-out'}`}>
+    <div
+      className={`toast-root ${status} ${sticky && "sticky"} ${
+        isLeaving && "slide-out"
+      }`}
+    >
       <FontAwesomeIcon className="icon" size="2x" icon={icon} />
       <div className="summary">{summary || status}</div>
       <div>{message || "..."}</div>
@@ -61,29 +64,4 @@ export default function Toast({
       />
     </div>
   );
-
-  //     return (
-  //       <div className="toast-root warn">
-  //         <FontAwesomeIcon icon={faCheck} />
-  //         <FontAwesomeIcon icon={faInfoCircle} />
-  //         <FontAwesomeIcon icon={faExclamationTriangle} />
-  //         <FontAwesomeIcon icon={faBan} />
-  //         <FontAwesomeIcon icon={faExclamation} />
-
-  //         <span>{message}</span>
-  //       </div>
-  //     );
-  //   }
-
-  //   return (
-  //     <div className="toast-root warn">
-  //       <FontAwesomeIcon icon={faCheck} />
-  //       <FontAwesomeIcon icon={faInfoCircle} />
-  //       <FontAwesomeIcon icon={faExclamationTriangle} />
-  //       <FontAwesomeIcon icon={faBan} />
-  //       <FontAwesomeIcon icon={faExclamation} />
-
-  //       <span>{message}</span>
-  //     </div>
-  //   );
 }

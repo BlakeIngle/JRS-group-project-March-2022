@@ -5,6 +5,7 @@ import "../SignUpPage/LoginSignUp.css";
 import { Context } from "../../App";
 import { useApi } from "../../services/api.service";
 import { useLocalStorage } from "../../services/localStorage.service";
+import { useToasts } from "../Toasts/ToastService";
 
 export default function LoginPage() {
   return (
@@ -24,7 +25,7 @@ export default function LoginPage() {
 
 function LoginForm() {
   var { state, setState } = useContext(Context);
-
+  const toast = useToasts();
   const storage = useLocalStorage();
   const api = useApi();
   const navigate = useNavigate();
@@ -62,9 +63,8 @@ function LoginForm() {
         .catch((err) => {
           console.error(err);
 
-          emailRef.current.classList.add("shake");
-          passwordRef.current.classList.add("shake");
 
+          toast.warn('Email and Password are incorrect!')
           setUser({ email: "", password: "" });
 
           setTimeout(() => {
