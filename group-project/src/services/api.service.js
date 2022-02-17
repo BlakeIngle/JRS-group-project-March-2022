@@ -57,6 +57,7 @@ const api = {
     if (location.latitude && location.longitude) {
       return axios.get(
         `${URL}/restaurants/${dishName}?latitude=${location.latitude}&longitude=${location.longitude}`
+        // `${URL}/restaurants`
       );
     } else {
       // location = 'new york' or 'NYC' or '29470' etc.

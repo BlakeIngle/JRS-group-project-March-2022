@@ -24,6 +24,8 @@ exports.getRestaurantsByQuery = (req, res) => {
   // replace literal value with user's actual location
   const location = "Charleston, SC";
 
+  // console.log(req);
+
   yelp
     .get(
       `/search?term=${name}&location=${location}&categories=restaurants&sort_by=distance`
@@ -57,10 +59,9 @@ exports.getRestaurantsByDish = (req, res) => {
   } else if (location) {
     locationParam = `location=${location}&`;
   }
-
   yelp
     .get(
-      `/search?${locationParam}categories=restaurants&sort_by=distance&limit=50`
+      `/search?term=${dishName}&${locationParam}categories=restaurants&sort_by=distance&limit=50`
     )
     .then((results) => {
       try {

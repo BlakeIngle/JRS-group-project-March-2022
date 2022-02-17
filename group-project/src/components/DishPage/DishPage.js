@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { useParams } from "react-router";
+import { useParams, useLocation } from "react-router";
 import { Emojis } from "../../assets/DishIcon";
 import { useApi } from "../../services/api.service";
 import "../DishPage/Dishes.css";
@@ -7,7 +7,6 @@ import { useGeolocation } from "../../services/geolocation.service";
 import RestaurantCard from "../RestaurantCard/RestaurantCard";
 import ReviewForm from "../ReviewForm/ReviewForm";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-// import RestaurantCard from "../RestaurantCard/RestaurantCard";
 import { faMapMarkerAlt } from "@fortawesome/free-solid-svg-icons";
 import Loader from "../Loader/Loader";
 import { Context } from "../../App";
@@ -18,6 +17,7 @@ export default function DishPage() {
   const api = useApi();
   const getCoordinatesPromise = useGeolocation();
   const { state } = useContext(Context);
+  const location = useLocation();
 
   const [dish, setDish] = useState(null);
   const [restaurants, setRestaurants] = useState([]); // the displayed list
@@ -87,8 +87,8 @@ export default function DishPage() {
   }, [inputText]);
 
   useEffect(() => {
-    setRestaurants(originalResults);
-  }, [originalResults]);
+    getRestaurantsByZipCode(dishName);
+  }, [location.pathname]);
 
   useEffect(() => {
     if (restaurants.length > 0) {
