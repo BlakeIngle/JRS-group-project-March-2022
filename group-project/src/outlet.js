@@ -16,8 +16,8 @@ export default function Outlet() {
     confirmation.ask({
       question: "Are you sure you want to change your password?",
       onLeftButtonClicked: () => {
-        toast.info('You have been redirected to the homepage since you said No!')
-        navigate("/");
+        toast.info('You have been redirected back to the home page')
+        navigate("/profile");
       },
     });
   }, []);
