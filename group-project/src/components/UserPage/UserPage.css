@@ -17,7 +17,7 @@
 .restaurant-card-root .favorite-card-review{
   position: relative;
   width: 50%;
-  height: 15vh;
+  /* height: 15vh; */
   overflow: scroll;
   word-wrap: break-word;
 
@@ -48,50 +48,66 @@
   position: absolute;
   right: 5px;
   top: 5px;
-
+  
   cursor: pointer;
 }
 
+.restaurant-card-root {
+  margin: 0.8rem auto;
+  background-color: lightgray;
+  max-width: 90vw;
+  padding: 0.8rem;
+  border-radius: 8px;
+}
+
 .restaurant-card-root h2 {
-  margin: 0 0 0.5rem;
-  word-wrap: break-word;
+  text-align: left;
+  /* margin: 0 0 0.5rem; */
 }
 
 .restaurant-card-root .top-row {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items: center;
 }
 
 .restaurant-card-root .dish-icon {
   font-size: 1.3rem;
 }
 
-.restaurant-card-root .links > * {
+.restaurant-card-root .reviews {
+  /* width: 100%; */
+  text-align: left;
+  /* display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 5px; */
+}
+
+.restaurant-card-root .reviews span {
+  margin-left: 1.6rem
+}
+
+.restaurant-card-root .icon {
+  font-size: 1.2rem;
+  cursor: pointer;
+  position: absolute;
+  left: 0.8rem;
+  bottom: 1rem;
+}
+
+.restaurant-card-root .icon:hover {
   font-size: 1.3rem;
-  margin-left: .8rem;
+  transition: all ease-in-out 100ms;
+  transform:scale(110%);
+}
+
+.restaurant-card-root .links > * {
   cursor: pointer;
 }
 
-.restaurant-card-root .emoji-icon{
-  position: absolute;
-  left: 0;
-  bottom: 0;
+.restaurant-card-root .agree-icon {
+  text-align: right;
 }
-
-.drop-down .right-icon{
-  position: relative;
-  height: 10vh;
-  width: 30vh;
- 
-  /* display: flex;
-  align-items: center;
-  justify-content: center; */
-
-}
-
-.drop-down .right-icon:active{
-transform: scale(.909);  
-
-}
-
