@@ -11,6 +11,7 @@ import ChangePasswordForm from "./ChangePasswordForm";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Review from "../Review/Review";
 import { useGeolocation } from "../../services/geolocation.service";
+import { ToastProvider, useToasts } from "../Toasts/ToastService";
 
 export default function UserPage() {
   const { dishName } = useParams();
@@ -80,9 +81,9 @@ export default function UserPage() {
   }
 
   useEffect(() => {
-    getCoordinatesPromise.then(async ({ latitude, longitude }) => {
-      await getRestaurantsByLatLong(latitude, longitude);
-      setOriginalResults([])
+    getCoordinatesPromise.then(({ latitude, longitude }) => {
+      getRestaurantsByLatLong(latitude, longitude);
+      setOriginalResults([]);
     });
   }, []);
 
@@ -90,7 +91,6 @@ export default function UserPage() {
     return <p>No user found</p>;
   }
 
-  
   const firstName = state.user.firstName;
   const email = state.user.email;
 
@@ -115,7 +115,9 @@ export default function UserPage() {
       </div>
       <Divider />
       <br />
-      <div className="favorites">{firstName ? firstName : email}'s Favorites:</div>
+      <div className="favorites">
+        {firstName ? firstName : email}'s Favorites:
+      </div>
       {reviews.map((review) => (
         <Review
           key={review.id}

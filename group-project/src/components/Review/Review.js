@@ -1,8 +1,7 @@
 import React from "react";
 import "../UserPage/UserPage.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBan, faMapMarkerAlt } from "@fortawesome/free-solid-svg-icons";
-import { useLocation } from "react-router";
+import { faMapMarkerAlt, faTimes } from "@fortawesome/free-solid-svg-icons";
 import { Emojis } from "../../assets/DishIcon";
 
 export default function Review({
@@ -29,10 +28,10 @@ export default function Review({
   //   // console.log("Long:" + position.coords.longitude);
   // }
 
-  const location = useLocation();
+  // const location = useLocation();
 
-  const { city, country, state, address1, address2, address3, zip_code } =
-    location;
+  // const { city, country, state, address1, address2, address3, zip_code } =
+  //   location;
 
   const googleUrl = "https://www.google.com/maps/search/" + restaurantName;
 
@@ -63,7 +62,7 @@ export default function Review({
           </a>
           <FontAwesomeIcon
             className="delete-favorite"
-            icon={faBan}
+            icon={faTimes}
             onClick={() => {
               deleteReviewCard(id);
             }}

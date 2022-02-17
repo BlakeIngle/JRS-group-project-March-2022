@@ -9,6 +9,7 @@ import { createContext, useState, useEffect } from "react";
 import { useLocalStorage } from "./services/localStorage.service";
 import UserPage from "./components/UserPage/UserPage";
 import DishSearch from "./components/Searches/DishSearch";
+import { ToastProvider } from "./components/Toasts/ToastService";
 
 export var Context = createContext();
 
@@ -38,23 +39,25 @@ function App() {
     >
       <div className="App">
         <BrowserRouter>
-          <Routes>
-            <Route path="" element={<HomePage />}>
-              <Route path="/" element={<DishSearch />}></Route>
-              <Route path="dish/:dishName" element={<DishPage />}></Route>
-              <Route path="login" element={<LoginPage />}></Route>
+          <ToastProvider>
+            <Routes>
+              <Route path="" element={<HomePage />}>
+                <Route path="/" element={<DishSearch />}></Route>
+                <Route path="dish/:dishName" element={<DishPage />}></Route>
+                <Route path="login" element={<LoginPage />}></Route>
+                <Route
+                  path="review/:reviewId"
+                  element={<RestaurantCard />}
+                ></Route>
+                <Route path="signup" element={<SignUpPage />}></Route>
+                <Route path="profile" element={<UserPage />}></Route>
+              </Route>
               <Route
-                path="review/:reviewId"
-                element={<RestaurantCard />}
+                path="*"
+                element={<div>404 - page does not exist</div>}
               ></Route>
-              <Route path="signup" element={<SignUpPage />}></Route>
-              <Route path="profile" element={<UserPage />}></Route>
-            </Route>
-            <Route
-              path="*"
-              element={<div>404 - page does not exist</div>}
-            ></Route>
-          </Routes>
+            </Routes>
+          </ToastProvider>
         </BrowserRouter>
       </div>
     </Context.Provider>

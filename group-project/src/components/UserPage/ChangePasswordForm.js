@@ -1,10 +1,13 @@
 import { Button, Divider, TextField } from "@mui/material";
 import React, { useState } from "react";
+import Outlet from "../../outlet";
 import { useApi } from "../../services/api.service";
+import { ConfirmationProvider } from "../ConfirmDialog/ConfirmConfirmationService";
+import { ToastProvider, useToasts } from "../Toasts/ToastService";
 
 export default function ChangePasswordForm({ user, close }) {
   const http = useApi();
-
+  const toast = useToasts()
   const [inputs, setInputs] = useState({
     currentPassword: "",
     newPassword: "",
@@ -25,7 +28,6 @@ export default function ChangePasswordForm({ user, close }) {
 
   function handleSubmit(e) {
     e.preventDefault();
-
     if (inputs.newPassword === inputs.confirmPassword) {
       // they match now
       // send a req to API - send current and new
@@ -34,7 +36,7 @@ export default function ChangePasswordForm({ user, close }) {
         .then((results) => {
           //    on success -> give notification that password was updated
           // password changed
-          alert("Your password was updated");
+          toast.success('Password has been updated!')
           setInputs({
             currentPassword: "",
             newPassword: "",
@@ -45,7 +47,11 @@ export default function ChangePasswordForm({ user, close }) {
         .catch((err) => {
           //    on fail -> give error notification
           console.error(err.response);
+          toast.error('Password did not update!')
         });
+    }
+    if (inputs.newPassword !== inputs.confirmPassword) {
+      toast.error('New Passwords do not match!')
     }
   }
 
@@ -87,7 +93,15 @@ export default function ChangePasswordForm({ user, close }) {
           Save
         </Button>
         <Divider />
+        <ToastProvider>
+          <ConfirmationProvider>
+            <Outlet />
+          </ConfirmationProvider>
+        </ToastProvider>
       </div>
     </form>
   );
 }
+
+
+
