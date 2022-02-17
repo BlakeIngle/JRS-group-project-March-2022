@@ -34,19 +34,19 @@ export function useToasts() {
   return {
     success: (message, summary) => {
       let status = "success";
-      addToast({ message, summary, status, sticky: true });
+      addToast({ message, summary, status, sticky: false });
     },
     error: (message, summary) => {
       let status = "error";
-      addToast({ message, summary, status, sticky: true });
+      addToast({ message, summary, status, sticky: false });
     },
     warn: (message, summary) => {
       let status = "warn";
-      addToast({ message, summary, status, sticky: true });
+      addToast({ message, summary, status, sticky: false });
     },
     info: (message, summary) => {
       let status = "info";
-      addToast({ message, summary, status, sticky: true });
+      addToast({ message, summary, status, sticky: false });
     },
     add: ({ message, summary, status, sticky, position }) => {
       if (!message) {
