@@ -118,13 +118,16 @@ export default function UserPage() {
       <div className="favorites">
         {firstName ? firstName : email}'s Favorites:
       </div>
+      <div className="reviews-container">
+
       {reviews.map((review) => (
-        <Review
-          key={review.id}
-          {...review}
-          deleteReviewCard={deleteReviewCard}
+        <Review 
+        key={review.id}
+        {...review}
+        deleteReviewCard={deleteReviewCard}
         />
-      ))}
+        ))}
+        </div>
       <br />
       <br />
       <div className="editInformation">

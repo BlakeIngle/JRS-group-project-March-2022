@@ -45,19 +45,15 @@ export default function Review({
   return (
     <div className="restaurant-card-root">
       <div className="top-row">
-        <span>
-          <h2>{restaurantName}</h2>
-        </span>
-        {/* <span>{total_favorites || 0}</span> */}
-        <span className="favorite-card-review"> {body}</span>
-        <span className="links">
+        <h2>{Emojis[dish]}{restaurantName}</h2>
+        <div className="links">
           <a onClick={handleClick}>
             <FontAwesomeIcon icon={faMapMarkerAlt} />
           </a>
-          <a style={{ marginRight: "1rem" }} onClick={handleYelpClick}>
+          <a onClick={handleYelpClick}>
             <img
               src="https://i.postimg.cc/d1QLsskm/yelp-logo-cmyk.png"
-              height="15"
+              height="20px"
             />
           </a>
           <FontAwesomeIcon
@@ -67,9 +63,14 @@ export default function Review({
               deleteReviewCard(id);
             }}
           />
-          <span className="emoji-icon">{Emojis[dish]}</span>
-        </span>
+        </div>
       </div>
+      {body &&
+        <div className="favorite-card-review">
+          <div>Your review:</div>
+          <div>"{body}"</div>
+        </div>
+      }
     </div>
   );
 }

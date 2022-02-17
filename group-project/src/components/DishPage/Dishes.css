@@ -44,7 +44,7 @@
     width: 8rem;
 }
 
-.dish-page-options .add-review-btn {
+.dish-page-root .dish-page-options .add-review-btn {
     color: #eee;
     background-color: #333;
     padding: 0.4rem 0.8rem;
@@ -53,7 +53,7 @@
     /* transition: all 200ms; */
 }
 
-.dish-page-options .add-review-btn:hover {
+.dish-page-root .dish-page-options .add-review-btn:hover {
     color: #fff;
     background-color: #444;
     /* transition: all 200ms; */
@@ -75,8 +75,8 @@
 
 .restaurant-list {
     width: 90vw;
-    margin: auto;
     max-width: 800px;
+    margin: auto;
 }
 
 .dish-container {

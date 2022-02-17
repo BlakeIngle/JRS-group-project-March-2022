@@ -1,26 +1,45 @@
-.restaurant-card-root {
-  margin: 0.8rem auto;
-  background-color: lightgray;
-  /* width: 700px; */
-  max-width: 90vw;
-  padding: 0.8rem;
-  border-radius: 8px;
-
-  position: relative;
+.user-page-root .reviews-container {
+  width: 90vw;
+  max-width: 900px;
+  margin: auto;
 }
 
-.restaurant-card-root:hover {
+.user-page-root .restaurant-card-root {
+  /* width: 90vw; */
+  /* max-width: 600px; */
+  padding: 0.8rem;
+  margin: 0.8rem auto;
+  border-radius: 8px;
+  position: relative;
+  background-color: lightgray;
+  max-width: 90vw;
+  border-radius: 8px;
+}
+
+.user-page-root .restaurant-card-root:hover {
   transform: scale(1.01);
   box-shadow: 0 4px 10px 0 rgba(163, 162, 162, 0.2);
 }
 
-.restaurant-card-root .favorite-card-review{
-  position: relative;
-  width: 50%;
-  /* height: 15vh; */
-  overflow: scroll;
-  word-wrap: break-word;
+.user-page-root .restaurant-card-root h2 {
+  margin: 0;
+  font-size: 1.3rem;
+  text-align: left;
+}
 
+.user-page-root .restaurant-card-root .favorite-card-review{
+  text-align: left;
+  margin-top: 0.5rem;
+  /* max-height: fit-content; */
+  overflow: auto;
+  /* word-wrap: break-word; */
+  height: fit-content;
+}
+
+.user-page-root .restaurant-card-root .favorite-card-review > :nth-child(2){
+  margin-top: 0.2rem;
+  background-color: rgba(255, 255, 255, 0.87);
+  padding: 0.3rem;
 }
 
 .user-page-root .top-section {
@@ -29,7 +48,7 @@
   justify-content: space-between;
   align-items: center;
   gap: 10px;
-  padding: 1rem 1.5rem;
+  padding: 0 1.5rem;
 }
 
 .user-page-root .top-section {
@@ -44,70 +63,49 @@
 
 .user-page-root .restaurant-card-root .top-row .delete-favorite {
   color: red;
-  font-size: small;
-  position: absolute;
+  font-size: 1.2rem;
+  /* position: absolute;
   right: 5px;
-  top: 5px;
-  
+  top: 5px; */
   cursor: pointer;
 }
 
-.restaurant-card-root {
-  margin: 0.8rem auto;
-  background-color: lightgray;
-  max-width: 90vw;
-  padding: 0.8rem;
-  border-radius: 8px;
-}
-
-.restaurant-card-root h2 {
-  text-align: left;
-  /* margin: 0 0 0.5rem; */
-}
-
-.restaurant-card-root .top-row {
+.user-page-root .restaurant-card-root .top-row {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
+  gap: 20px;
 }
 
-.restaurant-card-root .dish-icon {
+.user-page-root .restaurant-card-root .dish-icon {
   font-size: 1.3rem;
 }
 
-.restaurant-card-root .reviews {
-  /* width: 100%; */
-  text-align: left;
-  /* display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: center;
-  gap: 5px; */
-}
-
-.restaurant-card-root .reviews span {
-  margin-left: 1.6rem
-}
-
-.restaurant-card-root .icon {
+/* .user-page-root .restaurant-card-root .icon {
   font-size: 1.2rem;
   cursor: pointer;
   position: absolute;
   left: 0.8rem;
   bottom: 1rem;
-}
+} */
 
-.restaurant-card-root .icon:hover {
+.user-page-root .restaurant-card-root .icon:hover {
   font-size: 1.3rem;
   transition: all ease-in-out 100ms;
   transform:scale(110%);
 }
 
-.restaurant-card-root .links > * {
-  cursor: pointer;
+.user-page-root .restaurant-card-root .links {
+  font-size: 1rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.6rem;
+  /* margin-left: 10px; */
 }
 
-.restaurant-card-root .agree-icon {
-  text-align: right;
+.user-page-root .restaurant-card-root .links > * {
+  cursor: pointer;
 }
