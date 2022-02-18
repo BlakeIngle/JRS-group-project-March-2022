@@ -12,12 +12,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Review from "../Review/Review";
 
 export default function UserPage() {
-  
   const [isChangePasswordOpen, setIsChangePasswordOpen] = useState(false);
-  
+
   const [reviews, setReviews] = useState([]);
   const api = useApi();
-  
+
   const { state, setState } = useContext(Context);
   const navigate = useNavigate();
   const storage = useLocalStorage();
@@ -58,7 +57,7 @@ export default function UserPage() {
   useEffect(() => {
     if (state.user) {
       getReviews();
-    } 
+    }
   }, [state.user]);
 
   if (!state.user) {
@@ -92,32 +91,42 @@ export default function UserPage() {
         {firstName ? firstName : email}'s Favorites:
       </div>
       <div className="reviews-container">
-        {reviews.map(r => <Review key={r.id} {...r} name={r.restaurantName} deleteReviewCard={deleteReviewCard} />)}
+        {reviews.map((r) => (
+          <Review
+            key={r.id}
+            {...r}
+            name={r.restaurantName}
+            deleteReviewCard={deleteReviewCard}
+          />
+        ))}
       </div>
       <br />
       <br />
       <div className="editInformation">
         <Divider />
-        <h4 style={{ display: "flex", textDecoration: "underline" }}>
+        <h4 style={{ textAlign: "center", textDecoration: "underline" }}>
           Profile Information
         </h4>
-
-        <TextField
-          disabled
-          label="First Name"
-          defaultValue={firstName}
-          type="text"
-          variant="outlined"
-          sx={{ display: "flex", marginTop: "1rem" }}
-        />
-        <TextField
-          disabled
-          label="Email"
-          defaultValue={email}
-          type="email"
-          variant="outlined"
-          sx={{ display: "flex", marginTop: "1rem" }}
-        />
+        <div className="profile-info">
+          <TextField
+            className="first-name"
+            disabled
+            label="First Name"
+            defaultValue={firstName}
+            type="text"
+            variant="outlined"
+            sx={{ display: "flex", marginTop: "1rem" }}
+          />
+          <TextField
+            className="email"
+            disabled
+            label="Email"
+            defaultValue={email}
+            type="email"
+            variant="outlined"
+            sx={{ display: "flex", marginTop: "1rem" }}
+          />
+        </div>
 
         <div className="drop-down">
           <br />
@@ -137,7 +146,6 @@ export default function UserPage() {
             />
           )}
         </div>
-
 
         <Button
           variant="contained"

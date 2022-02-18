@@ -1,8 +1,6 @@
 import { Button, Divider, TextField } from "@mui/material";
 import React, { useState } from "react";
-import Outlet from "../../outlet";
 import { useApi } from "../../services/api.service";
-import { ConfirmationProvider } from "../ConfirmDialog/ConfirmConfirmationService";
 import { ToastProvider, useToasts } from "../Toasts/ToastService";
 
 export default function ChangePasswordForm({ user, close }) {
@@ -92,12 +90,8 @@ export default function ChangePasswordForm({ user, close }) {
         <Button variant="contained" type="submit">
           Save
         </Button>
-        <Divider />
-        <ToastProvider>
-          <ConfirmationProvider>
-            <Outlet />
-          </ConfirmationProvider>
-        </ToastProvider>
+      
+
       </div>
     </form>
   );

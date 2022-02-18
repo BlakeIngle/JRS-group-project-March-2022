@@ -55,10 +55,15 @@
   margin: 0;
 }
 
+.user-page-root .top-section .welcome{
+  text-transform: uppercase;
+}
+
 .user-page-root .favorites {
   font-size: larger;
   font-weight: bold;
   text-decoration: underline;
+  text-align: center;
 }
 
 .user-page-root .restaurant-card-root .top-row .delete-favorite {
@@ -109,3 +114,18 @@
 .user-page-root .restaurant-card-root .links > * {
   cursor: pointer;
 }
+
+
+.user-page-root .editInformation .profile-info{
+
+  display: inline-block;
+  align-items: center;
+  justify-content: center;
+
+  width: 60%;
+  }
+
+  .user-page-root .editInformation .right-icon{
+    width: 7rem;
+    height: 3rem;
+  }
