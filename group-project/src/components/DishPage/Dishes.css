@@ -1,0 +1,139 @@
+.search {
+    position: relative;
+}
+
+.search-bar {
+    position: fixed;
+    left: 0;
+    right: 0;
+    background-color: white;
+}
+
+.search input{
+    width: 50vw;
+    max-width: 350px;
+    margin: 0.5rem;
+    outline: none;
+    padding: 0.3rem;
+    font-size: 1rem;
+    vertical-align: middle;
+}
+
+.dish-page-root {
+    max-width: 800px;
+    margin: auto;
+}
+
+
+.dish-page-root .dish-name {
+    text-transform: capitalize;
+    font-weight: 700;
+    font-size: 1.6rem;
+    margin: 1rem;
+}
+
+.dish-page-root .dish-name span {
+    margin: 0 0.2rem;
+}
+
+.dish-page-root a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.dish-page-root hr {
+    max-width: 90vw;
+}
+
+.dish-page-options {
+    width: 100%;
+    max-width: 650px;
+    margin: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content:space-evenly;
+    align-items: center;
+}
+
+.dish-page-options .search-input {
+    font-size: 1.3rem;
+}
+
+.dish-page-options .search-input input {
+    font-size: 1rem;
+    margin-left: 5px;
+    padding: 0.2rem;
+    width: 15rem;
+    max-width: 50vw;
+}
+
+.dish-page-root .dish-page-options .add-review-btn {
+    color: #eee;
+    background-color: #333;
+    padding: 0.4rem 0.8rem;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.dish-page-root .dish-page-options .add-review-btn:hover {
+    color: #fff;
+    background-color: #444;
+}
+
+.search .icon {
+    font-size: 1.2rem;
+    vertical-align: middle;
+    opacity: 50%;
+}
+
+.restaurant-list {
+    width: 90vw;
+    max-width: 800px;
+    height: 70vh;
+    margin: auto;
+    overflow: auto;
+}
+
+.dish-container {
+    columns: 2;
+    padding: 3rem 1rem 1rem;
+    text-align: left;
+    margin: auto;
+    margin-bottom: 3rem;
+    justify-content: flex-start;
+    align-items:stretch;
+    width: 80vw;
+    overflow: auto;
+}
+
+.dish-container a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.dish-item {
+    font-size: 1.5rem;
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+.dish-item:hover {
+    background-color: aliceblue;
+}
+
+.placeholder-text {
+    font-size: 1.4rem;
+    color: #00000098;;
+}
+
+@media screen and (min-width: 700px) {
+    .dish-container {
+        columns: 3;
+        column-width: auto;
+    }
+
+    .dish-name {
+        font-size: 2.6rem;
+    }
+
+}

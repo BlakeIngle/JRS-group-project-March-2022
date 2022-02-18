@@ -1,35 +1,96 @@
-import React from 'react';
-import './RestaurantCard.css'
-import dishIcons from '../../assets/dishEmoji.json'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faExternalLinkAlt, faMapMarkerAlt, faThumbsUp } from '@fortawesome/free-solid-svg-icons';
+import React, { useContext, useState } from "react";
+import "./RestaurantCard.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faExternalLinkAlt,
+  faMapMarkerAlt,
+  faThumbsUp,
+} from "@fortawesome/free-solid-svg-icons";
+import { Context } from "../../App";
+import { useApi } from "../../services/api.service";
+import { useNavigate } from "react-router";
 
-export default function RestaurantCard(review) {
+export default function RestaurantCard({
+  id,
+  name,
+  location,
+  url,
+  total_favorites,
+}) {
+  const api = useApi();
+  const navigate = useNavigate();
 
-  review = {
-    userId: "1",
-    userName: "Greg",
-    body: "It's simply the best, better than all the rest",
-    restaurantId: "fd7843wnk393",
-    restaurantName: "Poe's Tavern",
-    dishId: 1,
-  };
+  const { state, setState } = useContext(Context);
 
-  const dishIcon = dishIcons[review.dishId - 1].emoji;
+  const [review, setReview] = useState({
+    dishId: "",
+    restaurantId: "",
+    userId: state.user?.id,
+    body: "",
+    restaurantName: "",
+  });
+
+  var googleUrl = "";
+  if (location) {
+    const { city, stateName, address1, address2, address3, zip_code } =
+      location;
+    googleUrl = `https://www.google.com/maps/place/${
+      address1 ? address1 + "," : ""
+    }${address2 ? address2 + "," : ""}${address3 ? address3 + "," : ""}${
+      city ? city + "," : ""
+    }${stateName ? stateName + "," : ""}${zip_code ? zip_code : ""}`;
+  }
+
+  function submitReview() {
+    setReview({
+      ...review,
+      restaurantId: id,
+      restaurantName: name,
+    });
+    api
+      .addNewReview(review)
+      .then((res) => {
+        // toggleForm();
+        navigate(`/profile`);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }
 
   return (
-    <div className='restaurant-card-root'>
-      <div className='top-row'>
-        <span className='dish-icon'>{dishIcon}</span>
-        <span><h2>{review.restaurantName}</h2></span>
-        <span className='links'>
-          <FontAwesomeIcon icon={faMapMarkerAlt} />
-          <FontAwesomeIcon icon={faExternalLinkAlt} />
+    <div className="restaurant-card-root">
+      <div className="top-row">
+        <span>
+          <h2>{name}</h2>
+        </span>
+        <span className="links">
+          {googleUrl && (
+            <a href={googleUrl} target="_blank" rel="noopener noreferrer">
+              <FontAwesomeIcon className="icon" icon={faMapMarkerAlt} />
+            </a>
+          )}
+          {url && (
+            <a href={url || "#"} target="_blank" rel="noopener noreferrer">
+              <img
+                className="icon"
+                src="https://i.postimg.cc/d1QLsskm/yelp-logo-cmyk.png"
+                height="20px"
+              />
+            </a>
+          )}
         </span>
       </div>
-
-      <p>{review.userName} says: "{review.body}"</p>
-      <div className='agree-icon'><FontAwesomeIcon icon={faThumbsUp} />
+      <div className="reviews">
+        <FontAwesomeIcon
+          className="icon"
+          // icon={faThumbsUp}
+          icon={faThumbsUp}
+          onClick={() => {
+            submitReview();
+          }}
+        />
+        <span>{total_favorites || 0}</span>
       </div>
     </div>
   );

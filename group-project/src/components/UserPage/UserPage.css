@@ -1,0 +1,131 @@
+.user-page-root .reviews-container {
+  width: 90vw;
+  max-width: 900px;
+  margin: auto;
+}
+
+.user-page-root .restaurant-card-root {
+  /* width: 90vw; */
+  /* max-width: 600px; */
+  padding: 0.8rem;
+  margin: 0.8rem auto;
+  border-radius: 8px;
+  position: relative;
+  background-color: lightgray;
+  max-width: 90vw;
+  border-radius: 8px;
+}
+
+.user-page-root .restaurant-card-root:hover {
+  transform: scale(1.01);
+  box-shadow: 0 4px 10px 0 rgba(163, 162, 162, 0.2);
+}
+
+.user-page-root .restaurant-card-root h2 {
+  margin: 0;
+  font-size: 1.3rem;
+  text-align: left;
+}
+
+.user-page-root .restaurant-card-root .favorite-card-review{
+  text-align: left;
+  margin-top: 0.5rem;
+  /* max-height: fit-content; */
+  overflow: auto;
+  /* word-wrap: break-word; */
+  height: fit-content;
+}
+
+.user-page-root .restaurant-card-root .favorite-card-review > :nth-child(2){
+  margin-top: 0.2rem;
+  background-color: rgba(255, 255, 255, 0.87);
+  padding: 0.3rem;
+}
+
+.user-page-root .top-section {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  padding: 0 1.5rem;
+}
+
+.user-page-root .top-section {
+  margin: 0;
+}
+
+.user-page-root .top-section .welcome{
+  text-transform: uppercase;
+}
+
+.user-page-root .favorites {
+  font-size: larger;
+  font-weight: bold;
+  text-decoration: underline;
+  text-align: center;
+}
+
+.user-page-root .restaurant-card-root .top-row .delete-favorite {
+  color: red;
+  font-size: 1.2rem;
+  /* position: absolute;
+  right: 5px;
+  top: 5px; */
+  cursor: pointer;
+}
+
+.user-page-root .restaurant-card-root .top-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.user-page-root .restaurant-card-root .dish-icon {
+  font-size: 1.3rem;
+}
+
+/* .user-page-root .restaurant-card-root .icon {
+  font-size: 1.2rem;
+  cursor: pointer;
+  position: absolute;
+  left: 0.8rem;
+  bottom: 1rem;
+} */
+
+.user-page-root .restaurant-card-root .icon:hover {
+  font-size: 1.3rem;
+  transition: all ease-in-out 100ms;
+  transform:scale(110%);
+}
+
+.user-page-root .restaurant-card-root .links {
+  font-size: 1rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.6rem;
+  /* margin-left: 10px; */
+}
+
+.user-page-root .restaurant-card-root .links > * {
+  cursor: pointer;
+}
+
+
+.user-page-root .editInformation .profile-info{
+
+  display: inline-block;
+  align-items: center;
+  justify-content: center;
+
+  width: 60%;
+  }
+
+  .user-page-root .editInformation .right-icon{
+    width: 7rem;
+    height: 3rem;
+  }

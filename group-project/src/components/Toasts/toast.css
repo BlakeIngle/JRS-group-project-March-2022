@@ -1,0 +1,133 @@
+.toast-root {
+  position: relative;
+  width: 18rem;
+  text-align: left;
+  padding: 0.5rem 1.5rem 0.5rem 3.5rem;
+}
+
+.toast-root .icon {
+  position: absolute;
+  top: 0.5rem;
+  left: 0.5rem;
+}
+
+.toast-root .summary {
+  font-weight: bolder;
+  text-transform: capitalize;
+}
+
+.toast-root .x-button {
+  position: absolute;
+  top: 0.25rem;
+  right: 0.5rem;
+  cursor: pointer;
+}
+
+.toast-root.success {
+  background-color: rgba(108, 206, 83, 0.57);
+  color: rgb(1, 85, 1);
+}
+
+.toast-root.info {
+  background-color: rgba(83, 163, 206, 0.57);
+  color: rgb(2, 31, 146);
+}
+
+.toast-root.warn {
+  background-color: rgba(219, 241, 18, 0.755);
+  color: rgb(88, 94, 3);
+}
+
+.toast-root.error {
+  background-color: rgba(206, 83, 83, 0.892);
+  color: rgb(146, 2, 2);
+  
+}
+
+.toast-root.default {
+  background-color: rgba(206, 83, 206, 0.515);
+  color: rgb(146, 2, 146);
+}
+
+/* animations for sticky / non-stick toasts */
+.toast-root {
+  animation-name: fade-in-out, slide-in-out;
+  animation-duration: 3000ms;
+  animation-timing-function: ease;
+}
+
+.toast-root.sticky {
+  animation-name: fade-in, slide-in;
+}
+.toast-root.sticky.slide-out {
+  animation-name: slide-out;
+  animation-duration: 1000ms;
+}
+
+@keyframes fade-in-out {
+  0% {
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  70% {
+    opacity: 1;
+  }
+  98% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+}
+
+@keyframes slide-in-out {
+  0% {
+    transform: translateX(100%);
+  }
+  10% {
+    transform: translateX(0px);
+  }
+  70% {
+    transform: translateX(0px);
+  }
+  98% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes slide-in {
+  0% {
+    transform: translateX(100%);
+  }
+  10% {
+    transform: translateX(0px);
+  }
+}
+
+@keyframes slide-out {
+  0% {
+    transform: translateX(0px);
+  }
+  70% {
+    transform: translateX(200%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(200%);
+    opacity: 1;
+  }
+}

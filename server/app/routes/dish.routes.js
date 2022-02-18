@@ -5,7 +5,9 @@ module.exports = (app) => {
 
   app.get("/api/dishes/search", dishes.getDishesByQuery);
 
-  app.get("/api/dishes/:dishId", dishes.getDishById);
+  // app.get("/api/dishes/:dishId", dishes.getDishById);
+
+  app.get("/api/dishes/:dishName", dishes.getDishByName);
 
   app.get("/api/dishes/zip/:location", dishes.getDishByLocation);
   app.get("/api/restaurants/:location/:name", dishes.getRestaurant);

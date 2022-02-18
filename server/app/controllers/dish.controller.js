@@ -21,8 +21,27 @@ exports.getAllDishes = (req, res) => {
 exports.getDishById = (req, res) => {
   const { dishId } = req.params;
 
-  const query = `SELECT * FROM dishes WHERE id = ?;`;
+  const query = `SELECT * FROM dishes.dish WHERE id = ?;`;
   const placeholders = [dishId];
+
+  db.query(query, placeholders, (err, results) => {
+    if (err) {
+      res.status(500).send({ error: err, message: "Error retrieving dish." });
+    } else {
+      if (results.length == 0) {
+        res.status(404).send({ message: "No dish found." });
+      } else {
+        res.send({ dish: results[0] });
+      }
+    }
+  });
+};
+
+exports.getDishByName = (req, res) => {
+  const { dishName } = req.params;
+
+  const query = `SELECT * FROM dishes.dish WHERE name = ?;`;
+  const placeholders = [dishName];
 
   db.query(query, placeholders, (err, results) => {
     if (err) {

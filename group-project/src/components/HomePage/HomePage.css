@@ -1,0 +1,75 @@
+.header-root {
+    background-color: #333;
+    color: #fff;
+
+    height: 2.2rem;
+    padding: 0.5rem;
+    max-width: 100vw;
+    position: sticky;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 2;
+
+    display: flex;
+    flex-direction: row;
+    align-items:center;
+    justify-content: space-between;
+}
+
+.header-root .logo {
+    height: 2rem;
+    vertical-align: middle;
+    margin: 0.4rem;
+}
+
+.header-root .app-name {
+    text-align: left;
+    font-size: 1.4rem;
+    font-weight: bold;
+    vertical-align: middle;
+}
+
+.header-root a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.header-root .user-options {
+    cursor: pointer;
+    border: solid #aaa 1px;
+    padding: 0.3rem 0.8rem;
+    border-radius: 4px;
+}
+
+.header-root .user-options .icon {
+    cursor: pointer;
+    font-size: 1.2rem;
+}
+
+.header-root .user-options:hover {
+    background-color: #fff;
+    color: #333;
+}
+
+.footer-root {
+    position: fixed;
+    bottom: -3rem;
+    left: 0;
+    right: 0;
+
+    background-color: #333;
+    color: #fff;
+    height: 2rem;
+    padding: 0.5rem 1rem;
+    font-size: 1.5rem;
+}
+
+.footer-root.visible {
+    bottom: 0;
+    transition: all 1s ease;
+}
+
+.footer-root .icon {
+    cursor: pointer;
+}

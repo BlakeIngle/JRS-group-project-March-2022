@@ -1,177 +1,246 @@
-const db = require('../index');
+const db = require("../index");
 const jwt = require("jsonwebtoken");
-const bcrypt = require('bcrypt');
+const { v4: uuid } = require("uuid");
+const bcrypt = require("bcrypt");
 const saltRounds = 10;
 
 exports.getUserById = (req, res) => {
+  const { userId } = req.params;
 
-    const { userId } = req.params;
-
-    const query = `SELECT user.userId, user.email, user.password, 
-                        user.username 
+  const query = `SELECT user.id, user.email, user.password, 
+                        user.firstName 
                     FROM user
-                    WHERE user.userId = ? ;`;
+                    WHERE user.id = ? ;`;
 
-    const placeholders = [userId];
+  const placeholders = [userId];
 
-    db.query(query, placeholders, (err, results) => {
-        if (err) {
-            res.status(500)
-                .send({ error: err, message: "Error retrieving user." })
-        } else {
-            if (results.length == 0) {
-                res.status(404)
-                    .send({ message: "No user found." });
-            } else {
-                var user = results[0];
-                res.send({ user });
-            }
-        }
-    });
-}
+  db.query(query, placeholders, (err, results) => {
+    if (err) {
+      res.status(500).send({ error: err, message: "Error retrieving user." });
+    } else {
+      if (results.length == 0) {
+        res.status(404).send({ message: "No user found." });
+      } else {
+        var user = results[0];
+        res.send({ user });
+      }
+    }
+  });
+};
+
+exports.getUserByEmail = (req, res) => {
+  const { email } = req.params;
+  const query = `SELECT user.id, user.email, user.password, user.firstName
+                    FROM dishes.user
+                    WHERE user.email = ? ;`;
+
+  const placeholders = [email];
+
+  db.query(query, placeholders, (err, results) => {
+    if (err) {
+      res.status(500).send({ error: err, message: "Error retrieving user." });
+    } else {
+      if (results.length == 0) {
+        res.status(404).send({ message: "No user found." });
+      } else {
+        var user = results[0];
+        res.send({
+          user,
+        });
+      }
+    }
+  });
+};
 
 exports.registerUser = async (req, res) => {
+  const { email, password, firstName } = req.body;
 
-    const { id, email, password, username } = req.body;
+  if (!(email && password)) {
+    res.status(404).send({ message: "invalid input" });
+  }
 
-    if (!(email && password)) {
-        res.status(404)
-            .send({ message: "invalid input" })
-    };
-
-    const query = `INSERT INTO dishes.user (id, email, password, username)
+  const query = `INSERT INTO dishes.user (id, email, password, firstName)
                     VALUES (?, ?, ?, ?);`;
 
-    const encryptedPassword = await bcrypt.hash(password, saltRounds);
+  const encryptedPassword = await bcrypt.hash(password, saltRounds);
 
-    const placeholders = [id, email, encryptedPassword, username];
+  var id = uuid();
+  const placeholders = [id, email, encryptedPassword, firstName];
 
-    db.query(query, placeholders, (err, results) => {
-        if (err) {
-            res.status(500)
-                .send({ error: err, message: "Error adding new user." })
-        } else {
-            // password and email with match. Row was just created
-            login(req, res);
-        }
-    });
-}
+  db.query(query, placeholders, (err, results) => {
+    if (err) {
+      res.status(500).send({ error: err, message: "Error adding new user." });
+    } else {
+      // password and email with match. Row was just created
+      this.login(req, res);
+    }
+  });
+};
 
 exports.login = (req, res) => {
+  const { email, password } = req.body;
 
-    const { email, password } = req.body;
-
-    const query = `SELECT * FROM user
+  const query = `SELECT * FROM dishes.user
                     WHERE email = ?;`;
 
-    const placeholders = [email];
+  const placeholders = [email];
 
-    db.query(query, placeholders, async (err, results) => {
-        if (err) {
-            res.status(500).send({
-                error: err,
-                message: "Error loging in."
-            })
-        } else {
-            if (results.length == 0) {
-                res.status(404).send({
-                    message: "Email or Password was incorrect."
-                });
-                return;
-            } else {
-                // logic
-                const passwordMatched = await bcrypt.compare(password, results[0].password);
+  db.query(query, placeholders, async (err, results) => {
+    if (err) {
+      res.status(500).send({
+        error: err,
+        message: "Error logging in.",
+      });
+    } else {
+      if (results.length == 0) {
+        res.status(404).send({
+          message: "Email or Password was incorrect.",
+        });
+        return;
+      } else {
+        // logic
+        const passwordMatched = await bcrypt.compare(
+          password,
+          results[0].password
+        );
 
-                if (passwordMatched) {
-                    // password correct
-                    var user = results[0];
+        if (passwordMatched) {
+          // password correct
+          var user = results[0];
 
-                    const token = jwt.sign(
-                        { userId: user.id, email: user.email },
-                        process.env.TOKEN_KEY,
-                        {
-                            expiresIn: "2h",
-                        }
-                    );
-                    // save user token
-                    user.token = token;
-
-                    res.send({ user });
-                } else {
-                    // password incorrect
-                    res.status(401).send({
-                        message: "Email or Password was incorrect."
-                    });
-                }
+          const token = jwt.sign(
+            { userId: user.id, email: user.email },
+            process.env.TOKEN_KEY,
+            {
+              expiresIn: "2h",
             }
+          );
+          // save user token
+          user.token = token;
+
+          res.send({ user });
+        } else {
+          // password incorrect
+          res.status(401).send({
+            message: "Email or Password was incorrect.",
+          });
         }
-    });
-}
+      }
+    }
+  });
+};
 
 exports.updateUserById = (req, res) => {
+  const { userId } = req.params;
 
-    const { userId } = req.params;
+  const pairs = Object.entries(req.body);
 
-    const pairs = Object.entries(req.body);
+  var setsString = "";
+  var isStarted = false;
+  const placeholders = [];
 
-    var setsString = '';
-    var isStarted = false;
-    const placeholders = [];
-
-    for (let i = 0; i < pairs.length; i++) {
-        let [key, value] = pairs[i];
-        if (key === 'id') {
-            continue;
-        }
-        setsString += `${isStarted ? ',' : ''} ?? = ? `
-        isStarted = true;
-        placeholders.push(key, value);
+  for (let i = 0; i < pairs.length; i++) {
+    let [key, value] = pairs[i];
+    if (key === "id") {
+      continue;
     }
+    setsString += `${isStarted ? "," : ""} ?? = ? `;
+    isStarted = true;
+    placeholders.push(key, value);
+  }
 
-    var query = `UPDATE user
+  var query = `UPDATE user
         SET ${setsString}
         WHERE id = ? ;`;
-    placeholders.push(userId);
+  placeholders.push(userId);
 
-    db.query(query, placeholders, (err, results) => {
-        if (err) {
-            res.status(500)
-                .send({ error: err, message: "Error updating user." })
-        } else {
-            res.send({
-                results,
-                message: "User updated successfully."
-            });
-        }
-    });
-}
+  db.query(query, placeholders, (err, results) => {
+    if (err) {
+      res.status(500).send({ error: err, message: "Error updating user." });
+    } else {
+      res.send({
+        results,
+        message: "User updated successfully.",
+      });
+    }
+  });
+};
 
 exports.deleteUserById = (req, res) => {
+  const { userId } = req.params;
 
-    const { userId } = req.params;
-
-    const query = `DELETE FROM user
+  const query = `DELETE FROM user
                     WHERE id = ? ;`;
 
-    const placeholders = [userId];
+  const placeholders = [userId];
 
-    db.query(query, placeholders, (err, results) => {
-        if (err) {
-            res.status(500)
-                .send({ error: err, message: "Error deleting user." })
-        } else {
-            if (results.affectedRows == 0) {
-                res.status(404)
-                    .send({
-                        message: "Cannot delete user. No user found.",
-                        results
-                    });
+  db.query(query, placeholders, (err, results) => {
+    if (err) {
+      res.status(500).send({ error: err, message: "Error deleting user." });
+    } else {
+      if (results.affectedRows == 0) {
+        res.status(404).send({
+          message: "Cannot delete user. No user found.",
+          results,
+        });
+      } else {
+        res.send({
+          results,
+          message: "User deleted successfully.",
+        });
+      }
+    }
+  });
+};
+
+exports.changePassword = (req, res) => {
+  // get the password and new password from body
+  const { password, newPassword } = req.body;
+  const { userId } = req.params;
+
+  // validate password is correct
+  const query1 = `SELECT password FROM dishes.user 
+                    WHERE id = ?;`;
+
+  const placeholders = [userId];
+
+  db.query(query1, placeholders, async (err, results) => {
+    if (err) {
+      res.status(500).send({ error: err, message: "Error updating password" });
+    } else {
+      if (results.length == 0) {
+        res.status(404).send({ message: "Error getting user's password" });
+      } else {
+        // now we have the password
+
+        const passwordMatched = await bcrypt.compare(
+          password,
+          results[0].password
+        );
+
+        if (passwordMatched) {
+          // change password in DB with new password (encrypted)
+          const query2 = `UPDATE user 
+                          SET password = ?
+                          WHERE user.id = ? ;`;
+
+          const encryptedPassword = await bcrypt.hash(newPassword, saltRounds);
+
+          const placeholders = [encryptedPassword, userId];
+          
+          db.query(query2, placeholders, (err, results) => {
+            if (err) {
+              res.status(500).send({ error: err, message: "Error updating password" });
             } else {
-                res.send({
-                    results,
-                    message: "User deleted successfully."
-                });
+              res.send({
+                message: "Password updated successfully.",
+              });
             }
+          })
+        } else {
+          res.status(400).send({message: "Error updating password."});
         }
-    });
-}
+      }
+    }
+  });
+};
