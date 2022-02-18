@@ -84,12 +84,13 @@ export default function RestaurantCard({
       <div className="reviews">
         <FontAwesomeIcon
           className="icon"
+          // icon={faThumbsUp}
           icon={faThumbsUp}
           onClick={() => {
             submitReview();
           }}
         />
-        <span>{total_favorites || 0} reviews</span>
+        <span>{total_favorites || 0}</span>
       </div>
     </div>
   );
