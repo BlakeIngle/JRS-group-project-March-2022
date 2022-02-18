@@ -39,7 +39,8 @@ export default function Review({
     window.open(googleUrl);
   };
   const handleYelpClick = () => {
-    window.open("https://www.yelp.com");
+    console.log(url);
+    // window.open(url);
   };
 
   return (

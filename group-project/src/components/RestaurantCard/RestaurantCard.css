@@ -37,25 +37,39 @@
   margin-left: 2rem
 }
 
-.restaurant-card-root .reviews .icon {
-  font-size: 1.2rem;
+.restaurant-card-root .icon {
+  font-size: 1.3rem;
   cursor: pointer;
+  transition: all 100ms;
+}
+
+.restaurant-card-root .reviews .icon {
+  /* font-size: 1.1rem; */
   position: absolute;
   left: 0.2rem;
   bottom: 0.2rem;
 }
 
-.restaurant-card-root .icon:hover {
-  font-size: 1.3rem;
-  transition: all ease-in-out 100ms;
-  transform:scale(110%);
+.restaurant-card-root .reviews .icon:hover {
+  transition: all 100ms;
+  transform:scale(105%);
+  transform-origin: center;
 }
 
-.restaurant-card-root .links > * {
+.restaurant-card-root .links {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+}
+
+.restaurant-card-root .links a {
   cursor: pointer;
+  font-size: 1.3rem;
+  transition: all 100ms;
 }
 
-.restaurant-card-root .agree-icon {
-  text-align: right;
-  
+.restaurant-card-root .links :hover{
+  transform: scale(104%);
+  transition: all 100ms;
 }

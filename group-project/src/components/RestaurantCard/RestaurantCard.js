@@ -86,10 +86,12 @@ export default function RestaurantCard({
         </span>
         <span className="links">
           <a onClick={handleClick}>
-            <FontAwesomeIcon icon={faMapMarkerAlt} />
+
+              <FontAwesomeIcon className="icon" icon={faMapMarkerAlt} />
+
           </a>
           <a onClick={handleYelpClick}>
-            <img
+            <img className="icon"
               src="https://i.postimg.cc/d1QLsskm/yelp-logo-cmyk.png"
               height="20px"
             />
