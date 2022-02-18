@@ -4,25 +4,23 @@ import { Avatar, Button, Divider, TextField, Tooltip } from "@mui/material";
 import "./UserPage.css";
 import { useLocalStorage } from "../../services/localStorage.service";
 import { Context } from "../../App";
-import { useNavigate, useParams } from "react-router";
+import { useNavigate } from "react-router";
 import { deepOrange } from "@mui/material/colors";
 import { useApi } from "../../services/api.service";
 import ChangePasswordForm from "./ChangePasswordForm";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Review from "../Review/Review";
-import { useGeolocation } from "../../services/geolocation.service";
-import { ToastProvider, useToasts } from "../Toasts/ToastService";
 
 export default function UserPage() {
-  const { dishName } = useParams();
+  
   const [isChangePasswordOpen, setIsChangePasswordOpen] = useState(false);
+  
   const [reviews, setReviews] = useState([]);
-  const { state, setState } = useContext(Context);
-  const [originalResults, setOriginalResults] = useState([]); // the first list of restaurants from coordinates
   const api = useApi();
+  
+  const { state, setState } = useContext(Context);
   const navigate = useNavigate();
   const storage = useLocalStorage();
-  const getCoordinatesPromise = useGeolocation();
 
   function logoutClicked() {
     // log out
@@ -33,7 +31,6 @@ export default function UserPage() {
 
   function togglePasswordChangeAccordion() {
     setIsChangePasswordOpen(!isChangePasswordOpen);
-    console.log(isChangePasswordOpen);
   }
 
   function getReviews() {
@@ -48,7 +45,6 @@ export default function UserPage() {
   }
 
   function deleteReviewCard(reviewId) {
-    console.log("deleting review", reviewId);
     api
       .deleteReview(reviewId)
       .then((res) => {
@@ -62,37 +58,14 @@ export default function UserPage() {
   useEffect(() => {
     if (state.user) {
       getReviews();
-    } else {
-      //not logged in
-      navigate("/");
-    }
-  }, []);
-
-  function getRestaurantsByLatLong(latitude, longitude) {
-    api
-      .getRestaurantsByDish(dishName, { latitude, longitude })
-      .then((results) => {
-        setOriginalResults(results.data.restaurants);
-        return results.data.restaurants;
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-  }
-
-  useEffect(() => {
-    getCoordinatesPromise.then(({ latitude, longitude }) => {
-      getRestaurantsByLatLong(latitude, longitude);
-      setOriginalResults([]);
-    });
-  }, []);
+    } 
+  }, [state.user]);
 
   if (!state.user) {
     return <p>No user found</p>;
   }
 
-  const firstName = state.user.firstName;
-  const email = state.user.email;
+  const { firstName, email } = state.user;
 
   return (
     <div className="user-page-root">
@@ -108,7 +81,7 @@ export default function UserPage() {
           }}
         >
           <p style={{ fontSize: "3.1rem" }}>
-            {state.user.firstName.charAt(0).toUpperCase()}
+            {firstName.charAt(0).toUpperCase()}
           </p>
         </Avatar>
         <h2 className="welcome">Welcome, {firstName ? firstName : email}!</h2>
@@ -119,15 +92,8 @@ export default function UserPage() {
         {firstName ? firstName : email}'s Favorites:
       </div>
       <div className="reviews-container">
-
-      {reviews.map((review) => (
-        <Review 
-        key={review.id}
-        {...review}
-        deleteReviewCard={deleteReviewCard}
-        />
-        ))}
-        </div>
+        {reviews.map(r => <Review key={r.id} {...r} name={r.restaurantName} deleteReviewCard={deleteReviewCard} />)}
+      </div>
       <br />
       <br />
       <div className="editInformation">
@@ -139,7 +105,7 @@ export default function UserPage() {
         <TextField
           disabled
           label="First Name"
-          defaultValue={state.user.firstName}
+          defaultValue={firstName}
           type="text"
           variant="outlined"
           sx={{ display: "flex", marginTop: "1rem" }}
@@ -147,7 +113,7 @@ export default function UserPage() {
         <TextField
           disabled
           label="Email"
-          defaultValue={state.user.email}
+          defaultValue={email}
           type="email"
           variant="outlined"
           sx={{ display: "flex", marginTop: "1rem" }}
@@ -172,7 +138,6 @@ export default function UserPage() {
           )}
         </div>
 
-        <Divider />
 
         <Button
           variant="contained"

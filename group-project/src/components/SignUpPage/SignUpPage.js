@@ -187,7 +187,6 @@ export default function SignUpPage() {
               <span>Not a {randomDish.name} fan?</span>
               <button onClick={() => {
                 setRandomDish(getRandomDish());
-                console.log(randomDish);
               }
               }>Get a different random dish</button>
             </div>

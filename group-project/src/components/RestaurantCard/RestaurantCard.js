@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import "./RestaurantCard.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -6,7 +6,6 @@ import {
   faMapMarkerAlt,
   faThumbsUp,
 } from "@fortawesome/free-solid-svg-icons";
-import ReviewForm from "../ReviewForm/ReviewForm";
 import { Context } from "../../App";
 import { useApi } from "../../services/api.service";
 import { useNavigate } from "react-router";
@@ -16,11 +15,8 @@ export default function RestaurantCard({
   name,
   location,
   url,
-  image_url,
   total_favorites,
-  dishName
 }) {
-
   const api = useApi();
   const navigate = useNavigate();
 
@@ -34,17 +30,16 @@ export default function RestaurantCard({
     restaurantName: "",
   });
 
-  const { city, country, stateName, address1, address2, address3, zip_code } =
-    location;
-  const googleUrl =
-    "https://www.google.com/maps/search/" + name + "@" + location.zip_code;
-
-  const handleClick = () => {
-    window.open(googleUrl);
-  };
-  const handleYelpClick = () => {
-    window.open(url);
-  };
+  var googleUrl = "";
+  if (location) {
+    const { city, stateName, address1, address2, address3, zip_code } =
+      location;
+    googleUrl = `https://www.google.com/maps/place/${
+      address1 ? address1 + "," : ""
+    }${address2 ? address2 + "," : ""}${address3 ? address3 + "," : ""}${
+      city ? city + "," : ""
+    }${stateName ? stateName + "," : ""}${zip_code ? zip_code : ""}`;
+  }
 
   function submitReview() {
     setReview({
@@ -63,21 +58,6 @@ export default function RestaurantCard({
       });
   }
 
-  useEffect(() => {
-    api
-      .getDishByName(dishName)
-      .then((res) => {
-        const dish = res.data.dish.id;
-        setReview({
-          ...review,
-          dishId: dish,
-        });
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-  }, [])
-
   return (
     <div className="restaurant-card-root">
       <div className="top-row">
@@ -85,17 +65,20 @@ export default function RestaurantCard({
           <h2>{name}</h2>
         </span>
         <span className="links">
-          <a onClick={handleClick}>
-
+          {googleUrl && (
+            <a href={googleUrl} target="_blank" rel="noopener noreferrer">
               <FontAwesomeIcon className="icon" icon={faMapMarkerAlt} />
-
-          </a>
-          <a onClick={handleYelpClick}>
-            <img className="icon"
-              src="https://i.postimg.cc/d1QLsskm/yelp-logo-cmyk.png"
-              height="20px"
-            />
-          </a>
+            </a>
+          )}
+          {url && (
+            <a href={url || "#"} target="_blank" rel="noopener noreferrer">
+              <img
+                className="icon"
+                src="https://i.postimg.cc/d1QLsskm/yelp-logo-cmyk.png"
+                height="20px"
+              />
+            </a>
+          )}
         </span>
       </div>
       <div className="reviews">
@@ -104,11 +87,10 @@ export default function RestaurantCard({
           icon={faThumbsUp}
           onClick={() => {
             submitReview();
-          }} />
+          }}
+        />
         <span>{total_favorites || 0} reviews</span>
-
       </div>
-
     </div>
   );
 }
