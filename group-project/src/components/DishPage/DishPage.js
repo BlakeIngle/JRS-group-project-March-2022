@@ -105,12 +105,13 @@ export default function DishPage() {
   return (
     <div>
       <div className="dish-page-root">
-        <h2 className="dish-name">
+        <div className="dish-name">
           <Link to="">
-            {Emojis[dish?.name]}The Forking Best {dish?.name}
-            {Emojis[dish?.name]}
+            <span>{Emojis[dish?.name]}</span>
+            <span>The Forking Best {dish?.name}</span>
+            <span>{Emojis[dish?.name]}</span>
           </Link>
-        </h2>
+        </div>
         <hr />
         {/* {!hasReviews && (
         <div>
@@ -119,13 +120,13 @@ export default function DishPage() {
         </div>
       )} */}
         <div className="dish-page-options">
-          <div className="zip-code-form">
+          <div className="search-input">
             <FontAwesomeIcon icon={faMapMarkerAlt} />
             <input
               type="text"
               className="zip-code-input"
               name="location"
-              placeholder="New Zip Code..."
+              placeholder="Search by name or location"
               onChange={(e) => setInputText(e.target.value)}
               value={inputText}
             />
@@ -150,7 +151,7 @@ export default function DishPage() {
         ) : (
           <div className="restaurant-list">
             {restaurants.map((r) => (
-              <RestaurantCard key={r.id} dishName={dish.name} {...r}/>
+              <RestaurantCard key={r.id} dishName={dish.name} {...r} />
             ))}
           </div>
         )}

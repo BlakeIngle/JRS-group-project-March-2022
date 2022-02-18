@@ -9,9 +9,31 @@
     background-color: white;
 }
 
+.search input{
+    width: 50vw;
+    max-width: 350px;
+    margin: 0.5rem;
+    outline: none;
+    padding: 0.3rem;
+    font-size: 1rem;
+    vertical-align: middle;
+}
+
 .dish-page-root {
     max-width: 800px;
     margin: auto;
+}
+
+
+.dish-page-root .dish-name {
+    text-transform: capitalize;
+    font-weight: 700;
+    font-size: 1.6rem;
+    margin: 1rem;
+}
+
+.dish-page-root .dish-name span {
+    margin: 0 0.2rem;
 }
 
 .dish-page-root a {
@@ -24,24 +46,25 @@
 }
 
 .dish-page-options {
-    width: 90vw;
-    max-width: 100%;
-    margin: 0.8rem auto;
+    width: 100%;
+    max-width: 650px;
+    margin: auto;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content:space-evenly;
     align-items: center;
 }
 
-.dish-page-options .zip-code-form {
+.dish-page-options .search-input {
     font-size: 1.3rem;
 }
 
-.dish-page-options .zip-code-form input {
+.dish-page-options .search-input input {
     font-size: 1rem;
     margin-left: 5px;
     padding: 0.2rem;
-    width: 8rem;
+    width: 15rem;
+    max-width: 50vw;
 }
 
 .dish-page-root .dish-page-options .add-review-btn {
@@ -50,21 +73,11 @@
     padding: 0.4rem 0.8rem;
     border-radius: 6px;
     cursor: pointer;
-    /* transition: all 200ms; */
 }
 
 .dish-page-root .dish-page-options .add-review-btn:hover {
     color: #fff;
     background-color: #444;
-    /* transition: all 200ms; */
-}
-
-.search input{
-    width: 80vw;
-    margin: 0.5rem;
-    outline: none;
-    padding: 0.3rem;
-    font-size: 1rem
 }
 
 .search .icon {
@@ -76,7 +89,9 @@
 .restaurant-list {
     width: 90vw;
     max-width: 800px;
+    height: 70vh;
     margin: auto;
+    overflow: auto;
 }
 
 .dish-container {
@@ -104,12 +119,6 @@
 
 .dish-item:hover {
     background-color: aliceblue;
-}
-
-.dish-name {
-    text-transform: capitalize;
-    font-size: 5vw;
-    margin: 1rem;
 }
 
 .placeholder-text {
