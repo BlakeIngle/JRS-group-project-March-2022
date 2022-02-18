@@ -12,9 +12,10 @@ export default function LoginPage() {
     <div className="login">
       <h2 className="login-header">Login</h2>
       <LoginForm />
-      <div className="form-message">OR</div>
+      <hr />
+
       <Link to="/signup">
-        <button type="button">Sign Up</button>
+        <button type="button" className="secondary-button">Sign Up</button>
       </Link>
       {/*<a href="#" className="forgotPassword">
         Forgot My Username/Password
@@ -62,9 +63,7 @@ function LoginForm() {
         })
         .catch((err) => {
           console.error(err);
-
-
-          toast.warn('Email and Password are incorrect!')
+          toast.warn("Email and Password are incorrect!");
           setUser({ email: "", password: "" });
 
           setTimeout(() => {
@@ -79,32 +78,33 @@ function LoginForm() {
     <form onSubmit={handleSubmit}>
       <div className="form-inputs">
         {/* <div className="email"> */}
-          <label>Email</label>
-          <input
-            ref={emailRef}
-            type="text"
-            name="email"
-            value={user.email}
-            style={{ "--animationTime": `${animationTime}ms` }}
-            onChange={handleChange}
-            placeholder="Email"
-          />
-        {/* </div> */}
-        {/* <div> */}
-          <label>Password</label>
-          <input
-            ref={passwordRef}
-            type="password"
-            name="password"
-            value={user.password}
-            style={{ "--animationTime": `${animationTime}ms` }}
-            onChange={handleChange}
-            placeholder="Password"
-          />
-        {/* </div> */}
+        <label>Email</label>
+        <input
+          ref={emailRef}
+          type="text"
+          name="email"
+          value={user.email}
+          style={{ "--animationTime": `${animationTime}ms` }}
+          onChange={handleChange}
+          placeholder="Email"
+        />
+        <label>Password</label>
+        <input
+          ref={passwordRef}
+          type="password"
+          name="password"
+          value={user.password}
+          style={{ "--animationTime": `${animationTime}ms` }}
+          onChange={handleChange}
+          placeholder="Password"
+        />
       </div>
       <br />
-      <button type="submit" disabled={!user.email || !user.password}>
+      <button
+        className="primary-button"
+        type="submit"
+        disabled={!user.email || !user.password}
+      >
         Login
       </button>
     </form>

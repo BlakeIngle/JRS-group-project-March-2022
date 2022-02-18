@@ -1,6 +1,4 @@
 :root {
-  --inputLabelText: #d2e2e2;
-  --headerText: #e7dddd;
   --backgroundImage: url(https://www.wallpapertip.com/wmimgs/54-549491_background-for-food-website.jpg);
 }
 
@@ -9,15 +7,14 @@
   margin: 2rem auto;
   width: 80vw;
   max-width: 700px;
-  background-color: rgba(0, 0, 0, 0.705);
+  background-color: rgb(234, 234, 234);
   border-radius: 8px;
   padding: 1rem;
-  color: #eee;
+  color: rgb(16, 16, 16);
 }
 
 .login-header,
 .signup-header {
-  color: var(--headerText);
   margin: 0 0 1rem;
   font-size: 1.7rem;
 }
@@ -45,21 +42,44 @@
 }
 
 .login button,
+.login input,
+.signup button,
+.signup input {
+  max-width: 400px;
+  margin-left: 0;
+  margin-right: 0;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.login button,
 .signup button {
+
+  width: 90%;
+
   font: inherit;
   font-weight: 900;
   border: none;
-  width: 8rem;
   margin-bottom: 0.5rem;
   padding: 0.25rem;
 
   border-radius: 4px;
 }
 
-.login button:hover,
+.primary-button {
+  background-color: hsl(130, 100%, 60%);
+}
+
+.secondary-button{
+  background-color: hsl(200, 100%, 60%);
+}
+
+
 .signup button:hover {
-  color: rgba(255, 255, 255, 0.925);
-  background-color: rgba(255, 255, 255, 0.767);
+  cursor: pointer;
+}
+
+.login button:hover{
   cursor: pointer;
 }
 
