@@ -20,7 +20,7 @@ require("./app/routes/dish.routes")(app);
 require("./app/routes/restaurants.routes")(app);
 require("./app/routes/review.routes")(app);
 
-const PORT = 8080;
+const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}.`);
 });

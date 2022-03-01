@@ -62,12 +62,10 @@ exports.getDishByLocation = (req, res) => {
   yelp
     .getRestaurantsNearZipCode(location)
     .then((result) => {
-      console.log(result.data.businesses);
       // send request to our DB
       res.send(result.data.businesses);
     })
     .catch((error) => {
-      console.log("ERROR:", error);
       res.status(500).send({
         error: error,
         message: "There was a problem getting restaurants",
@@ -81,11 +79,9 @@ exports.getRestaurant = (req, res) => {
   yelp
     .searchRestaurantsByName(name, location)
     .then((result) => {
-      console.log(result.data.businesses);
       res.send(result.data.businesses);
     })
     .catch((error) => {
-      console.log("ERROR:", error);
       res.status(500).send({
         error: error,
         message: "There was a problem getting restaurants",

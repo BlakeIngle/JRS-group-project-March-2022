@@ -1,7 +1,7 @@
 var cache = {};
 
-exports.save = (key, data, duration) => {
-  cache[key] = data;
+exports.save = (key, dish, data, duration) => {
+  cache[key + dish] = data;
   setTimeout(
     () => {
       delete cache[key];
@@ -10,6 +10,6 @@ exports.save = (key, data, duration) => {
   ); // about 23.6 hours max
 };
 
-exports.get = (key) => {
-  return cache[key];
+exports.get = (key, dish) => {
+  return cache[key + dish];
 };
