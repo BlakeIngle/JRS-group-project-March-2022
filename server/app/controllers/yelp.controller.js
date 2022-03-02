@@ -45,7 +45,7 @@ exports.getRestaurantsByDish = (req, res) => {
   const { latitude, longitude, location } = req.query;
   const { dishName } = req.params;
 
-  const cachedRestaurants = cache.get(location);
+  const cachedRestaurants = cache.get(location, dishName);
   if (cachedRestaurants) {
     sortRestaurantsByRank(cachedRestaurants, res, dishName);
     return;
@@ -65,7 +65,7 @@ exports.getRestaurantsByDish = (req, res) => {
     )
     .then((results) => {
       try {
-        cache.save(location, results.data.businesses);
+        cache.save(location, dishName, results.data.businesses);
         sortRestaurantsByRank(results.data.businesses, res, dishName);
       } catch (error) {
         res
